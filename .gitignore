@@ -12,6 +12,6 @@
 
 
 #ignore all other files
-*.bbl, *.toc, *.blg, *.
+*.bbl, *.toc, *.blg, *.doc, *.ppt, *.png, *.jpg, *.eps
 
 
