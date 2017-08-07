@@ -1,0 +1,105 @@
+\mychapter{2}{previouswork}
+
+\section{Previous Works}
+----start with a summary paragraph explaining the difference and previewing 
+----pros and cons 
+---somehow get to similarity measure. Then elucidate on next sections
+
+
+
+
+\subsection{Single-unit multiple trials}
+
+Traditionally, experimentalists developed substantial scientific theories based on analyses from single-unit multiple-trial recordings. For instance, it is known that activity patterns from sensory neurons in the motor cortex of primates are tuned to the direction of the subject's arm movements \cite{Georgopoulos1982}, that neurons in the visual cortex of primates are tuned to the orientation of a stimulus \cite{Hubel1968}, that place cells in the CA1 region of the rat hippocampus are tuned to the animal's position in the environment \cite{OKeefe1971}, in addition to many others.
+Classical  methods of analyzing single-unit recordings require averaging of responses across trials in order to estimate the firing rate from which information about the stimulus is decoded. Even though trial averaging may help reduce spiking variability, it does not reduce firing rate (response) variability.
+Moreover, the process often results in the smoothing over of rapid fluctuations in the 
+responses, which may lead to loss of temporal information in activity patterns, thus yielding incorrect interpretations of the underlying neural mechanisms.
+In addition, there are neural mechanisms underlying certain observed phenomena 
+that cannot be accounted for using single unit recordings.
+For instance, consider that neither sensory neurons tuned to odor \cite{Hopfield1995},
+nor certain internal mechanisms such as cognition and decision making (\cite{Redish2016,
+Vos2015, Kaufman2014, Mazor2005}, can be controlled by researchers, as can other forms of external stimuli. Such observed phenomena, therefore, can only be analyzed by single-trial multiple-unit recordings. 
+\newpage
+
+
+
+\subsection{Multiple-unit single trial}
+
+On the other hand however, the use of multi-electrode \cite{Kipke2008} and optical \cite{Kerr2008} recording technologies
+has enabled single-trial multiple-unit recording from various brain structures.\\
+
+However, the challenge is that different neurons have highly heterogeneous patterns of activity (neuronal response variability) even on multiple presentation of the same stimulus. Trying to identify all possible activity patterns  corresponding to  a single neuron within the recorded neural population leads to an amplification the number of variables to be considered while modeling collective neural responses. Consequently, biologically motivated assumptions have been made in order to model population activity. For instance, in the dynamical systems perspective, neurons belong to an underlying  tight recurrent connected network within the brain  which may favor correlated responses between neurons \cite{Shenoy2013}.
+Among a population of neurons that encode features of a stimulus, the population activity is
+correlated with the features of the stimulus \cite{Georgopoulos1982, Hubel1968}.
+Thus whether the researcher views the number of stimulus features as lower than the number
+of neurons in the population, or views neurons as belonging to an underlying network, it is nonetheless possible to study collective neural activity patterns using a low
+dimensional model which captures similar activity patterns among neuronal populations.\\
+
+Lately, dimensionality reduction has been suggested as a tool for modeling population activity. Viewing the recorded N $>1$ neurons as measured variables in the data, dimensionality reduction provides a low dimensional model of the neuronal response space by finding a subset K $<<$ N of directions (dimensions) that explains most of the variability in the neuronal responses. The variability unexplained by the low dimensional model is often regarded as noise \cite{Cunningham2014a}.  Analyses on low dimensional neural population models have been be used to test scientific hypotheses about neural mechanisms that influence a subject's real-world experience. For instance, Mante et al. (2013) used Principle Component Analysis (PCA) and linear regression to show how sensory input is selected and integratedin the prefrontal cortex during decision-making   \cite{Vos2015}.  Kaufman et al. (2014) used Factor Analysis to show evidence of movement preparation before movement in the premotor cortex \cite{Kaufman2014}.  Mazor and Laurent (2005)  used PCA to demonstrate odor discrimination in the olfactory system \cite{Mazor2005}. In the context of exploratory data analysis and visualization, Yu et al. (2009) used Gaussian Process Factor Analysis (GPFA) to characterize single-trial population activity in  macaque premotor and motor cortices during reach planning and execution  \cite{Yu2009} .\\
+
+\subsection{Spike train metrics}
+A common approach for quantifying neuronal response variability is through specification of a 
+similarity or dissimilarity measure between pairs of spike train data
+\cite{Brown2004, Victor1996, Victor1998, Rossum2001,houghton2010measuring, Schreiber2003}.
+Here a spike train refers to an increasing sequence of action potentials or spikes
+through which the sensory system receives information about the world.
+This raises the need for a the notion of ``distance". 
+In line with conclusions reached by Victor and Purpura (1996, 1997) and
+van Raussum (2001) \cite{Victor1996, Victor1998, Rossum2001}, a short distance between two spike trains approximately represents similar inputs (stimuli) while a large distance between spike trains roughly represents discrimination between different stimuli.
+How spike trains encode information is not known. In certain instances, information may be encoded through the precise time at which spikes occur (temporal coding) where as in others, it is encoded through the number of spikes in a given interval (rate coding) (cite Rieke, Warland and Bialek 1996 book on Spikes).
+As a remedy for loss of temporal information due to trial averaging, the observation duration is often divided into non-over lapping time intervals called bins.
+As long as the size of the bin is larger than the average inter-spike interval (ISI), cross-correlation of binned spike trains provides a good estimate of the instantaneous firing rate
+\cite{Brown2004}. The shortcoming of spike binning in studying temporal patterns, is that, two different spike trains often yield identical binning patterns whenever spikes fall in the same bin. Several spike train measures have been designed to overcome the problem of binning. For instance, the edit-length metric \cite{Victor1996, Victor1998} is based on minimizing the cost of transforming one spike train into another by deleting, inserting or shifting a spike. Another measure, the van Rossum distance \cite{Rossum2001, houghton2010measuring} refers to any metric induced on the space of spike trains by transforming a spike train into a continuous function (i.e. a filtered spike train) using a smoothing kernel (such as a box-car window, Gaussian, decaying exponential and  Laplace Kernel) and then using the standard $L^2$ distance on the corresponding function space as the dissimilarity measure. An additional measure, the the correlation-based distance \cite{Schreiber2003} is based on the filtering the spike trains using a Gaussian kernel and then using the normalized dot product between  spike trains as a  similarity measure.
+The vector space viewpoint uses van Rossum metrics while the point-process viewpoint
+uses metrics such as the edit-length distance \cite{Victor2005}. 
+Metrics based on the former often yield  Euclidean distances while those based on the latter are typically non-Euclidean \cite{Aronov2004}.\\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%\begin{itemize}
+%\item what are your long term objectives?
+%\item Describe the model you've designed and the metric you're proposing to use
+%\item How is this model and metric helping to address short comings of the previous model?
+%\item What do you hope to accomplish with this new model?
+%\item What new maths theories can be derived from this model?
+%\item What are the applications to real world problems
+%
+%\end{itemize}
+
+
+
+
+
+

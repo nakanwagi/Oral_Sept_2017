@@ -1,0 +1,157 @@
+%Latex template designed from scratch by Mary Sylvia %Agwang following a great Youtube video %by Michelle Krummel:
+
+\documentclass[12pt]{report}
+%set margins to 1in
+\usepackage[margin=1in]{geometry}
+%packages for typing maths stuff
+\usepackage{amsfonts, amsmath, amssymb}
+
+% package for Maths tools
+\usepackage{mathtools}
+\newcommand\Set[2]{\{\,#1\mid#2\,\}}
+%add two packages to add tables and graphics
+\usepackage{graphicx} %load the graphics package
+\graphicspath{{/home/tesylvia/Oral_Sept_2017/images/}} %add a path to the image folder
+\usepackage{float}
+%add package for multiple figures/subfigures
+\usepackage{caption} 
+\usepackage{subcaption}
+
+%_%%%%7_9_2017
+\usepackage{pgfplots}
+\usepackage{tikz}
+
+
+
+
+
+
+%add a package for the table of contents
+\usepackage[nottoc, notlot, notlof]{tocbibind}
+%prevent latex from using hyphenated words
+\usepackage[none]{hyphenat}
+%=====change header if this is in appropriate=====%
+%creat customed header and footer as follows
+\usepackage{fancyhdr} %creates customed header and footer
+
+
+% Now type within latex preamable
+
+
+\pagestyle{fancy}
+%next clear the default header and footer
+\fancyhead{}
+\fancyfoot{}
+% above two commands remove the default numbering
+%next place the title in Capital leters and italics to the Left of the Page
+\fancyhead[L]{\slshape\MakeUppercase{Place Title Here}}
+%now place student's name to the right
+\fancyhead[R]{\slshape Mary Sylvia Agwang}
+\fancyfoot[C]{\thepage} %put back page numbers
+%the commented commands below remove the ruled lines
+% at the header and foot
+%\renewcommand{\headrulewidth}{0pt}
+%\renewcommand{\footrulewidth}{0pt}
+
+%The uncommented string of commands in this section (==) % make the headers appear on each page
+
+%===end of setting the headers======================%
+
+\parindent 0ex
+%removes paragraphs from sections
+%adjust the paragraphs automatically without indendantation in latex
+%====spacing description===========================
+% this document is made up of 1in margins
+% and 1in spacing between paragraphs
+
+%adding new chapters:
+\newcommand{
+  \mychapter}[2]{
+  \setcounter{chapter}{#1}
+  \setcounter{section}{0}
+  \chapter*{#2}
+  \addcontentsline{toc}{chapter}{#2}
+}
+
+
+\renewcommand{\baselinestretch}{1} 
+%other ways to adjust paragraphs are commented
+%\setlength{\parindent}{4em}
+%\setlength{\parskip}{1em}
+
+
+%\newtheorem ---a command used to define theorems, lemmas, definitions and corollaries.
+\newtheorem{Def}{Definition}
+\newtheorem{Thm}{Theorem}
+\newtheorem{Lem}{Lemma}
+\newtheorem{Cor}{Corollary}
+\newtheorem{Rem}{Remark}
+\newtheorem{Ex}{Example}
+%add a shortcut to make vectors bold
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+%abbreviations
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+
+
+
+%start writing the content in here
+\begin{document}
+
+
+
+%\include{chapters/coverpage}
+
+\input{chapters/coverpage}
+
+
+\tableofcontents
+\thispagestyle{empty}
+%\clearpage
+\setcounter{page}{1}
+
+
+%\include{chapters/introduction}
+\input{chapters/introduction}
+
+
+%\include{chapters/objectives}
+\input{chapters/previouswork}
+
+%\include{chapters/methodology}
+\input{chapters/methodology}
+
+%\include{chapters/interpretation}
+\input{chapters/specific_implementation}
+
+
+%\include{chapters/nextsteps}
+\input{chapters/simulation_and_results}
+
+
+
+%\include{chapters/conclusion}
+\input{chapters/real_world_data_results}
+
+
+\input{chapters/discussion}
+
+
+\input{chapters/future_work}
+
+
+%%%%%%%%%%%%%%%% Generate a Bibliography%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%==== put the bibliography after all sections=====
+% but above end document===========================
+\pagebreak
+
+%add a bibliography using mendeley
+
+\bibliography{/home/tesylvia/Oral_Sept_2017/References/library.bib}
+
+\bibliographystyle{unsrt}
+
+
+
+
+\end{document}

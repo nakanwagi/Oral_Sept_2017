@@ -1,0 +1,17 @@
+#ignore all log files
+
+*.log
+
+#ignore all aux files
+
+*.aux
+
+#ignore all pdf files
+
+*.pdf
+
+
+#ignore all other files
+*.bbl, *.toc, *.blg, *.
+
+
