@@ -1,9 +1,10 @@
-\mychapter{1}{Introduction}
-%%set up basic documents within my document
-%\section{Introduction/Background (2-3 days)}
-\section{Big picture}
 
-Still working on this.....
+\section{Big picture}
+ 
+Examining stimulus-response data and extrapolating from that a model
+that allows us to predict, given a set of responses, what the stimulus 
+likely was.
+
 
 %---------This should be more general and give a big picture-------------
 %----what do you want to accomplish?
@@ -100,30 +101,19 @@ For Spike Train analyses, the multi-unit single-trial recordings are usually pro
 The data set we are analyzing is based on intracellular multiple single-unit single-trial recordings where the action potentials are measured from different cell membranes using tetrodes. Tetrodes are used in the rat hippocampus where there is a dense network of cells which would otherwise be hard to isolate using the usual spike sorting methods as in multi-unit single-trial recordings.
 
 
-\subsection{Point Processes}
-A random variable is a number assigned to every outcome in an experiment.
-For instance, the number of action potentials generated when an auditory neuron is stimulated
-by a high pitched sound for 1.5ms or the number of heads obtained when a fair coin is tossed twice, are examples of random variables.  Each outcome in an experiment is generated according to some underlying probability distribution. A stochastic process is a collection  of random variables that vary with time such as the fluctuation of a voltage signal during an intracellular neuronal recording. A spike train is a sequence of recorded times at which a neuron fires an action potential. The rate at which a neuron fires a spike in a single trial (spike-count rate) is defined as the number of spikes obtained during that experiment divided by the duration of the experiment. The spike-count rate obtained from a single trial over a long duration, results into the smoothing over of rapid fluctuations of neuronal responses across that trial. To reduce this loss of temporal information, the duration of the experiment is divided into short time intervals [t, t+$\Delta$t] and action potentials are recorded repeatedly from neurons in response to the same stimulus.  The firing rate at time t, is then defined as the number of spikes recorded over the time interval of length $\Delta$t divided by the length of that interval. The instantaneous firing rate is then estimated by averaging spikes across a finite number of trials of the same experiment, a process also known as trial-averaging.\\
-
-While analyses of neural activity in terms of the firing rate are useful in many contexts, certain changes in the pattern of spike times such as the variability of inter-spike intervals (ISIs) across spike trains may also covey information.
-As much as the precise time at which a spike occurs is known to convey information, the stochastic behavior of gated-ion channels and the frequency of action potentials arriving at a synapse, may lead to varying neuronal responses.
-For instance, spike times are highly variable even in controlled experiments like in vitro preparations where the same time-varying current is injected on multiple trials.
-Thus the variability of ISIs observed in areas such as the cortex may be attributed to random processes that are unrelated to the stimulus or animal's behavior.\\
+\subsection{Place cells}
 
 
-A stochastic process that generates irregular sequence of events such as spikes is called a point process. Let $\{t_{i} \}_{i=1}^{n}$ be a spike train of a single neuron consisting of
-n spike times and $X_{i} = t_{i+1} - t_{i}$ be the inter-spike interval (ISI) recorded from
-a time t=0 to T. Let $S_{j} = \sum_{i=1}^{j}X_{i}$ be the time of the j$^{th}$ spike.
-The sequence $\{ S_{i} \}_{i \geq 1}$ forms a point process in the finite interval [0, T].
+\subsection{Place fields}
+
+
+\subsection{Characteristics of place fields}
 
 
 
 
 
-
-
-
-
+\newpage
 
 
 

@@ -1,0 +1,351 @@
+%\mychapter{4}{Dimensionality Reduction}
+\newpage
+
+
+In the the following sections, we review the concept of dimensionality reduction.
+We mainly focus on spectral dimensionality reduction methods where the 
+low dimensional model is obtained from spectral decomposition of n$\times$n
+positive semidefinite matrices.
+
+\subsection{Dimensionality reduction}
+Let \textbf{X} = $\displaystyle \{\vect{x}_{1}, \ldots , \vect{x}_{n} \}$
+be a set of n data points, each of which is associated with D features, so that each $\vect{x}_{i}$ is a point in a high dimensional space $\R^{D}$. Assume that the data points lie on or near an underlying d-dimensional manifold embedded in the high dimensional space where d is much smaller than D. Dimensionality reduction considers the problem of  transforming the high dimensional data set
+$\textbf{X}$ into a new data set \textbf{Y} = $\displaystyle \{ \vect{y}_{1}, \ldots, \vect{y}_{n} \}$  of n points, each of which is associated
+with a fewer set of d features and such that each $\vect{y}_{i} \in \R^{d}$ is a low dimensional representation of $\vect{x}_{i} \in \R^{D}$ in the low dimensional space. In addition the transformation must preserve, as much as possible, the underlying geometry of the data.
+
+
+
+\subsubsection{Spectral properties of symmetric matrices}
+An n$\times$n matrix $\Bm{A}$ is symmetric if $\Bm{A} = \Bm{A}^{\top}$
+where $\Bm{A}^{\top}$ denotes the transpose of a matrix.\\
+Let \textbf{A} be an n$\times$n real symmetric matrix with a set of 
+orthogonal unit-length eigenvectors  $\{ \vect{v}_{1}, \ldots, \vect{v}_{n} \}$ and corresponding eigenvalues $\{\lambda_{1}, \ldots, \lambda_{n} \}.$ 
+Then \textbf{A} can be written as 
+\[ 
+\bm{A} = \bm{VDV^{T}} = 
+\sum_{i=1}^{n} \lambda_{i} \vect{v}_{i} \vect{v}_{i}^{T} 
+\]
+
+where $\bm{D} = \text{diag}(\lambda_{1}, \ldots, \lambda_{n})$ and  $ \bm{V} = [\vect{v}_{1}, \ldots, \vect{v}_{n}]$ is an orthonormal matrix i.e.
+$\bm{V^{T}V  = VV^{T} = I}.$\\
+
+An n$\times$n symmetric matrix $\Bm{A}$ is positive semidefinite (PSD) if the quadratic form
+\[
+\vect{x} \Bm{A} \vect{x}^{\top} \geq 0,\ \ \text{for all non-zero vectors} \ \ \vect{x} \in \R^{n}
+\]
+
+Given any n$\times$n matrix $\Bm{A}$, the matrices $\Bm{A}\Bm{A}^{\top}$
+and $\Bm{A}^{\top}\Bm{A}$ are symmetric PSD.
+
+\subsubsection{Singular value decomposition (SVD)}
+Let $\R^{n \times m}$ denote the vector space of n$\times$m matrices with real entries. Given any n$\times$m matrix $\bm{A}$ with real entries, there exist orthonormal matrices $\bm{U} \in \R^{n \times n}$ and $\bm{V} \in \R^{m \times m}$ such that 
+$\bm{\displaystyle A = U \Sigma V^{T}}$ with $\bm{\Sigma}$ = \text{diag}$(\sigma_{1}, \ldots, \sigma_{k})$ where  k = $\min(n, m)$ and
+ $\sigma_{1} \geq \sigma_{2} \geq \ldots \geq \sigma_{k} \geq 0$.
+The numbers $\sigma_{i}, 1\leq i\leq n$ are called the singular values of $\bm{A}$. 
+
+
+\subsubsection{Properties of SVD}
+Given any n$\times$m real matrix A of rank r, there exist  orthogonal matrices 
+$\bm{U} \in \R^{n \times r}$ and $\bm{V} \in \R^{r \times r}$ 
+satisfying $\bm{U^{T}U = V^{T}V = I}$ such that $\bm{\text{A} = \text{U} \Sigma_{1} \text{V}^{T}}$ with $\bm{\Sigma}_{1}$ = \text{diag}$(\sigma_{1}, \ldots, \sigma_{r})$ and $\sigma_{1} \geq \sigma_{2} \geq \ldots \geq \sigma_{r} > 0$.
+This factorization of $\bm{A}$ with  is called the truncated SVD of A.
+The rank of A is equal to the number of non-zero singular values of A.
+If $\bm{U}$ and $\bm{V}$ are made up of column vectors so that  $\bm{U} = [\vect{u}_1, \ldots, \vect{u}_{r}]$ and $\bm{V} = [\vect{v}_{1}, \ldots, \vect{v}_{r}\}$ then $\{ \vect{u}_1, \ldots, \vect{u}_{r} \}$  and $\{\vect{v}_{1}, \ldots, \vect{v}_{r} \}$ are called the left and right singular vectors of A respectively. The range of A is equal to the subspace spanned by the left singular vectors of A. The null space of A is equal to the subspace spanned by the set of vectors $\{\vect{v}_{r+1}, \ldots, \vect{v}_{n} \}.$
+The matrix A admits the SVD expansion 
+\[
+A = \sum_{i=1}^{r} \sigma_{i} \vect{u}_{i} \vect{v}_{i}^{T}.
+\]
+The real numbers $\{\lambda_{1}, \ldots, \lambda_{r}\}$ where $\lambda_{i} = \sigma_{i}^{2}$ for all i = $1 , \ldots, r$ are the eigenvalues of both symmetric matrices $\bm{A^{T}A}$ and $\bm{AA^{T}}.$ The right singular vectors of $\bm{A}$ are the eigenvectors of $\bm{A^{T}A}.$ The left singular vectors of $\bm{A}$ are the eigenvectors of $\bm{AA^{T}}.$ The spectral decomposition of $\bm{A^{T}A}$ is given by $\bm{A^{T}A  = V D_{1} V^{T}}$ and that of  $\bm{AA^{T}}$ is given by  $\bm{AA^{T}} = U D_{2} U^{T}$ where $\bm{U}$ and $\bm{V}$ are the SVD factors upto a sign, $\bm{D}_{1}$ and $\bm{D}_{2}$ are diagonal matrices containing the r
+singular values of $A$.
+
+\subsubsection{Proximity measures}
+A proximity measure characterizes how close two objects are, using
+either a similarity or dissimilarity measure between them.
+A similarity measure characterizes how similar two objects are while
+a dissimilarity measure or distance characterizes how dissimilar two objects are.
+\begin{Def}\label{distance}
+Let X be a set of n objects, $\{x_{1}, \dots, x_{n}\}$, that are not necessarily vectors. A distance, d, on X, is a real-valued  function
+$d: X \times X \rightarrow  \R$ which assigns to each pair of objects, (x$_{i}$, x$_{j}$), a real number, d$_{ij}$, satisfying three conditions, for all i and j from 1 to n. First, $d_{ii} = 0.$ Second, $d_{ij} \geq 0\ \  \text{if}\ \ i \neq j$. Third, $d_{ij} = d_{ji}.$
+\end{Def}
+
+The first condition states that the distance of an object to itself is 0.
+The second condition states that two distinct objects must be a positive distance apart and the third condition says that a distance is a symmetric function.
+A metric is a distance function, d, which satisfies two extra conditions namely:
+$d_{jk} \leq d_{ij} + d_{ik}, \ \ \text{for all}\ \ i,j,k$ (the triangle inequality), and $d_{ij} = 0$ if and only if  $x_{i} = x_{j}$ (definiteness). The triangle inequality states that the distance between two objects cannot be larger than the sum of their distance to a third point.\\
+
+A similarity measure $s: X \times X \rightarrow  \R$ is a function which assigns to each pair of objects, (x$_{i}$, x$_{j}$), a real number, s$_{ij}$, such that
+for all i and j, we have that
+$s_{ij} = s_{ji}$, $0 \leq s_{ij} \leq 1$ and $s_{ij} \leq s_{ii}$.
+The similarity measure, s$_{ij}$, can be obtained from a distance, d$_{ij}$, using any of the three operations: d$_{ij}$ = c - s$_{ij}$ or  d$_{ij}$ = 1/s$_{ij}$ - c, or $d_{ij}$ = s$_{ii}$ + s$_{jj}$ - 2s$_{ij}$,
+where c is a constant.
+To avoid dividing by zero, we set $s_{ii} = 1$ and $s_{ij} > 0$ whenever $i \neq j$. Thus the similarity of an object to itself is 1.
+A matrix of distances between pairs of objects, D = (d$_{ij}$), is called a distance matrix or dissimilarity matrix and that of similarities, S = (s$_{ij}$), between pairs of objects is called a similarity matrix.
+
+\subsubsection{Examples of proximity measures}
+Let $\vect{x}_{i} = (x_{i1}, \ldots, x_{ip} ) \in \R^{p}$. Dissimilarities or distances based on matrix data include:\\
+ the Euclidean distance
+\begin{equation}\label{Euclidist}
+\displaystyle{ \norm{\vect{x}_{i} - \vect{x}_{j}}^{2}_{2} = \sum_{k=1}^{p} (x_{ik} - x_{jk})^{2}  },
+\end{equation}
+the Minkowski metric 
+\begin{equation}\label{Minkowski}
+\displaystyle{ \left \{\sum_{k=1}^{n} w_{i} \abs{x_{ik} - x_{jk} }^{\lambda} 
+\right \}^{\frac{1}{\lambda}} } \quad \text{where} \quad w_{i} \quad \text{are weights},
+\end{equation}
+
+the Mahalanobis distance 
+\begin{equation}\label{Mahalanobis}
+\displaystyle{ \sqrt{ (\vect{x}_{i} - \vect{x}_{j})^{T} \Sigma (\vect{x}_{i} - \vect{x}_{j})} } \quad \text{where} \ \  \Sigma \ \ \text{is the any PSD matrix},
+\end{equation}
+
+the correlation dissimilarity measure
+\begin{equation}\label{correlationdist}
+\displaystyle{  1 - \dfrac{ \sum_{k}^{p} (x_{ik} - \bar{\vect{x}_{i}})
+ (x_{jk} - \bar{\vect{x}_{j}} )} 
+ { \sqrt{ \sum_{k=1}^{p}  (x_{ik} - \bar{\vect{x}_{i}})^{2} 
+ \sum_{k=1}^{p} (x_{jk} -   \bar{\vect{x}_{j}})^{2}    } } } 
+\end{equation}
+
+where  $\bar{\vect{x}_{i}}$ is the mean of $\vect{x}_{i}$, in addition to others.
+
+\subsubsection{Properties of Euclidean distance}
+The Euclidean distance, $d_{ij}$, (see \eqref{Euclidist}), is invariant under orthogonal transformations. In addition d$_{ij}$ is used to define a positive semi definite (PSD) matrix as follows: Let $\Bm{A} = (a_{ij})$ be a matrix whose elements are given by 
+\begin{equation}\label{afromEuclidist}
+a_{ij} = -\frac{1}{2}d_{ij}^{2},\quad \text{ for all i and j},
+\end{equation}
+ and define a centering n$\times$n matrix $\Bm{H}$ where
+\begin{equation}\label{centerMatrix}
+\Bm{H} = \Bm{I} - n^{-1}\Bm{1}\Bm{1}^{\top}
+\end{equation}
+Then the ,n$\times$n,  inner product matrix, $\Bm{B = HAH}$, is PSD
+with the entries ,$b_{ij}$, given by 
+\[ 
+b_{ij} = a_{ij} - \bar{a}_{i.} - \bar{a}_{.j} + \bar{a}_{..}
+\]
+where
+\begin{equation}\label{Euclidtransform}
+\bar{a}_{i.} = \displaystyle \frac{1}{n}  \sum_{j = 1}^{n} a_{ij}, \ \
+\bar{a}_{.j} = \displaystyle \frac{1}{n}    \sum_{i = 1}^{n} a_{ij}, \ \ 
+\bar{a}_{..} = \displaystyle \frac{1}{n^2}  \sum_{i=1}^{n} \sum_{j = 1}^{n} a_{ij}  
+\end{equation}
+
+
+\subsubsection{Steps of spectral dimensionality reduction Algorithms}
+Let $\Bm{X} \in \R^{n \times D}$ be a matrix of n data points in a high dimensional space $\R^{D}$. Spectral dimensionality reduction refers to all 
+dimensionality methods which obtain a low dimensional model of $\Bm{X}$
+by carrying out four main steps:\\
+First, a distance $d_{ij} = \text{dist}(x_{i}, x_{j})$, between data points
+is chosen and a real number k, $1 \leq k < D$ representing the desired dimensionality is fixed.\\
+Second, an n$\times$n PSD similarity matrix, $\Bm{S}$, or distance matrix, $\Bm{D}$, between data points is computed.\\
+Third, spectral decomposition is carried out on the chosen PSD matrix and
+the top k eigen vectors $\{ \vect{v}_{1}, \ldots, \vect{v}_{k} \}$ of $\Bm{S}$
+or $\Bm{D}$ are stack as columns in a new matrix, 
+$\Bm{V} = [\vect{v}_{1}, \ldots, \vect{v}_{k}] \in \R^{n \times k}.$\\
+Finally, viewing the i$^{th}$ row of, $\bm{V}$, as a point, $\vect{y}_{i}$,
+in $\R^{k}$, a configuration of n points 
+$\{\vect{y}_{i}, \ldots, \vect{y}_{k} \}$ is obtained where each
+\[  
+\vect{y}_{i} = (\vect{v}_{1}(i), \ldots, \vect{v}_{k}(i)) \in \R^{k}
+\]
+is a low dimensional representation of $\vect{x}_{i} \in \R^{D}$.\\
+
+
+Based on statistical and machine learning literature, we refer to the space 
+in which the original data points lie as the input space and that in which
+the low dimensional representation is sought as the output space. 
+Spectral dimensionality reduction algorithms differ depending to the
+type of distance matrix or similarity matrix used and the relationship
+between the input space and output space.
+
+
+
+\subsubsection{Spectral linear dimensionality  reduction}
+In spectral linear dimensionality reduction \cite{VanDerMaaten2009}, the input space and output space are related by a linear transformation between the spaces.
+Let $\bm{X} \in \R^{n \times D}$ be a design matrix where the rows of
+$\bm{X}$ contain n data points, each of which is associated with D features
+in the columns of $\bm{X}$.
+Linear dimensionality reduction techniques find a low dimensional model of the data matrix $\textbf{X}$ using a linear transformation such as an $n \times d$ orthonormal matrix \textbf{M} where d$<<$D. The low dimensional model of the data
+$\Bm{Y}$ is obtained using the relation $\Bm{Y} = \Bm{M}^{\top}X.$ 
+
+
+
+\subsubsection{Principal Component Analysis (PCA)}
+A common example of a linear spectral method is principle component analysis (PCA) \cite{JolliffeIT1986PCAa}. PCA is a linear technique for finding the directions
+of maximum variance in the data. The main assumption in PCA is that the high dimensional data lies on or near a low d-dimensional subspace embedded in some high dimensional space $\R^{D}$. The best low d-dimensional subspace that describes the data is then found by minimizing the sum of squared residuals    \eqref{PCA}, between the orthogonal projection of the data  points onto the estimated low dimensional subspace and the given points.
+
+\begin{equation}\label{PCA}
+\begin{aligned}
+& \underset{M}{\text{minimize}}
+& & \sum_{i=1}^{n} \big \lVert \vect{x}_{i} - \textbf{MM}^{T}\vect{x}_{i} \big \rVert_{2}^{2} \\
+& \text{subject to}
+& & \textbf{M} \in \R^{n \times d} \\
+&&& \textbf{M}^{T}\textbf{M = I}.
+\end{aligned}
+\end{equation}
+
+The solution to PCA, is found via SVD \cite{Agricultural1938,BishopChristopherM2006Pram, AmericanMathematicalSociety.1939Apat} as follows:\\
+1.Compute the mean \textbf{c} of the data set \textbf{X} and center
+the data so that \textbf{X} = \textbf{X} - \textbf{c}\\
+2.Summarize the correlation relationships between the zero-mean data points by computing the covariance matrix $\frac{1}{n}$\textbf{XX}$^{T}$\\
+3.Find the spectral decomposition of \textbf{XX}$^{T}$ or 
+use SVD to find \textbf{X} = $\bm{U\Sigma V^{T}}$\\
+4.Let $\bm{V}_{d}$ denote the top d columns of \textbf{V} corresponding to the  top r singular values of \textbf{X}\\
+5.The optimal point of the optimization problem \eqref{PCA} is \textbf{M} = \textbf{V}$_{d}^{T}$.\\
+The low dimensional model \textbf{Y} is obtained by setting \textbf{Y} = \textbf{V}$^{T}$\textbf{X}.\\
+In other-words, the rows of $\textbf{V}^{T}$ (or the columns of \text{V}) are an orthonormal basis for transforming \textbf{X} into \textbf{Y}.\\
+
+
+So far, we have looked at spectral linear dimensionality reduction in the case where we have n observed data points in $\R^{p}$ assumed to lie on or near a low dimensional subspace. In that case, a low dimensional model of the data can easily be obtained using PCA. In the next two sections, we review an alternative perspective on dimensionality reduction called Multidimensional scaling (MDS) 
+\cite{CoxT2000, MardiaK.V1979Ma}. In MDS, the data points are unobserved but we are given a distance matrix of pair-wise relations between the points.
+This means that the researcher has already decided on what distance to use so as
+to visualize the data. This approach helps to high light the main difference between linear and non-linear dimensionality reduction. MDS applies to any set of n objects (not necessarily vectors) with a given pair-wise dissimilarity
+or similarity measure between points. We only focus on MDS in the special case where the data points are represented as vectors in a high dimensional space $\R^{N}$, whose components are numerical values assigned to features associated with each point.
+
+
+%Examples of similarity measures include: the Gaussian Kernel
+%\[
+%e^{-\dfrac{\norm{\vect{x}_{i} - \vect{x}_{j}}^{2}_{2}}{2\sigma^{2}}},
+%\ \ \text{where} \ \  \norm{\vect{x}}_{2} \ \ \text{denotes the Euclidean distance},
+%\]
+%the Laplace Kernel
+%\[
+%\frac{1}{\tau} e^{-\dfrac{\norm{\vect{x}_{i} - \vect{x}_{j}}_{1} }{\tau} }
+%\ \ \text{where} \ \  \norm{\vect{x}}_{1} \ \ \text{denotes the Minknowski distance with} \ \ \lambda = w_{i} = 1,
+%\]
+%
+%the dot product between two vectors taken either in finite or infinite dimensional space, as a few salient examples.\\
+
+
+
+\subsubsection{Multidimensional scaling (MDS)}
+Assume that an n$\times$n matrix, $\Bm{D}$=(d$_{ij}$), of pair-wise distances
+(not necessarily Euclidean) or similarities, $\Bm{S} = (s_{ij})$, between unobserved  data points, $\{\vect{x}_{1}, \ldots, \vect{x}_{n} \}$, is given and n is large.
+Multidimensional scaling (MDS) \cite{CoxT2000, MardiaK.V1979Ma} considers the the problem of finding a low dimensional model of the high dimensional data by searching for a configuration of n points $\{\vect{y}_{1}, \ldots, \vect{y}_{n} \}$ in $\R^{\text{p}}, \text{p} << \text{n}$, where each $\vect{y}_{i}$ is a low dimensional representation of $\vect{x}_{i}$, and such that the pair-wise distances between points are preserved. Specifically, the Euclidean distances between the configuration points, $\norm{\vect{y}_{i} - \vect{y}_{j}}_{2}$, must be as ``close" as possible to  the given dissimilarities, d$_{ij}$, that is, $\norm{\vect{y}_{i} - \vect{y}_{j}}_{2} \approx \text{d}_{ij}$, for all i and j between 1 and n inclusive. The configuration points $\vect{y}_{i}$ and the intrinsic dimension 
+p are often unknown.\\
+
+The distance matrix, $\Bm{D}$ = (d$_{ij}$), is called a metric if, d$_{ij}$, is a metric for all i and j. The distance matrix, $\Bm{D}$ = (d$_{ij}$), is called Euclidean
+if for some, $p \in \R$, there exists a configuration of n points, $\{\vect{y}_{1}, \ldots, \vect{y}_{n} \}$, in $\R^{\text{p}}$, such that, d$_{ij}$, is exactly equal to $\norm{\vect{y}_{i} - \vect{y}_{j}}_{2}$, for all i and j.
+Configurations obtained using MDS are not unique. Thus the data is usually
+centered to get a unique solution when $\Bm{D}$ is Euclidean.
+
+
+\subsubsection{Classical MDS}
+Assume that the given n$\times$n distance matrix $\Bm{D} = (d_{ij})$ 
+corresponding to an unobserved data matrix $\Bm{X} \in \R^{n \times p}$ is Euclidean. Let $\hat{d}_{ij} = \norm{\vect{y}_{i} - \vect{y}_{j}}_{2}$  be the Euclidean distance between a set of n configuration points 
+$\displaystyle \{\vect{y}_{i}\}_{i=1}^{n}$ in $\R^{p}$, obtained from the matrix $\Bm{D}.$ Classical MDS or classical scaling  considers the problem of minimizing the reconstruction error function.
+\begin{equation}\label{error1}
+\displaystyle \sum_{i = 1}^{n} \sum_{j=1}^{n} (d_{ij}^{2} - \hat{d}_{ij}^{2})
+\end{equation}
+The optimal linear dimensionality reduction to equation \eqref{error1} is given by the following procedure 
+\cite{MardiaK.V1979Ma}:\\
+First, a real number k, $1 \leq k < p$ is chosen.\\
+Second, an n$\times$n PSD similarity matrix, $\Bm{B}$ = $-\frac{1}{2} \Bm{HDH}$,   is computed from the given distance matrix, $\Bm{D}$, where $\Bm{H}$ is the centering matrix in \eqref{centerMatrix}.\\
+Third, the  spectral decomposition of $\Bm{B}$ is computed to 
+obtain  \textbf{Y} = \textbf{V} \textbf{$\Sigma$} \textbf{V}$^{\top}$,
+where 
+\[
+\bm{\Sigma} = \text{diag}(\lambda_{1}, \ldots, \lambda_{p}),
+ \lambda_{1} \geq \lambda_{2} \geq \ldots \geq \lambda_{p} > 0 \ \
+ \text{is a diagonal matrix and} \ \    \bm{V} = [\vect{v}_{1}, \ldots, \vect{v}_{p}]
+ \]
+is an orthonormal matrix.
+Fourth, the top k eigenvectors of $\textbf{V}$ are chosen
+and the estimated data matrix 
+\[
+\hat{\Bm{X}} = [\sqrt{\lambda_{1}}\vect{v}_{1}, \ldots, \sqrt{\lambda_{k}}\vect{v}_{k} ]
+\]
+gives the optimal solution to \eqref{error1}.\\
+
+Observe that 
+\[ \hat{\textbf{X}} = \Bm{X}\Bm{H} = \Bm{X} - n^{-1} \Bm{X}\Bm{1}\Bm{1}^{\top} = \Bm{X} - \bm{\mu}\Bm{1}^{\top}
+\]
+where 
+\[
+\bm{\mu} = n^{-1} \Bm{X1}
+\]
+is the empirical mean of the unobserved data. Therefore PCA and classical MDS both give the same solution whenever the data is centered.\\
+
+If a similarity matrix $\Bm{S}$ is PSD, with entries 
+$s_{ij}$ obtained from a distance matrix $D = (d_{ij})$ by the transformation
+\[ 
+d_{ij} = \sqrt{s_{ii} - 2s_{ij} + s_{jj}} \geq 0
+\]
+Then $\Bm{S}$ is Euclidean, with centered inner product matrix, $\Bm{B = HSH}$, where the entries of $\Bm{B}$ are given by 
+\[ 
+b_{ij} = s_{ij} - \bar{s}_{i.} - \bar{s}_{.j} + \bar{s}_{..}
+\]
+and the quantities on the right hand side of the preceding equation are defined as in \eqref{Euclidtransform}.
+
+\subsubsection{Spectral Non-linear dimensionality reduction}
+Spectral non-linear dimensionality reduction
+
+
+\subsubsection{Graph theory}
+
+ 
+\subsubsection{Finite Markov chains}
+
+
+\subsubsection{Laplacian Eigen Maps}
+
+
+\subsubsection{Diffusion Maps}
+
+
+
+\subsection{Spike train metrics}
+A common approach for quantifying neuronal response variability is through specification of a 
+similarity or dissimilarity measure between pairs of spike train data
+\cite{Brown2004, Victor1996, Victor1998, Rossum2001,houghton2010measuring, Schreiber2003}.
+Here a spike train refers to an increasing sequence of action potentials or spikes
+through which the sensory system receives information about the world.
+This raises the need for a the notion of ``distance". 
+In line with conclusions reached by Victor and Purpura (1996, 1997) and
+van Raussum (2001) \cite{Victor1996, Victor1998, Rossum2001}, a short distance between two spike trains approximately represents similar inputs (stimuli) while a large distance between spike trains roughly represents discrimination between different stimuli.
+How spike trains encode information is not known. In certain instances, information may be encoded through the precise time at which spikes occur (temporal coding) where as in others, it is encoded through the number of spikes in a given interval (rate coding) (cite Rieke, Warland and Bialek 1996 book on Spikes).
+As a remedy for loss of temporal information due to trial averaging, the observation duration is often divided into non-over lapping time intervals called bins.
+As long as the size of the bin is larger than the average inter-spike interval (ISI), cross-correlation of binned spike trains provides a good estimate of the instantaneous firing rate
+\cite{Brown2004}. The shortcoming of spike binning in studying temporal patterns, is that, two different spike trains often yield identical binning patterns whenever spikes fall in the same bin. Several spike train measures have been designed to overcome the problem of binning. For instance, the edit-length metric \cite{Victor1996, Victor1998} is based on minimizing the cost of transforming one spike train into another by deleting, inserting or shifting a spike. Another measure, the van Rossum distance \cite{Rossum2001, houghton2010measuring} refers to any metric induced on the space of spike trains by transforming a spike train into a continuous function (i.e. a filtered spike train) using a smoothing kernel (such as a box-car window, Gaussian, decaying exponential and  Laplace Kernel) and then using the standard $L^2$ distance on the corresponding function space as the dissimilarity measure. An additional measure, the the correlation-based distance \cite{Schreiber2003} is based on the filtering the spike trains using a Gaussian kernel and then using the normalized dot product between  spike trains as a  similarity measure.
+The vector space viewpoint uses van Rossum metrics while the point-process viewpoint
+uses metrics such as the edit-length distance \cite{Victor2005}. 
+Metrics based on the former often yield  Euclidean distances while those based on the latter are typically non-Euclidean \cite{Aronov2004}.\\
+
+
+\subsubsection{Cost-based metrics}
+Describe single neuron case only
+
+\subsubsection{Van Rossum Metrics}
+
+
+\subsubsection{Correlation-based metrics}
+
+
+
+
+
+
+
+\newpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
