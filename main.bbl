@@ -1,0 +1,202 @@
+\begin{thebibliography}{10}
+
+\bibitem{Georgopoulos1982}
+a~P Georgopoulos, J~F Kalaska, R~Caminiti, and J~T Massey.
+\newblock {On the relations between the direction of two-dimensional arm
+  movements and cell discharge in primate motor cortex}.
+\newblock {\em J.Neurosci.}, 2(11)(11):1527--1537, 1982.
+
+\bibitem{Hubel1968}
+D.~H. Hubel and T~N Wiesel.
+\newblock {Receptive Fields and Functional Architecture of monkey striate
+  cortex}.
+\newblock {\em Journal of Physiology}, 195:215--243, 1968.
+
+\bibitem{OKeefe1971}
+J~O'Keefe and J~Dostrovsky.
+\newblock {The hippocampus as a spatial map. Preliminary evidence from unit
+  activity in the freely-moving rat}.
+\newblock {\em Brain Research}, 34(1):171--175, 1971.
+
+\bibitem{Hopfield1995}
+J~J Hopfield.
+\newblock {Pattern recognition computation using action potential timing for
+  stimulus representation}.
+\newblock {\em Nature}, 376(6535):33--36, 1995.
+
+\bibitem{Redish2016}
+A.~David Redish.
+\newblock {Vicarious trial and error}.
+\newblock {\em Nature Reviews Neuroscience}, 17(3):147--159, 2016.
+
+\bibitem{Vos2015}
+Seychelle~M Vos, Elsa~M Tretter, Bryan~H Schmidt, James~M Berger, and Cell
+  Biology.
+\newblock {HHS Public Access}.
+\newblock 12(12):827--841, 2015.
+
+\bibitem{Kaufman2014}
+Matthew~T Kaufman, Mark~M Churchland, Stephen~I Ryu, and Krishna~V Shenoy.
+\newblock {Cortical activity in the null space: permitting preparation without
+  movement.}
+\newblock {\em Nature neuroscience}, 17(3):440--448, 2014.
+
+\bibitem{Mazor2005}
+Ofer Mazor and Gilles Laurent.
+\newblock {Transient dynamics versus fixed points in odor representations by
+  locust antennal lobe projection neurons}.
+\newblock {\em Neuron}, 48(4):661--673, 2005.
+
+\bibitem{Kipke2008}
+D.~R. Kipke, W.~Shain, G.~Buzsaki, E.~Fetz, J.~M. Henderson, J.~F. Hetke, and
+  G.~Schalk.
+\newblock {Advanced Neurotechnologies for Chronic Neural Interfaces: New
+  Horizons and Clinical Opportunities}.
+\newblock {\em Journal of Neuroscience}, 28(46):11830--11838, 2008.
+
+\bibitem{Kerr2008}
+Jason N.~D. Kerr and Winfried Denk.
+\newblock {Imaging in vivo: watching the brain in action}.
+\newblock {\em Nature Reviews Neuroscience}, 9(3):195--205, 2008.
+
+\bibitem{Shenoy2013}
+Krishna~V Shenoy, Maneesh Sahani, and Mark~M Churchland.
+\newblock {Cortical control of arm movements: a dynamical systems perspective.}
+\newblock {\em Annual review of neuroscience}, 36:337--359, 2013.
+
+\bibitem{Cunningham2014a}
+John~P Cunningham and Byron~M Yu.
+\newblock {Dimensionality reduction for large-scale neural recordings}, nov
+  2014.
+
+\bibitem{Yu2009}
+Byron~M Yu, John~P Cunningham, Gopal Santhanam, Stephen~I Ryu, Krishna~V
+  Shenoy, and Maneesh Sahani.
+\newblock {Gaussian-Process Factor Analysis for Low-Dimensional Single-Trial
+  Analysis of Neural Population Activity}.
+\newblock pages 614--635, 2009.
+
+\bibitem{Dayan2001}
+P~Dayan and LF~Abbott.
+\newblock {\em {Theoretical neuroscience}}.
+\newblock 2001.
+
+\bibitem{JolliffeIT1986PCAa}
+I~T Jolliffe.
+\newblock {\em {Principal Component Analysis and Factor Analysis}}.
+\newblock Principal Component Analysis. Springer New York, 1986.
+
+\bibitem{Agricultural1938}
+Oklahoma Agricultural.
+\newblock {discussed earlier by Beltrami and Jordan , and more recently Autonne
+  and E . T . Browne have proved the theorem for square matrices with complex
+  elements . f The following definitions will be convenient for the present
+  pur- pose . An ( r , s ) matrix is o}.
+\newblock 46(1934):118--121, 1938.
+
+\bibitem{BishopChristopherM2006Pram}
+Christopher~M Bishop.
+\newblock {\em {Pattern recognition and machine learning}}.
+\newblock Information science and statistics. Springer, New York, 2006.
+
+\bibitem{AmericanMathematicalSociety.1939Apat}
+American~Mathematical Society.
+\newblock {A principal axis transformation for non-hermitian matrices}.
+\newblock {\em Bulletin of the American Mathematical Society.}, 45(2):118--122,
+  1939.
+
+\bibitem{CoxT2000}
+Cox~M {Cox T}.
+\newblock {\em {Multidimensional scaling}}.
+\newblock 2000.
+
+\bibitem{MardiaK.V1979Ma}
+K~V Mardia.
+\newblock {\em {Multivariate analysis}}.
+\newblock Probability and mathematical statistics. Academic Press, London ; New
+  York, 1979.
+
+\bibitem{TenenbaumJB2000Aggf}
+J~B Tenenbaum, V~de~Silva, and J~C Langford.
+\newblock {A global geometric framework for nonlinear dimensionality
+  reduction.}
+\newblock {\em Science.}, 290(5500):2319--2323, dec 2000.
+
+\bibitem{roweis2000nonlinear}
+Sam~T Roweis and Lawrence~K Saul.
+\newblock {Nonlinear dimensionality reduction by locally linear embedding}.
+\newblock {\em science}, 290(5500):2323--2326, 2000.
+
+\bibitem{belkin2003laplacian}
+Mikhail Belkin and Partha Niyogi.
+\newblock {Laplacian eigenmaps for dimensionality reduction and data
+  representation}.
+\newblock {\em Neural computation}, 15(6):1373--1396, 2003.
+
+\bibitem{Luxburg2007}
+Ulrike~Von Luxburg.
+\newblock {A tutorial on spectral clustering}.
+\newblock (August 2006):395--416, 2007.
+
+\bibitem{Brown2004}
+E~N Brown, R~E Kass, and P~P Mitra.
+\newblock {Multiple neural spike train data analysis: state-of-the-art and
+  future challenges}.
+\newblock {\em Nat.Neurosci.}, 7(5):456--461, 2004.
+
+\bibitem{Victor1996}
+J.~D. Victor and Keith~P Purpura.
+\newblock {Nature and precision of temporal coding in visual cortex: a
+  metric-space analysis.}
+\newblock {\em Journal of neurophysiology}, 76(2):1310--26, 1996.
+
+\bibitem{Victor1998}
+Jonathan~D Victor, Keith~P Purpura, and Jonathan~D Victor.
+\newblock {No Title}.
+\newblock (212):1--60, 1998.
+
+\bibitem{Rossum2001}
+M~C W~Van Rossum.
+\newblock {Communicated by Jonathan Victor}.
+\newblock {\em Neural Computation}, 763:751--763, 2001.
+
+\bibitem{houghton2010measuring}
+Conor Houghton and Jonathan Victor.
+\newblock {Measuring representational distances--the spike-train metrics
+  approach}.
+\newblock {\em Visual Population Codes--Toward a Common Multivariate Framework
+  for Cell Recording and Functional Imaging}, pages 391--416, 2010.
+
+\bibitem{Schreiber2003}
+S~Schreiber, J~M Fellous, D~Whitmer, and P~Tiesinga.
+\newblock {A new correlation-based measure of spike timing reliability}.
+\newblock 54:925--931, 2003.
+
+\bibitem{Victor2005}
+Jonathan~D. Victor.
+\newblock {Spike train metrics}.
+\newblock {\em Current Opinion in Neurobiology}, 15(5):585--592, 2005.
+
+\bibitem{Aronov2004}
+Dmitriy Aronov and Jonathan~D Victor.
+\newblock {Non-Euclidean properties of spike train metric spaces}.
+\newblock {\em Physical Review E - Statistical, Nonlinear, and Soft Matter
+  Physics}, 69(6 1):1--9, 2004.
+
+\bibitem{coifman2006diffusion}
+Ronald~R Coifman and St{\'{e}}phane Lafon.
+\newblock {Diffusion maps}.
+\newblock {\em Applied and computational harmonic analysis}, 21(1):5--30, 2006.
+
+\bibitem{quiroga2009extracting}
+Rodrigo~Quian Quiroga and Stefano Panzeri.
+\newblock {Extracting information from neuronal populations: information theory
+  and decoding approaches}.
+\newblock {\em Nature Reviews Neuroscience}, 10(3):173--185, 2009.
+
+\bibitem{Burgess1993}
+Neil Burgess, Michael Recce, and J~O'Keefe.
+\newblock {Using hippocampal 'place cells' for navigation}.
+\newblock 1993.
+
+\end{thebibliography}

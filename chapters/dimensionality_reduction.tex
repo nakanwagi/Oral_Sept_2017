@@ -143,7 +143,7 @@ or $\Bm{D}$ are stack as columns in a new matrix,
 $\Bm{V} = [\vect{v}_{1}, \ldots, \vect{v}_{k}] \in \R^{n \times k}.$\\
 Finally, viewing the i$^{th}$ row of, $\bm{V}$, as a point, $\vect{y}_{i}$,
 in $\R^{k}$, a configuration of n points 
-$\{\vect{y}_{i}, \ldots, \vect{y}_{k} \}$ is obtained where each
+$\{\vect{y}_{1}, \ldots, \vect{y}_{k} \}$ is obtained where each
 \[  
 \vect{y}_{i} = (\vect{v}_{1}(i), \ldots, \vect{v}_{k}(i)) \in \R^{k}
 \]
@@ -157,20 +157,19 @@ Spectral dimensionality reduction algorithms differ depending to the
 type of distance matrix or similarity matrix used and the relationship
 between the input space and output space.
 
-
-
-\subsubsection{Spectral linear dimensionality  reduction}
-In spectral linear dimensionality reduction \cite{VanDerMaaten2009}, the input space and output space are related by a linear transformation between the spaces.
+\subsubsection{Linear dimensionality  reduction}
 Let $\bm{X} \in \R^{n \times D}$ be a design matrix where the rows of
 $\bm{X}$ contain n data points, each of which is associated with D features
 in the columns of $\bm{X}$.
 Linear dimensionality reduction techniques find a low dimensional model of the data matrix $\textbf{X}$ using a linear transformation such as an $n \times d$ orthonormal matrix \textbf{M} where d$<<$D. The low dimensional model of the data
-$\Bm{Y}$ is obtained using the relation $\Bm{Y} = \Bm{M}^{\top}X.$ 
+$\Bm{Y}$ is obtained using the relation $\Bm{Y} = \Bm{M}^{\top}X.$\\
+Examples of linear dimensionality techniques include: Factor analysis (FA), Guassian Process Factor Analysis (GPFA), principle component analysis (PCA), in addition to many others. GPFA is not a spectral linear dimensionality technique and is thus not a focus of our project. FA is a spectral linear dimensionality technique but will only focus on PCA.\\ 
+
 
 
 
 \subsubsection{Principal Component Analysis (PCA)}
-A common example of a linear spectral method is principle component analysis (PCA) \cite{JolliffeIT1986PCAa}. PCA is a linear technique for finding the directions
+A common example of a spectral linear method is principle component analysis (PCA) \cite{JolliffeIT1986PCAa}. PCA is a linear technique for finding the directions
 of maximum variance in the data. The main assumption in PCA is that the high dimensional data lies on or near a low d-dimensional subspace embedded in some high dimensional space $\R^{D}$. The best low d-dimensional subspace that describes the data is then found by minimizing the sum of squared residuals    \eqref{PCA}, between the orthogonal projection of the data  points onto the estimated low dimensional subspace and the given points.
 
 \begin{equation}\label{PCA}
@@ -217,7 +216,7 @@ or similarity measure between points. We only focus on MDS in the special case w
 
 
 
-\subsubsection{Multidimensional scaling (MDS)}
+\subsection{Multidimensional scaling (MDS)}
 Assume that an n$\times$n matrix, $\Bm{D}$=(d$_{ij}$), of pair-wise distances
 (not necessarily Euclidean) or similarities, $\Bm{S} = (s_{ij})$, between unobserved  data points, $\{\vect{x}_{1}, \ldots, \vect{x}_{n} \}$, is given and n is large.
 Multidimensional scaling (MDS) \cite{CoxT2000, MardiaK.V1979Ma} considers the the problem of finding a low dimensional model of the high dimensional data by searching for a configuration of n points $\{\vect{y}_{1}, \ldots, \vect{y}_{n} \}$ in $\R^{\text{p}}, \text{p} << \text{n}$, where each $\vect{y}_{i}$ is a low dimensional representation of $\vect{x}_{i}$, and such that the pair-wise distances between points are preserved. Specifically, the Euclidean distances between the configuration points, $\norm{\vect{y}_{i} - \vect{y}_{j}}_{2}$, must be as ``close" as possible to  the given dissimilarities, d$_{ij}$, that is, $\norm{\vect{y}_{i} - \vect{y}_{j}}_{2} \approx \text{d}_{ij}$, for all i and j between 1 and n inclusive. The configuration points $\vect{y}_{i}$ and the intrinsic dimension 
@@ -276,39 +275,316 @@ b_{ij} = s_{ij} - \bar{s}_{i.} - \bar{s}_{.j} + \bar{s}_{..}
 \]
 and the quantities on the right hand side of the preceding equation are defined as in \eqref{Euclidtransform}.
 
-\subsubsection{Spectral Non-linear dimensionality reduction}
-Spectral non-linear dimensionality reduction
+\subsection{Spectral non-linear dimensionality reduction}
+Spectral non-linear dimensionality reduction (SNLDR) techniques are a 
+class of MDS methods, where there is no linear mapping between the 
+input and output space. Both SNLDR techniques and classical MDS, utilize
+either a PSD similarity matrix or distance matrix to find a low dimensional
+model of the data. Examples of SNLDR methods include ISOMAP \cite{TenenbaumJB2000Aggf}, locally linear embedding (LLE)  \cite{roweis2000nonlinear}, Laplacian eigenmaps (LE) \cite{belkin2003laplacian}
+and diffusion maps \cite{belkin2003laplacian}, in addition to many others.
+These methods are different from classical MDS (or linear dimensionality reduction) because they search for the optimal configuration points from the output space and not directly from the given distance matrix (input space). This makes them
+superior to classical MDS (linear dimensionality reduction techniques) because they do not make an apriori assumption
+about the underlying geometry of the data manifold and can hence discover 
+interesting structure in the data.
+SNLDR methods use spectral graph theory \cite{Luxburg2007}, where a graph is built on the given data set, using a specified distance, to obtain the graph Laplacian. The eigen vectors of the graph Laplacian, provide a new coordinate system, which is used to embed the data into Euclidean space.
+ISOMAP, LLE and LE require dense sampling of the data manifold in order to 
+provide an accurate embedding, and are not very robust to noise and outliers.
+They are static methods like PCA, in that, they provide a good visualization of the data in most cases but they cannot account for temperal changes such as those exhibited in patterns of action potentials or spikes. Diffusion  maps on the other hand is robust to noise and outliers, does not require dense sampling of the data and has a parameter which can be tuned to visualize stochastic random variables such as spike trains.\\
 
 
-\subsubsection{Graph theory}
+Suppose a data set, $\Bm{X} =  \{x_{1}, \ldots, x_{n} \}$, is given  and assume that the pair-wise distances, $d_{ij} = \text{dist}(x_{i}, x_{j})$, between points are known. A graph, G = (V,E), consisting of n vertices, $V = \{v_{1}, \ldots, v_{n}\}$, and a set of edges, E, between vertices, can be used to define pair-wise  similarities, s$_{ij}$, between points by identifying each data point, $x_{i}$, with a vertex, $v_{i}$, on the graph, for all i from 1 to n.
+The similarities, s$_{ij}$, are assigned such that, points which are close together, have a high similarity while those points that are far apart, have a low similarity. Pair-wise similarities are usually used to model
+local neighborhood relations on the graph. In the next section, we review some basic concepts in spectral graph theory, which we then use to outline the steps for diffusion maps and laplacian eigen  maps.
 
- 
-\subsubsection{Finite Markov chains}
+\subsubsection{Graph theory definitions}
+
+A graph, G = (V,E), with a finite set of n vertices or nodes, V = $\{i, j, k,...,m\}$, is called weighted, if any edge joining a pair of vertices, (i,j), has a non-negative weight, $w_{ij} \geq 0$, associated to it.
+The edge weight $w_{ij}=0$ if nodes i and j have no edge between them, that is, $(i,j) \not \in E.$
+A graph G is  undirected if the edges are bi-directional such that, $w_{ij} = w_{ji}$.\\
+A matrix, $\Bm{W} = (w_{ij})$, for all i and j between 1 and n, 
+whose entries are edge weights between pairs of nodes, is called the adjacency matrix or the similarity matrix of G. The degree of the, $i^{th}$, node defined 
+as
+\begin{equation}\label{degree}
+d_{i} := \sum_{j}w_{ij}, 
+\end{equation}
+
+is the sum of all the weights, $w_{ij}$, such that, $(i,j) \in E.$ In other words, the sum over j above, is non-zero only when two nodes are connected
+by a non-zero weight.
+The degree matrix, $\Bm{D}$, is a diagonal matrix with degrees, $d_{i}$, on it's diagonal.
+If A is a subset of V, then the volume of A, vol(A), defined as 
+\[
+\text{vol(A)} =  \displaystyle \sum_{i \in A} d_{i},
+\]
+is equal to the sum of all node degrees in the set A. The unnormalized graph Laplacian L is defined as
+
+\begin{equation}\label{unnormalized Laplacian}
+\Bm{L = D} - \Bm{W} 
+\end{equation}
 
 
-\subsubsection{Laplacian Eigen Maps}
+\subsubsection{Neighborhood similarity graphs}
+Assuming that the pairwise distances, $d_{ij}$, between a given data set, 
+$ \Bm{X} = \{x_{1}, \ldots, x_{n}\}$, are known, different SNLDR methods
+use either distances, $d_{ij}$, or similarities, $s_{ij}$, to build a graph 
+on the data set. Diffusion maps and Laplacian eigenmaps build a graph on data using similarities, $s_{ij}$, between points.
+These methods consider the problem of modeling local neighborhood relations
+between points, so that points that are very close together, are assigned a large similarity, while those that are far apart, are assigned a small similarity.
+The neighborhood graphs are formed by connecting together, those points which have a positive similarity, between them based on a given distance, $d_{ij}$.\\
+
+There are three common methods for building similarity graphs:
+The first method is called, the $\epsilon-$nearest neighbor graph, where a threshold, $\epsilon$, is fixed and then  all points which are within a distance, $\epsilon$, from each other are connected. The second method is called, the mutual k-nearest neighbor graph, where two points, $x_{i}$, and ,$x_{j}$, are connected together if and only if, $x_{i}$,  is among the k-nearest neighbors of ,$x_{j}$, and, $x_{j}$, is among the k-nearest neighbors of, $x_{i}$.
+The third method is called, the fully connected graph. In this method, all 
+points with a positive similarity between them are connected.
+The most widely used measure for a fully connected similarity graph is the Gaussian kernel given by 
+\[
+\text{s}_{ij} = e^{-\dfrac{\text{dist}^{2}(x_{i}, x_{j})}{2 \sigma^2 } } 
+\]
+where
+\[
+d_{ij}^{2} = \text{dist}^{2}(x_{i}, x_{i}) = \norm{x_{i}-x_{j}}_{2}^{2}
+\]
+The tuning parameter, $\sigma$, controls the width of a given neighborhood.
 
 
-\subsubsection{Diffusion Maps}
+
+\subsubsection{Embedding a graph on the real line}
+Suppose that G = (V, E) is a connected, weighted and undirected graph.
+The minimum cut denoted Cut(A,B) refers to the problem of partitioning the set of a disjoint union of vertices, V = A $\displaystyle \cup$ B  such that there is a minimal number of edges connecting the two subsets A and B.
+Given two disjoint subsets A and B of V, Cut(A,B), is defined as
+
+\begin{equation}\label{cut}
+Cut(A,B) = \displaystyle \frac{1}{2} \sum_{i \in A,  j \in B } w_{ij} 
+\end{equation}
 
 
+The normalised cut denoted, Ncut(A,B), a relaxed version of, Cut(A, B), is defined as
+
+\begin{equation}\label{Ncut}
+\displaystyle \text{Ncut}(A,B) = \frac{\text{Cut}(A, B)}{\text{vol}(A)}
++ \frac{\text{Cut}(A, B)}{\text{vol}(B)} 
+\end{equation}
+
+Spectral graph partitioning\cite{Luxburg2007} was designed as solution to the relaxed hard, Ncut(A, B), problem above.
+A simple example of Spectral Graph partitioning is the problem of embedding a finite Graph G=(V,E) onto the real line $\R$ so that neighboring points on the graph remain  close in the low dimensional representation. To see this, assume that there are n vertices in the set V where $V = \{i, j, k, \ldots\, m\}.$
+Let $\vect{y} = (y_{1}, \ldots, y_{n})$  be any vector in Euclidean space $\R^{n}$. The vector $\vect{y}$ can be viewed as a function
+
+\[ \vect{y}: V \rightarrow \mathbb{R}, \ \  \ \  \vect{y}(i) \mapsto y_i \]
+
+on the set of vertices V of  G which assigns to each vertex i in V, a real number $\vect{y}(i) = y_{i}$.  Using this definition, it follows that
+
+\begin{equation}\label{Ccut}
+\text{Cut(A,B)} = \displaystyle{ \sum_{i,j} (y_{i} - y_{j})^{2}w_{ij} }
+\end{equation}
+and
+\begin{equation}\label{Nncut}
+\text{Ncut(A,B)} = \displaystyle{ \frac{1}{\text{vol}(V)} y^{T}\Bm{L}y}   
+\end{equation}
+
+\begin{proof}
+
+\text{Let} 
+\[
+ y_{i} =
+  \begin{cases} 
+      \hfill +1    \hfill & \text{ if node $i \in A$} \\
+      \hfill -1 \hfill & \text{if node $i \in B$} \\
+  \end{cases}
+\]
+
+ If $i, j \in A $ then $y_{i} = y_{j}$ and $y_{i} - y_{j} = 0.$
+
+ Conversely, $i \in A, j \in B \implies y_{i} - y_{j} = 2$ and $i \in B, j \in A \implies y_{i}-y_{j} = -2.$
+
+
+\[
+ (y_{i} - y_{j})^{2} =
+  \begin{cases} 
+      \hfill 0    \hfill & \text{ if i and j lie in the same subset} \\
+      \hfill 4 \hfill & \text{if  i and j lie in different subsets } \\
+  \end{cases}
+\]
+
+Let  W = $(w_{ij})$ be defined by
+\[
+ w_{ij} =
+  \begin{cases} 
+      \hfill 1   \hfill & \text{ if $ (i, j) \in E$} \\
+      \hfill 0 \hfill & \text{otherwise} \\
+  \end{cases}
+\]
+
+using \eqref{cut}, we have
+
+\begin{align*}
+Cut(A, B) &= \frac{1}{4} \sum_{(i, j) \in E} (y_{i} - y_{j})^{2}  \\
+& =  \frac{1}{8} \sum_{i} \sum_{j} (y_{i}-y_{j})^{2}w_{ij} \\
+& \approx  \sum_{i,j} (y_{i} - y_{j})^{2}w_{ij}
+\end{align*}
+
+
+\end{proof}
+Thus
+Solving the Cut(A,B) is equivalent to minimizing \eqref{Ccut},
+which is equivalent to requiring that points which are close on the graph, are mapped to neighboring points on the real line.
+To see this, observe that if, $y_{i}$ is very similar to $y_{j}$, then, w$_{ij} \approx 1$, by definition of a similarity measure. Since, $(y_{i}-y_{j})^2 > 0$, equation \eqref{Ccut} is minimized only if $y_{i}$ is very close to $y_{j}$. Thus neighboring points on the graph, are mapped to neighboring points on the real line. On the other hand, if $y_{i}$ is very dissimilar to $y_{j}$, then $w_{ij} \approx 0$. Therefore when equation  \eqref{Ccut} is minimized,
+the points which are very far apart will not matter in the final embedding.
+
+\subsubsection{Graph Laplacians and their properties}
+The unnormalized graph Laplacian $\Bm{L = D} - \Bm{W}$  of a connected, weighted,
+undirected graph G with n vertices is positive semidefinite hence 
+has a basis of n non-negative eigenvalues with corresponding  eigenvectors.
+The smallest eigenvalue of $\Bm{L}$ is $\vect{0}$ with corresponding eigenvector $\vect{1}$. 
+The second eigenvalue of $\Bm{L}$ is positive if and only if the graph G is connected.\\
+There are two other types of graph Laplacians namely the symmetric normalized
+graph Laplacian 
+\begin{equation}\label{normalizedLaplacian}
+\Bm{L}_{sym} = \Bm{D}^{-\frac{1}{2}} \Bm{L} \Bm{D}^{-\frac{1}{2}} =
+\Bm{I} - \Bm{D}^{-\frac{1}{2}} \Bm{W} \Bm{D}^{-\frac{1}{2}}
+\end{equation}
+and 
+the graph Laplacian related to a random walk on a graph which is not symmetric
+\begin{equation}\label{RandomWalk}
+\Bm{L}_{rw} = \Bm{D}^{-1}\Bm{L} = \Bm{I} - \Bm{D}^{-1}\Bm{W}
+\end{equation}
+where $\Bm{D}$ is the degree matrix and $\Bm{W}$ is the similarity matrix.
+Diffusion maps uses a variant of \eqref{RandomWalk} to get a symmetric similarity
+matrix. 
+Both Laplacian eigenmaps and diffusion maps use the degree matrix $\Bm{D}$
+and the similarity matrix $\Bm{W}$ to normalize \eqref{unnormalized Laplacian}\\
+
+The Cut(A,B) problem is solved by using the signs of components of the bottom non-constant eigen vector of $\Bm{L}$ to partition the vertex set into two disjoint subsets\cite{Luxburg2007}.
+From properties of $\Bm{L}$, any graph G with n vertices can be embedded in $\R^{k}$ where $1 \leq k \leq n-1$ by taking the top k or bottom k eigenvectors of the graph Laplacian.
+The constant eigen vector corresponding to the zero eigen value is normally
+discarded when using the normalized graph Laplacian.
+
+
+
+%\subsubsection{Laplacian eigen maps algorithm}
+%Building a Graph from a data set $X = \{\vec{x}_{1}, \ldots , \vec{x}_{n}\}$}
+%\pause
+%Assuming the pairwise distances $d_{ij}$ or similarities $s_{ij}$ between data points $\{x_{1}, \ldots, x_{n}\}$
+%are known, the points may be connected using 
+%
+%mutual k-nearest neighbor graph
+%
+%
+%Build a weighted graph on the given data set
+%by viewing data points as vertices of a graph in which neighboring points are connected by weighted edges
+%
+%From the adjacency matrix W  using one of the two methods
+%
+%Choose the weights $w_{ij}$ using the Heat Kernel with no parameter
+%\[
+% w_{ij} =
+%  \begin{cases} 
+%      \hfill e^{-\frac{\norm{\vec{x}_{i}-\vec{x}_{j}}^2}{t}}    \hfill & \text{ if $(i,j) \in E$} \\
+%      \hfill 0 \hfill & \text{otherwise} \\
+%  \end{cases}
+%\]
+%\pause
+%
+%\item Case 2: (No Parameter t).
+%
+%\[
+% w_{ij} =
+%  \begin{cases} 
+%      \hfill 1    \hfill & \text{ if $(i,j) \in E$} \\
+%      \hfill 0 \hfill & \text{otherwise} \\
+%  \end{cases}
+%\]
+%
+%
+%
+%
+%
+%and degree matrix D,
+%compute the graph Laplacian L using the relationship L = D-W
+%
+%Solve the generalized eigenvalue problem Lv = $\lambda$Dv
+%and stack the smallest  eigenvectors $\{\vec{v}_{1}, \ldots, \vec{v}_{d} \}$ of L excluding the smallest eigenevector of L as columns in a matrix U ;
+%obtain a d-dimensional embedding of the data
+% by viewing each  data point as the $i^{th}$ row of U via the map
+%$\vec{x}_{i} \mapsto (\vec{v}_{1}(i), \ldots, \vec{v}_{d}(i))$ };
+%
+%
+%
+%
+%
+%
+%\item Solve the generalized eigenvalue problem $L\vect{v} = \lambda D \vect{v}$ and take the bottom d-smallest generalized eigenvectors $\vect{f}_{2}, \ldots, \vect{f}_{d}$ of L excluding the constant eigenvector.
+% \pause
+% \item Form the matrix U = $[\vect{f}_{2} \ldots \vect{f}_{d}]$ by stacking $\vect{f}_{i}$ as columns in U.
+% \pause 
+% \item View the $\text{i}^{th}$ row of U as the $d$-dimensional representation of the $\text{i}^{th}$ vertex 
+% corresponding to the original data point $\vect{x}_{i}.$
+%
+
+\subsubsection{Random walk on a graph}
+Let G=(V,E) be a connected, weighted and undirected graph with a set of n vertices, V = $\{v_{1}, \dots, v_{n} \}$.
+A stochastic process which jumps from one vertex, $v_{i}$, to another vertex, $v_{j}$, on the graph, G, is called a random walk on G.
+Denote the random walk on G by the set $\{X(t)\}_{t \in \mathbb{N}}$.
+A matrix M is called a stochastic transition matrix or a transition probability
+matrix, if the entries in each row of M are non-negative and add upto one.
+We know that the transition probability of jumping from vertex $v_{i}$
+to vertex, $v_{j}$, on , G, is proportional to the edge weight, $w_{ij}$, between the two vertices. 
+Let $p_{ij} = \text{Prob} \left(X(t+1) = j | X(t) = i \right)$ be the transition probability of jumping from vertex $v_{i}$ to vertex $v_{j}$ in one step. Define $p_{ij}$ by
+\begin{equation}
+p_{ij}   = \frac{w_{ij}}{d_{i}}
+\end{equation}
+where, $d_{i}$,  denotes the degree of the $i^{th}$ vertex as in \eqref{degree}, and 
+set $\Bm{P} = (p_{ij})$. Since the degree matrix $\Bm{D} = \text{diag}(d_{1}, \ldots, d_{n})$, contains the sum of the $i^{th}$ row of the adjacency matrix, $\Bm{W}$,
+we know that the matrix 
+\begin{equation}\label{transitmatrix}
+\Bm{P} = \Bm{D}^{-1}\Bm{W} 
+\end{equation}
+is indeed a transition probability matrix. This follows from the fact that, $d_{i} > 0$, (because G is connected) and $w_{ij} \geq 0$ since it's a similarity. Moreover, the definition of $\Bm{D}$ implies that the rows of $\Bm{P}$ sum upto one. 
+$\Bm{P}$ is a probability transition matrix implies that it satisfies
+the equation $\Bm{P} \vect{1} = \vect{1}$. Thus one is an eigenvalue of 
+$\Bm{P}$ with corresponding constant eigenvector $\vect{1}$.
+
+Observe that $\Bm{P}$ is precisely, the random walk graph Laplacian, $\Bm{L}_{rw}$, in equation\eqref{RandomWalk}.
+Given that the random walk starts at node i, so that, $X(0) = i$, the probability
+that the random walk is at vertex $v_{j}$ after t steps is given by
+\[
+\text{Prob}\left( X(t) = j | X(0) = i  \right) = p_{ij}^{t}
+\]
+Thus the probability distribution of the random walk at time t, given that it started from vertex $v_{i}$ is given by the  $i^{th}$ row of $\Bm{P}^{t}$, i.e.
+\[
+\text{Prob}\left( X(t) | X(0) = i  \right) = \vect{1}^{\top}\Bm{P}^{t} = \Bm{P}^{t}(i, :)
+\]
+However, we cannot apply spectral decomposition to, $\Bm{P}$, because it's
+not symmetric hence not PSD.
+This requires a normalization using the adjacency matrix, $\Bm{W}$, in order
+to get a PSD similarity matrix $\Bm{S}$.
+
+The eigenvalues, $\lambda_{k}$, of ,$\Bm{P}$, satisfy $\abs{\lambda}_{k} < 1$
+for all k.
+
+\subsubsection{Diffusion maps algorithm}
+1). Given an $n \times n$ distance matrix D = ($d_{ij}$), build a graph G = (V, E) on the data by identifying the each data point
+as a vertex $v_{i}$ from the vertex set  ,V = $\{v_{1}, \ldots, v_{n}\}$, on  G.\\
+2). Compute the similarity matrix or weight matrix, $\bm{W} = (w_{ij})$ between
+the vertices $v_{i}$ using weights
+\[
+w_{ij} = e^{-\dfrac{\text{dist}^{2}(x_{i}, x_{j})}{2\sigma^2}} 
+= e^{-\dfrac{d_{ij}^{2}}{2\sigma^2}}
+\] 
+
+2(a). The weight matrix, $W$, can be any PSD kernel and, $d_{ij}$, is any distance appropriate for the data. $\sigma$, is a band width or tuning parameter which restricts transitions from between points to a, $\sqrt{\epsilon}$, neighborhood.
+
+
+
+
+\newpage
 
 \subsection{Spike train metrics}
-A common approach for quantifying neuronal response variability is through specification of a 
-similarity or dissimilarity measure between pairs of spike train data
-\cite{Brown2004, Victor1996, Victor1998, Rossum2001,houghton2010measuring, Schreiber2003}.
-Here a spike train refers to an increasing sequence of action potentials or spikes
-through which the sensory system receives information about the world.
-This raises the need for a the notion of ``distance". 
-In line with conclusions reached by Victor and Purpura (1996, 1997) and
-van Raussum (2001) \cite{Victor1996, Victor1998, Rossum2001}, a short distance between two spike trains approximately represents similar inputs (stimuli) while a large distance between spike trains roughly represents discrimination between different stimuli.
+A common approach for quantifying neuronal response variability is through specification of a  similarity or dissimilarity measure between pairs of spike train data \cite{Brown2004, Victor1996, Victor1998,Rossum2001,houghton2010measuring, Schreiber2003}.
+Here a spike train refers to an increasing sequence of action potentials or spikes through which the sensory system perceives real-world information.
+This raises the need for a the notion of distance as discussed in section 3.6.4-3.6.6.  In line with conclusions reached by Victor and Purpura (1996, 1997) and van Raussum (2001) \cite{Victor1996, Victor1998, Rossum2001}, a short distance between two spike trains approximately represents similar inputs (stimuli) while a large distance between spike trains roughly represents divergence between different stimuli.
 How spike trains encode information is not known. In certain instances, information may be encoded through the precise time at which spikes occur (temporal coding) where as in others, it is encoded through the number of spikes in a given interval (rate coding) (cite Rieke, Warland and Bialek 1996 book on Spikes).
-As a remedy for loss of temporal information due to trial averaging, the observation duration is often divided into non-over lapping time intervals called bins.
-As long as the size of the bin is larger than the average inter-spike interval (ISI), cross-correlation of binned spike trains provides a good estimate of the instantaneous firing rate
-\cite{Brown2004}. The shortcoming of spike binning in studying temporal patterns, is that, two different spike trains often yield identical binning patterns whenever spikes fall in the same bin. Several spike train measures have been designed to overcome the problem of binning. For instance, the edit-length metric \cite{Victor1996, Victor1998} is based on minimizing the cost of transforming one spike train into another by deleting, inserting or shifting a spike. Another measure, the van Rossum distance \cite{Rossum2001, houghton2010measuring} refers to any metric induced on the space of spike trains by transforming a spike train into a continuous function (i.e. a filtered spike train) using a smoothing kernel (such as a box-car window, Gaussian, decaying exponential and  Laplace Kernel) and then using the standard $L^2$ distance on the corresponding function space as the dissimilarity measure. An additional measure, the the correlation-based distance \cite{Schreiber2003} is based on the filtering the spike trains using a Gaussian kernel and then using the normalized dot product between  spike trains as a  similarity measure.
-The vector space viewpoint uses van Rossum metrics while the point-process viewpoint
-uses metrics such as the edit-length distance \cite{Victor2005}. 
-Metrics based on the former often yield  Euclidean distances while those based on the latter are typically non-Euclidean \cite{Aronov2004}.\\
+As a remedy for loss of temporal information due to trial averaging, the observation duration is often divided into non-over lapping time intervals called bins. As long as the size of the bin is larger than the average inter-spike interval (ISI), cross-correlation of binned spike trains provides a good estimate of the instantaneous firing rate \cite{Brown2004}. The shortcoming of spike binning in studying temporal patterns, is that, two different spike trains often yield identical binning patterns whenever spikes fall in the same bin. Several spike train measures have been designed to overcome the problem of binning. For instance, the edit-length metric \cite{Victor1996, Victor1998} is based on minimizing the cost of transforming one spike train into another by deleting, inserting or shifting a spike. Another measure, the van Rossum distance \cite{Rossum2001, houghton2010measuring} refers to any metric induced on the space of spike trains by transforming a spike train into a continuous function (i.e. a filtered spike train) using a smoothing kernel (such as a box-car window, Gaussian, decaying exponential and  Laplace Kernel) and then using the standard $L^2$ distance on the corresponding function space as the dissimilarity measure. An additional measure, the the correlation-based distance \cite{Schreiber2003} is based on the filtering the spike trains using a Gaussian kernel and then using the normalized dot product between  spike trains as a  similarity measure.
+The vector space viewpoint uses van Rossum metrics while the point-process viewpoint uses metrics such as the edit-length distance \cite{Victor2005}. 
+Metrics based on the former often Euclidean while those based on the latter are typically non-Euclidean \cite{Aronov2004}.\\
 
 
 \subsubsection{Cost-based metrics}
