@@ -37,32 +37,30 @@
 \contentsline {subsubsection}{\numberline {3.8.4}Graph Laplacians and their properties}{23}
 \contentsline {subsubsection}{\numberline {3.8.5}Random walk on a graph}{23}
 \contentsline {subsubsection}{\numberline {3.8.6}Diffusion maps algorithm}{24}
-\contentsline {subsection}{\numberline {3.9}Spike train metrics}{25}
-\contentsline {subsubsection}{\numberline {3.9.1}Cost-based metrics}{25}
-\contentsline {subsubsection}{\numberline {3.9.2}Van Rossum Metrics}{25}
-\contentsline {subsubsection}{\numberline {3.9.3}Correlation-based metrics}{25}
-\contentsline {section}{\numberline {4}Current Project}{26}
-\contentsline {subsection}{\numberline {4.1}Our framework}{26}
-\contentsline {subsection}{\numberline {4.2}Nature of our Raw real-world data}{26}
-\contentsline {subsection}{\numberline {4.3}Preprocessing raw spike train data}{26}
-\contentsline {subsection}{\numberline {4.4}Conversation to a firing rate}{26}
-\contentsline {subsection}{\numberline {4.5}Computing the previous time}{27}
-\contentsline {subsection}{\numberline {4.6}Specific implementation}{28}
-\contentsline {subsubsection}{\numberline {4.6.1}Our distance measures}{28}
-\contentsline {subsubsection}{\numberline {4.6.2}Our similarity measures}{28}
-\contentsline {subsubsection}{\numberline {4.6.3}Place field model}{28}
-\contentsline {subsubsection}{\numberline {4.6.4}Firing rate simulation}{28}
-\contentsline {subsubsection}{\numberline {4.6.5}Previous time approach}{28}
-\contentsline {subsubsection}{\numberline {4.6.6}Initial Results}{28}
-\contentsline {subsubsection}{\numberline {4.6.7}Modification}{28}
-\contentsline {section}{\numberline {5}Results}{29}
-\contentsline {subsection}{\numberline {5.1}Simulation results }{29}
-\contentsline {subsection}{\numberline {5.2}Results on Real-world Data}{29}
-\contentsline {section}{\numberline {6}Discussion/interpretation}{31}
-\contentsline {subsection}{\numberline {6.1}Interpretation of results}{31}
-\contentsline {subsection}{\numberline {6.2}Impact of place fields on results}{31}
-\contentsline {subsection}{\numberline {6.3}Strengths of our model}{31}
-\contentsline {subsection}{\numberline {6.4}Weaknesses of our model}{31}
-\contentsline {subsection}{\numberline {6.5}Future directions}{31}
-\contentsline {section}{\numberline {7}Future work and discussion}{32}
-\contentsline {section}{References}{33}
+\contentsline {subsection}{\numberline {3.9}Spike train metrics}{27}
+\contentsline {subsubsection}{\numberline {3.9.1}Van Rossum Metrics}{27}
+\contentsline {subsubsection}{\numberline {3.9.2}Correlation-based metrics}{27}
+\contentsline {section}{\numberline {4}Current Project}{28}
+\contentsline {subsection}{\numberline {4.1}Our framework}{28}
+\contentsline {subsection}{\numberline {4.2}Nature of our Raw real-world data}{28}
+\contentsline {subsection}{\numberline {4.3}Preprocessing raw spike train data}{28}
+\contentsline {subsection}{\numberline {4.4}Conversation to a firing rate}{28}
+\contentsline {subsection}{\numberline {4.5}Computing the previous time}{29}
+\contentsline {subsection}{\numberline {4.6}Specific implementation}{30}
+\contentsline {subsubsection}{\numberline {4.6.1}Our distance measures}{30}
+\contentsline {subsubsection}{\numberline {4.6.2}Our similarity measures}{30}
+\contentsline {subsubsection}{\numberline {4.6.3}Place field model}{30}
+\contentsline {subsubsection}{\numberline {4.6.4}Firing rate simulation}{30}
+\contentsline {subsubsection}{\numberline {4.6.5}Previous time approach}{30}
+\contentsline {subsubsection}{\numberline {4.6.6}Initial Results}{30}
+\contentsline {subsubsection}{\numberline {4.6.7}Modification}{30}
+\contentsline {section}{\numberline {5}Results}{31}
+\contentsline {subsection}{\numberline {5.1}Simulation results }{31}
+\contentsline {subsection}{\numberline {5.2}Results on Real-world Data}{31}
+\contentsline {section}{\numberline {6}Discussion/interpretation}{33}
+\contentsline {subsection}{\numberline {6.1}Interpretation of results}{33}
+\contentsline {subsection}{\numberline {6.2}Impact of place fields on results}{33}
+\contentsline {subsection}{\numberline {6.3}Strengths of our model}{33}
+\contentsline {subsection}{\numberline {6.4}Weaknesses of our model}{33}
+\contentsline {subsection}{\numberline {6.5}Future directions}{33}
+\contentsline {section}{\numberline {7}Future work and discussion}{34}

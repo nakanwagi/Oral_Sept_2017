@@ -549,9 +549,9 @@ that the random walk is at vertex $v_{j}$ after t steps is given by
 \text{Prob}\left( X(t) = j | X(0) = i  \right) = p_{ij}^{t}
 \]
 Thus the probability distribution of the random walk at time t, given that it started from vertex $v_{i}$ is given by the  $i^{th}$ row of $\Bm{P}^{t}$, i.e.
-\[
+\begin{equation}\label{pdftime}
 \text{Prob}\left( X(t) | X(0) = i  \right) = \vect{1}^{\top}\Bm{P}^{t} = \Bm{P}^{t}(i, :)
-\]
+\end{equation}
 However, we cannot apply spectral decomposition to, $\Bm{P}$, because it's
 not symmetric hence not PSD.
 This requires a normalization using the adjacency matrix, $\Bm{W}$, in order
@@ -568,9 +568,96 @@ the vertices $v_{i}$ using weights
 \[
 w_{ij} = e^{-\dfrac{\text{dist}^{2}(x_{i}, x_{j})}{2\sigma^2}} 
 = e^{-\dfrac{d_{ij}^{2}}{2\sigma^2}}
-\] 
+\] \\
 
-2(a). The weight matrix, $W$, can be any PSD kernel and, $d_{ij}$, is any distance appropriate for the data. $\sigma$, is a band width or tuning parameter which restricts transitions from between points to a, $\sqrt{\epsilon}$, neighborhood.
+2(a). The weight matrix, $\Bm{W}$, can be any PSD kernel (similarity) and, $d_{ij}$, is any distance appropriate for the data. $\sigma$, is a band width or tuning parameter which restricts transitions between points to a, $\sqrt{\epsilon}$, neighborhood.\\
+2(b). Diffusion maps uses Euclidean distance 
+$d_{ij} = \norm{x_{i} - x_{j}}^{2}_{2}$ in the Gaussian Kernel above
+and all theoretical results only hold when the Gaussian Kernel is used.\\
+3). Compute degree matrix $\Bm{D} = \text{diag}(d_{1}, \ldots, d_{n})$
+where $d_{i}$ is the degree of the $i^{th}$ node.\\
+4). Define a random walk on the graph by specifying the transition probabilities
+defining 
+\[
+p_{ij} = \frac{w_{ij}}{d_{i}}
+\]\\
+5). Obtain the random walk graph Laplacian or transition probability
+matrix $\Bm{P}$ by defining 
+\begin{equation}\label{transit} 
+(p_{ij}) = \Bm{P} = \Bm{D}^{-1}\Bm{W}.
+\end{equation}
+
+6). Since ,$\Bm{P}$, is not symmetric, normalize \eqref{transit}
+using $\Bm{D}$ to obtain a PSD similarity matrix S given by
+\begin{equation}\label{simPSD}
+\Bm{S} = \Bm{D}^{\frac{1}{2}}\Bm{P}\Bm{D}^{\frac{-1}{2}} = \Bm{D}^{-\frac{1}{2}}\Bm{W}\Bm{D}^{\frac{-1}{2}} 
+\end{equation} \\
+
+7). Apply spectral decomposition to $\Bm{S}$ in \eqref{simPSD} and write
+
+\begin{equation}
+\Bm{S} = \Bm{V}\bm{\Sigma}\bm{V^{\top}}
+\end{equation}
+
+and order the eigenvalues, $\lambda_{1}\geq \lambda_{2} \geq \ldots \geq \lambda_{n}$, where,  
+$\bm{\Sigma} = \text{diag}(\lambda_{1}, \ldots, \lambda_{n})$. Write 
+$\Bm{S} = [\vect{v}_{1}, \ldots, \vect{v}_{n}].$\\
+
+8). From \eqref{simPSD}, write 
+
+\[\Bm{P} = (\Bm{D}^{-\frac{1}{2}}) \Bm{S} (\Bm{D}^{\frac{1}{2}} ) = 
+ (\Bm{D}^{-\frac{1}{2}} \Bm{V}) \bm{\Sigma} (\Bm{D}^{\frac{1}{2}} \Bm{V} )^{\top}
+\] \\
+9). Let $\bm{\Phi} = \Bm{D}^{-\frac{1}{2}} \Bm{V}  = [\phi_{1}, \ldots, \phi_{n}]$ and 
+$\bm{\Psi} = \Bm{D}^{\frac{1}{2}} \Bm{V} = [\psi_{1}, \ldots, \psi_{n}] $
+to get  
+\[\Bm{P} = \bm{\Phi \Sigma \Psi^{\top}}
+\].
+The bases $\bm{\Phi}$ and $\bm{\Psi}$ are a biorthorgonal system hence satisfy
+$ \bm{\Phi}\bm{\Psi}^{\top} =  \bm{\Phi}^{\top}\bm{\Psi}  = \bm{I}_{n \times n}$
+which implies that $\phi_{j}^{\top}\psi_{k} = \delta_{ij}$.\\
+10). Observe that  $[\phi_{1}, \ldots, \phi_{n}]$ and $[\psi_{1}, \ldots, \psi_{n}]$ are the right and left singular vectors of $\Bm{P}$ respectively.
+Hence we can write for any time t,
+\begin{equation}\label{expansion}
+ \bm{P}^{t} = \bm{\Phi \Sigma^{t} \Psi^{\top}} = \displaystyle \sum_{k=1}^{n} \lambda_{k}^{t} \phi_{k} \psi_{k}^{\top}
+\end{equation} \\
+
+11) Equation \eqref{expansion} shows the expansion of $\bm{P}^{t}$ 
+in terms of  the basis vectors $\{psi_{k}\}$, 
+
+Thus by the observation on \ref{pdftime}, it follows that diffusion map
+for the $i^{th}$ vertex $v_{i}$ is given by
+
+$$ v_{i} \mapsto \bm{P}^{t}(i,:) = \begin{bmatrix}
+         \lambda_{1}^{t}\phi_{1}(i)\\
+         \lambda_{2}^{t}\phi_{2}(i)\\
+         \vdots\\
+         \lambda_{n}^{t}\phi_{2}(i)
+        \end{bmatrix} $$
+        
+12). Since $\abs{\lambda_{k}} < 1$, for a sufficiently high power of t,
+most $\lambda_{k}^{t}$ are very small and hence can be discarded.
+Also $\Bm{P}\vect{1} = \vect{1}$ implies that the first constant vector
+yields a trivial solution and can be discarded.
+Hence a diffusion map $\phi_{t}$ for a embedding the $i^th$ vertex $v_{i}$ of a graph  G in  low dimension
+$p << n$ is the map $$\phi_{t}(v_{i}) = \begin{bmatrix}
+         \lambda_{2}^{t}\phi_{1}(i)\\
+         \lambda_{3}^{t}\phi_{2}(i)\\
+         \vdots\\
+         \lambda_{p+1}^{t}\phi_{2}(i)
+        \end{bmatrix} $$
+13). The diffusion distance between two probability distributions of random
+walks on a graph after t steps is related to Euclidean distance as follows:
+For any vertices $v_{k}$ and $v_{m}$ on the graph, we have that
+
+\begin{equation}\label{diffusionDistance}
+\norm{\phi_{t}(v_k) - \phi_{t}(v_m)}_{2}^{2} = 
+\displaystyle \sum_{j=1}^{n} \frac{1}{d_{i}} 
+[ \text{Prob}\left( X(t) = j | X(0) = k \right) -  \text{Prob}\left( X(t) = j | X(0) = m \right) ]
+\end{equation}
+
+where $d_{i}$ are the degrees of the vertices.
+
 
 
 
@@ -587,8 +674,8 @@ The vector space viewpoint uses van Rossum metrics while the point-process viewp
 Metrics based on the former often Euclidean while those based on the latter are typically non-Euclidean \cite{Aronov2004}.\\
 
 
-\subsubsection{Cost-based metrics}
-Describe single neuron case only
+%\subsub%section{Cost-based metrics}
+%Describe single neuron case only
 
 \subsubsection{Van Rossum Metrics}
 
