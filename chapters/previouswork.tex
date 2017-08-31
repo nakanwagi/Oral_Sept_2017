@@ -1,26 +1,110 @@
 %\mychapter{2}{previouswork}
 
 \section{Previous work and theoretical background}
-In this section, we review some previous work based on multi-unit single-trial
-and single-trial multiple trial analyses highlighting the strength and
-weaknesses of each approach.
-We also review some work on spike train analyses based on spike metrics
-and their pros and cons.
-\subsection{Measuring neurons}
-In this section, we describe the standard procedure of estimating the 
-firing rate and average spike count. We then use these estimates
-to simulate spikes using a non-homogeneous poisson process.
-Finally, we give a detailed description of the point process framework and 
-state its advantages over using the estimated firing rate
+In this section, we review several previous works.
+First, we provide some mathematical neuroscience models of representing action potentials such as spike trains, the neural response function and point-processes. Second, we review analyses based on multi-unit single-trial and single-trial multiple trial analyses highlighting the strength and weaknesses of each approach. Third, we review some existing state-of-the-art dimensionality
+reduction techniques and their role in analyzing large scale neural recordings.
+Finally, we review two spike train metrics that have been used to study neuronal
+variability.
 
-\subsubsection{Derivation of the time varying firing rate}
-Recall that for j=1, the neural response function $\eqref{spiketrain}$ represents a sequence of recorded times in an interval [0, T] at which a neuron fires an action potential (spike train)
+\subsection{Representation of spike trains}
+Even if the size, shape and amplitude of action potentials is somewhat different,
+action potentials are often viewed as identical events which occur at a single moment in time. A spike train is an increasing sequence of recorded times at which a neuron fires an action potential. Spike trains are considered as the main mode of information transmission in the nervous system.
+%Formally, a spike train for  a single neuron labeled j is a sequence of spike times T$_{i}^{j} = \{t_{1}^{j}, ....., t_{n_{i}}^{j} \} = \{t_{i}^{j}\}$ where $0 \leq t_{1}^{j} < t_{2}^{j}< ... < t_{n_{i}}^{j} \leq T$  and  $n_{i} \geq 0$ is the number of spikes in the spike train.\\
+Formally, a spike train is a sequence of spike times
 
-\begin{equation}\label{response function}
+$\displaystyle  \{t_{1}, ....., t_{n} \} = \{t_{i}\}_{i=1}^{n} \ \ 
+ \text{with} \ \  0 \leq t_{1} < t_{2}< ... < t_{n} \leq T,$
+ where n is the number of spikes in the sequence.
+In this definition, the start and end times of the duration over which spikes are recorded is 0 and T respectively. There are various ways of representing spike trains. One way is through a raster plot, (see figure \ref{fig:Raster}).\\
+ 
+ \begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.5]{/home/tesylvia/Oral_Sept_2017/images/RasterPlot.png}
+     \caption{Raster plot for real-world data from a rat hippocampus}
+     %label the figure so latex can reference it
+      \label{fig:Raster}
+\end{figure}
+
+A spike train can also be represented as a sum of Dirac $\delta$ functions translated to the right by given spike times \cite{Dayan2001}.
+
+%\begin{equation}\label{spiketrain}
+% T_{i}^{j}(t) =: \sum_{i=1}^{n_{i}} \delta(t-t_{i}^{j})  
+%\end{equation}
+%Equation \eqref{spiketrain} represents the spike train $T_{i}^{j}$ of the $j^{th}$ neuron consisting of $n_{i}$ spikes occurring at times $t_{i}^{j}, i = 1 \ldots n_{i}$ where $t_{i}^{j}$ denotes the $i^{th}$ spike time of the $j^{th}$ neuron.  $T_{i}^{j}$ is referred to as the response function.\\
+
+\begin{equation}\label{spiketrain}
  \rho(t) = \sum_{i=1}^{n} \delta(t-t_{i})  
 \end{equation}
-where n is the total number of spikes in the spike train and $t_{i}$ is the time at which the i$^{th}$ spike occurred. Using \eqref{DiracDelta}
-We can write the total the number of spikes in the train by integrating the response function
+Equation \eqref{spiketrain} represents the spike train, of a single neuron, in a single trial, consisting of n spikes, occurring at times $t_{i}, i = 1 \ldots n$ where $t_{i}$ denotes the $i^{th}$ spike time of the cell.  
+$\rho(t)$ is referred to as the neural response function.\\
+
+
+The Dirac  function denoted $\delta(x)$ is defined by
+\begin{Def}
+\[
+  \delta(x) =
+  \begin{cases}
+                                   0 & \text{if $x \neq 1$} \\
+                                   \infty & \text{if $x=0$} 
+  \end{cases}
+\]
+\end{Def}
+As a "measure" on $\mathbb{R}$, we define
+\begin{equation} \label{DiracDelta}
+\displaystyle \int_{\mathbb{R}}  \delta(x)f(x) \quad dx = f(0) 
+\end{equation}
+where $f$ is any continuous function which vanishes outside a closed 
+and bounded domain.\\
+
+The  spike train \eqref{spiketrain} can also be represented as a continuous function of time, R(t), by filtering (convolving) with a Kernel K as shown below:
+
+\begin{align*}
+\displaystyle
+R(t) = \rho(t)*K(t) &= \int_{\mathbb{R}} \rho(t-s)K(s)  ds \\
+& = \int_{\mathbb{R}}    \sum_{i=1}^{n} \delta(t - s -t_{i}) K(s)  ds  \\
+& =  \int_{\mathbb{R}}    \sum_{i=1}^{n} \delta( -(s - t + t_{i})) K(s)  ds\\
+& =  \sum_{i=1}^{n}   \int_{\mathbb{R}} \delta(s - (t - t_{i})) K(s)  ds \quad (\text{ since $\delta(x)$ is even and we have a finite sum})\\
+& = \sum_{i=1}^{n} K(t-t_{i}) 
+\end{align*}
+
+Thus
+\begin{equation} \label{firerate}
+R(t) = \sum_{i=1}^{n} K(t-t_{i})
+\end{equation}
+
+
+
+
+%\begin{align*}
+%\displaystyle
+%R^{j}(t) := T_{i}^{j}(t)*K(t) &= \int_{\mathbb{R}} T_{i}^{j}(t-s)K(s)  ds \\
+%& = \int_{\mathbb{R}}    \sum_{i=1}^{n_{i}} \delta(t - s -t_{i}^{j}) K(s)  ds 
+%\quad \eqref{spiketrain}  \\
+%& =  \int_{\mathbb{R}}    \sum_{i=1}^{n_{i}} \delta( -(s - t + t_{i}^{j})) K(s)  ds\\
+%& =  \sum_{i=1}^{n_{i}}   \int_{\mathbb{R}} \delta(s - (t - t_{i}^{j})) K(s)  ds \quad (\text{ since $\delta(x)$ is even and we have a finite sum})\\
+%& = \sum_{i=1}^{n_{i}} K(t-t^{j}_{i}) \quad \eqref{DiracDelta}
+%\end{align*}
+%
+%Thus
+%\begin{equation} \label{firerate}
+%R^{j}(t) = \sum_{i=1}^{n_{i}} K(t-t^{j}_{i})
+%\end{equation}
+%The function $R^{j}(t)$ is often referred to as the firing rate of the $j^{th}$ neuron. 
+%Note that $R^{j}(t)$ is independent of the precise timing of a spike.
+%Smoothing equation \eqref{spiketrain} with a kernel K enables us to represent events like spikes as continuous functions of time. R$^{j}$(t) is then viewed as an element of the infinite dimensional vector space of continuous functions.  Equation \eqref{firerate} 
+%is also referred to a filtered spike train in spike metrics literature.
+%The function $R^{j}(t)$ can also be viewed as an estimate of the unknown stimulus.
+%(cite van Rossum's paper). 
+%The common kernels used for estimating the firing rate include the Gaussian kernel,  decaying exponential kernel and Box car window.
+
+% write an equation of these kernels and define what a kernel means
+% copy and paste this from the kernel review you wrote on Xu's unpublished work.
+
+
+\subsubsection{Derivation of the time varying firing rate}
+
+Using equations \eqref{spiketrain} and \eqref{DiracDelta}, we obtain the total the number of spikes in the train by integrating the response function 
 \begin{align*}
 \int_{\mathbb{R}}  \rho(t)  dt &=   \int_{0}^{T}  \rho(t)  dt\\
       &= \displaystyle  \sum_{i=1}^{n}    \int_{0}^{T}  \delta(t-t_{i}) dt\\
@@ -39,7 +123,7 @@ over a single trial of duration T
   \text{r} =  \frac{1}{T}  \int_{0}^{T}  \rho(t)  dt
 \end{equation}
 
-We know that to reduce loss of temporal information due to averaging over a long period of time, the duration T of the experiment is often divided into small intervals [t, t+$\Delta$t] of length $\Delta$t so that the firing rate at time t,
+To reduce loss of temporal information due to averaging over a long period of time, the duration T of the experiment is often divided into small intervals [t, t+$\Delta$t] of length $\Delta$t so that the firing rate at time t,
 denoted fr(t)  is  given by
 
 \begin{equation}\label{single-trial emprical-spike count}
@@ -90,7 +174,7 @@ For a large $\Delta$t (long intervals), the average spike count denoted $\langle
 \end{equation}
 
 From equation \eqref{average spike count}, the average spike count is equivalent
-to counting the number $n_{i}$  of spikes in the i$^{th}$ trial, for an infinitely large number of trials and taking the average of those spikes across the trials.
+to counting the number $n_{i}$  of spikes in the i$^{th}$ trial, for an infinitely large number of trials and taking the average of those spikes across the trials. This process of averaging spikes across trials is called trial-averaging.
 
 
 However for short intervals around t such as $(t-\Delta t, t+\Delta t)$, the average spike count    $\langle n \rangle$ is approximately equal 
@@ -186,15 +270,8 @@ vector of spike times p($t_{1}, \ldots, t_{n}$) multiplied by the quantity
 $(\Delta t)^{n}$\\
 
 
-Still working on this to get to a non-homogeneous poisson process simulation.....
-
-
-
-Blah...........This is why we need dimensionality reduction
-
-
-
-
+\subsubsection{Non-homogenous poisson processes for spike simulation}
+Still working on this...................
 
 
 \subsection{Single-unit multiple trials}
@@ -207,132 +284,19 @@ In addition, there are neural mechanisms underlying certain observed phenomena
 that cannot be accounted for using single unit recordings.
 For instance, consider that neither sensory neurons tuned to odor \cite{Hopfield1995},
 nor certain internal mechanisms such as cognition and decision making (\cite{Redish2016,
-Vos2015, Kaufman2014, Mazor2005}, can be controlled by researchers, as can other forms of external stimuli. Such observed phenomena, therefore, can only be analyzed by single-trial multiple-unit recordings. 
+Vos2015, Kaufman2014, Mazor2005}, can be controlled by researchers, as can other forms of external stimuli. Such observed phenomena, therefore, can only be analyzed by multiple-unit single-trial recordings. 
 
 
 
 
 \subsection{Multiple-unit single trial}
 
-On the other hand however, the use of multi-electrode \cite{Kipke2008} and optical \cite{Kerr2008} recording technologies
-has enabled single-trial multiple-unit recording from various brain structures.\\
+On the other hand however, the use of multi-electrode \cite{Kipke2008} recording technologies has enabled  multiple-unit single-trial recording from various brain structures.\\
+However, the challenge is that different neurons have highly heterogeneous patterns of activity (neuronal response variability) even on multiple presentation of the same stimulus. Trying to identify all possible activity patterns  corresponding to  a single neuron within the recorded neural population leads to an amplification in the number of variables to be considered while modeling collective neural responses. Consequently, biologically motivated assumptions have been made in order to model population activity. For instance, in the dynamical systems perspective, neurons belong to an underlying  tight recurrent connected network within the brain  which may favor correlated responses between neurons \cite{Shenoy2013}.
+Among a population of neurons that encode features of a stimulus, the population activity is correlated with the features of the stimulus \cite{Georgopoulos1982, Hubel1968}.
+Thus whether the researcher views the number of stimulus features as lower than the number of neurons in the population, or views neurons as belonging to an underlying network, it is nonetheless possible to study collective neural activity patterns using a low dimensional model which captures similar activity patterns among neuronal populations.\\
 
-However, the challenge is that different neurons have highly heterogeneous patterns of activity (neuronal response variability) even on multiple presentation of the same stimulus. Trying to identify all possible activity patterns  corresponding to  a single neuron within the recorded neural population leads to an amplification the number of variables to be considered while modeling collective neural responses. Consequently, biologically motivated assumptions have been made in order to model population activity. For instance, in the dynamical systems perspective, neurons belong to an underlying  tight recurrent connected network within the brain  which may favor correlated responses between neurons \cite{Shenoy2013}.
-Among a population of neurons that encode features of a stimulus, the population activity is
-correlated with the features of the stimulus \cite{Georgopoulos1982, Hubel1968}.
-Thus whether the researcher views the number of stimulus features as lower than the number
-of neurons in the population, or views neurons as belonging to an underlying network, it is nonetheless possible to study collective neural activity patterns using a low
-dimensional model which captures similar activity patterns among neuronal populations.\\
-
-Lately, dimensionality reduction has been suggested as a tool for modeling population activity. Viewing the recorded N $>1$ neurons as measured variables in the data, dimensionality reduction provides a low dimensional model of the neuronal response space by finding a subset K $<<$ N of directions (dimensions) that explains most of the variability in the neuronal responses. The variability unexplained by the low dimensional model is often regarded as noise \cite{Cunningham2014a}.  Analyses on low dimensional neural population models have been be used to test scientific hypotheses about neural mechanisms that influence a subject's real-world experience. For instance, Mante et al. (2013) used Principle Component Analysis (PCA) and linear regression to show how sensory input is selected and integratedin the prefrontal cortex during decision-making   \cite{Vos2015}.  Kaufman et al. (2014) used Factor Analysis to show evidence of movement preparation before movement in the premotor cortex \cite{Kaufman2014}.  Mazor and Laurent (2005)  used PCA to demonstrate odor discrimination in the olfactory system \cite{Mazor2005}. In the context of exploratory data analysis and visualization, Yu et al. (2009) used Gaussian Process Factor Analysis (GPFA) to characterize single-trial population activity in  macaque premotor and motor cortices during reach planning and execution  \cite{Yu2009} .\\
-
-\subsection{Representation of spike trains}
-Even if the size, shape and amplitude of action potentials is somewhat different,
-action potentials are often viewed as identical events which occur at a single moment in time. Thus a sequence of action potentials conveys information through the precise time at which  a spike occurs. A spike train is an increasing sequence of recorded times at which a neuron fires an action potential. Spike trains are considered as the main mode of information transmission in the nervous system.  A spike train T$_{i}^{j}$ for  a single neuron labeled j is a sequence of spike times T$_{i}^{j} = \{t_{1}^{j}, ....., t_{n_{i}}^{j} \} = \{t_{i}^{j}\}$ where $0 \leq t_{1}^{j} < t_{2}^{j}< ... < t_{n_{i}}^{j} \leq T$  and  $n_{i} \geq 0$ is the number of spikes in the spike train.\\
-In this case, the start and end times of a trial duration over which spikes are recorded is 0 and T respectively. Spike trains can be represented in form of Raster plots (see figure \ref{fig:Raster}).\\
- 
- \begin{figure}[H]
-  \centering
-    \includegraphics[scale=0.5]{Firing_Rates.png}
-     \caption{A Raster Plot}
-     %label the figure so latex can reference it
-      \label{fig:Raster}
-\end{figure}
-
-%\footnote{An example footnote}.
-
-\subsection{Detailed description}
-A spike train can also be represented as a sum of Dirac $\delta$ functions translated
-to the right by given spike times \cite{Dayan2001}.
-\begin{equation}\label{spiketrain}
- T_{i}^{j}(t) =: \sum_{i=1}^{n_{i}} \delta(t-t_{i}^{j})  
-\end{equation}
-Equation \eqref{spiketrain} represents the spike train $T_{i}^{j}$ of the $j^{th}$ neuron consisting of $n_{i}$ spikes occurring at times $t_{i}^{j}, i = 1 \ldots n_{i}$ where $t_{i}^{j}$ denotes the $i^{th}$ spike time of the $j^{th}$ neuron.  $T_{i}^{j}$ is referred to as the response function.\\
-
-The Dirac  function denoted $\delta(x)$ is defined by
-\begin{Def}
-\[
-  \delta(x) =
-  \begin{cases}
-                                   0 & \text{if $x \neq 1$} \\
-                                   \infty & \text{if $x=0$} 
-  \end{cases}
-\]
-\end{Def}
-As a "measure" on $\mathbb{R}$, we define
-\begin{equation} \label{DiracDelta}
-\displaystyle \int_{\mathbb{R}}  \delta(x)f(x) \quad dx = f(0) 
-\end{equation}
-where $f$ is any continuous function which vanishes outside a closed 
-and bounded domain.\\
-
-
-%use properties of a delta function to derive a definition
-% for a trial average.
-% also talk about a peristumulus time histogram as a way of taking into account
-% temporal patterns.
-%but smaller bin width implies that the resulting responses are going to be correlated
-% since some spikes may belong to two different bins.
-% it still does not deal with response variability 
-% dimensionality reduction is a way to deal with response variability, redundancy
-% correlated responses.
-
-
-
-
-The  spike train \eqref{spiketrain} can also be represented as a continuous function of time by filtering (convolving) with a Kernel K as shown below:
-
-\begin{align*}
-\displaystyle
-R^{j}(t) := T_{i}^{j}(t)*K(t) &= \int_{\mathbb{R}} T_{i}^{j}(t-s)K(s)  ds \\
-& = \int_{\mathbb{R}}    \sum_{i=1}^{n_{i}} \delta(t - s -t_{i}^{j}) K(s)  ds 
-\quad (\text{by equation \ref{spiketrain}  })  \\
-& =  \int_{\mathbb{R}}    \sum_{i=1}^{n_{i}} \delta( -(s - t + t_{i}^{j})) K(s)  ds\\
-& =  \sum_{i=1}^{n_{i}}   \int_{\mathbb{R}} \delta(s - (t - t_{i}^{j})) K(s)  ds \quad (\text{ since $\delta(x)$ is even and we have a finite sum})\\
-& = \sum_{i=1}^{n_{i}} K(t-t^{j}_{i}) \quad (\text{by equation \ref{DiracDelta} })
-\end{align*}
-
-Thus
-\begin{equation} \label{firerate}
-R^{j}(t) = \sum_{i=1}^{n_{i}} K(t-t^{j}_{i})
-\end{equation}
-
-
-The function $R^{j}(t)$ is often referred to as the firing rate of the $j^{th}$ neuron. 
-Note that $R^{j}(t)$ is independent of the precise timing of a spike.
-Smoothing equation \eqref{spiketrain} with a kernel K enables us to represent events like spikes as continuous functions of time. R$^{j}$(t) is then viewed as an element of the infinite dimensional vector space of continuous functions.  Equation \eqref{firerate} 
-is also referred to a filtered spike train in spike metrics literature.
-The function $R^{j}(t)$ can also be viewed as an estimate of the unknown stimulus.
-(cite van Rossum's paper). 
-The common kernels used for estimating the firing rate include the Gaussian kernel,  decaying exponential kernel and Box car window.
-
-% write an equation of these kernels and define what a kernel means
-% copy and paste this from the kernel review you wrote on Xu's unpublished work.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Lately, dimensionality reduction \cite{Cunningham2014a}, has been suggested as a tool for modeling population activity. Viewing the recorded N $>1$ neurons as measured variables in the data, dimensionality reduction provides a low dimensional model of the neural response space by finding a subset K $<<$ N of directions (dimensions) that explains most of the variability in the neuronal responses. Analyses on low dimensional neural population models have been be used to test scientific hypotheses about neural mechanisms that influence a subject's real-world experience. For instance, Mante et al. (2013) used Principle Component Analysis (PCA) and linear regression to show how sensory input is selected and integratedin the prefrontal cortex during decision-making   \cite{Vos2015}.  Kaufman et al. (2014) used Factor Analysis to show evidence of movement preparation before movement in the premotor cortex \cite{Kaufman2014}.  Mazor and Laurent (2005)  used PCA to demonstrate odor discrimination in the olfactory system \cite{Mazor2005}. In the context of exploratory data analysis and visualization, Yu et al. (2009) used Gaussian Process Factor Analysis (GPFA) to characterize single-trial population activity in  macaque premotor and motor cortices during reach planning and execution  \cite{Yu2009} .\\
 
 
 

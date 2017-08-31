@@ -1,99 +1,66 @@
 %\mychapter{6}{Results}
 
 \section{Results}
-%{Here are the results and what they mean! (3-4 days)}
+In this section, we report our results on both synthetic and real-world data
+using diffusion maps. We compare our results with those obtained via PCA, a popular linear dimensionality technique.
 
-\subsection{Simulation results }
-
-% DF on noisy sim FR
-
-%\begin{frame}[allowframebreaks]
-%\begin{figure}
-%\centering
-%\begin{subfigure}{.5\textwidth}
-%\includegraphics[page=1,width=\textwidth]{MI_on_SimNoisyFRdiffmap1.eps}
-%\caption{DF on sim FR.}
-%\end{subfigure}%
-%\begin{subfigure}{0.5\textwidth}
-%\includegraphics[page=2,width=\textwidth]{MI_on_SimNoisyFRdiffmap2.eps}
-%\caption{DF on sim FR.}
-%\end{subfigure}
-%\end{figure}
-%\end{frame}
-%
-%
-%\vspace{2in}
-%\begin{frame}[allowframebreaks]
-%\begin{figure}
-%\centering
-%\begin{subfigure}{.5\textwidth}
-%\includegraphics[page=1,width=\textwidth]{MI_on_SimNoisyFRdiffmap3.eps}
-%\caption{DF on sim FR.}
-%\end{subfigure}%
-%\begin{subfigure}{0.5\textwidth}
-%\includegraphics[page=2,width=\textwidth]{MI_on_SimNoisyFRdiffmap4.eps}
-%\caption{DF on sim FR.}
-%\end{subfigure}
-%\end{figure}
-%\end{frame}
-%
-%
-%
-%
-%
-%
-%
-%
-%
+\subsection{Simulation results on Firing Rate}
+In following sections, we show our fake-brain results using 
+diffusion maps (DM) with l1 distance on simulated firing rate (SimFRDML1), and PCA  on simulated firing rate (SimFRPCA).
 
 
+\subsubsection{DM on simulated FR data using L1 distance}
 
-\subsection{Results on Real-world  Data}
-\begin{frame}[allowframebreaks]
-\begin{figure}
-\centering
-\begin{subfigure}{.5\textwidth}
-\includegraphics[page=1,width=\textwidth]{MI_binpca_real.png}
-\caption{PCA on binnedSpikes.}
-\end{subfigure}%
-\begin{subfigure}{0.5\textwidth}
-\includegraphics[page=2,width=\textwidth]{MI_bindiffMaps_real.png}
-\caption{DF on binnedSpikes.}
-\end{subfigure}
+\begin{figure}[H]
+  \centering
+   \makebox[\textwidth]{\includegraphics[width=\paperwidth]{/home/tesylvia/Oral_Sept_2017/images/FakeBrain-plots/DM-on-FR-L1.pdf}}
 \end{figure}
-\end{frame}
 
 
-\vspace{2in}
-\begin{frame}[allowframebreaks]
-\begin{figure}
-\centering
-\begin{subfigure}{.5\textwidth}
-\includegraphics[page=1,width=\textwidth]{MI_FRdiffMaps_real.png}
-\caption{DF on smoothedSpikes.}
-\end{subfigure}%
-\begin{subfigure}{0.5\textwidth}
-\includegraphics[page=2,width=\textwidth]{MI_FRpca_real.png}
-\caption{PCA on smoothedSpikes.}
-\end{subfigure}
+
+\subsubsection{PCA on simulated FR  data}
+
+\begin{figure}[H]
+  \centering
+   \makebox[\textwidth]{\includegraphics[width=\paperwidth]{/home/tesylvia/Oral_Sept_2017/images/FakeBrain-plots/PCA-on-FR.pdf}}
 \end{figure}
-\end{frame}
 
 
-\vspace{1in}
-\begin{frame}[allowframebreaks]
-\begin{figure}
-\centering
-\begin{subfigure}{.5\textwidth}
-\includegraphics[page=1,width=\textwidth]{MI_PCA_prevtime_real.png}
-\caption{PCA on prevtime.}
-\end{subfigure}%
-\begin{subfigure}{0.5\textwidth}
-\includegraphics[page=2,width=\textwidth]{MI_prevDiffMaps_real.png}
-\caption{DF on prevtime.}
-\end{subfigure}
+\subsection{Simulation results on previous time data}
+In these sections, we show our results of diffusion maps (DM),on simulated previous time (Simprevtime) using the l1 distance (SimprevtimeDML1)and  PCA on Simprevtime (SimprevtimePCA).
+
+
+
+\subsubsection{DM on simulated prevtime data using L1 distance}
+
+\begin{figure}[H]
+  \centering
+   \makebox[\textwidth]{\includegraphics[width=\paperwidth]{/home/tesylvia/Oral_Sept_2017/images/FakeBrain-plots/FirstL1DM.pdf}}
 \end{figure}
-\end{frame}
+
+
+
+\begin{figure}[H]
+  \centering
+   \makebox[\textwidth]{\includegraphics[width=\paperwidth]{/home/tesylvia/Oral_Sept_2017/images/FakeBrain-plots/SecondL1DM.pdf}}
+\end{figure}
+
+
+
+
+\subsubsection{PCA on simulated prevtime data}
+
+\begin{figure}[H]
+  \centering
+   \makebox[\textwidth]{\includegraphics[width=\paperwidth]{/home/tesylvia/Oral_Sept_2017/images/FakeBrain-plots/FirstPCAMI.pdf}}
+\end{figure}
+
+
+
+\begin{figure}[H]
+  \centering
+   \makebox[\textwidth]{\includegraphics[width=\paperwidth]{/home/tesylvia/Oral_Sept_2017/images/FakeBrain-plots/MI-2PCA.pdf}}
+\end{figure}
 
 
 
@@ -103,7 +70,44 @@
 
 
 
-\newpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

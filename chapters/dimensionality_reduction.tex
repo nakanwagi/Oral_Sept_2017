@@ -1,5 +1,5 @@
 %\mychapter{4}{Dimensionality Reduction}
-\newpage
+
 
 
 In the the following sections, we review the concept of dimensionality reduction.
@@ -653,34 +653,10 @@ For any vertices $v_{k}$ and $v_{m}$ on the graph, we have that
 \begin{equation}\label{diffusionDistance}
 \norm{\phi_{t}(v_k) - \phi_{t}(v_m)}_{2}^{2} = 
 \displaystyle \sum_{j=1}^{n} \frac{1}{d_{i}} 
-[ \text{Prob}\left( X(t) = j | X(0) = k \right) -  \text{Prob}\left( X(t) = j | X(0) = m \right) ]
+[ \text{Prob}\left( X(t) = j | X(0) = k \right) -  \text{Prob}\left( X(t) = j | X(0) = m \right) ]^{2}
 \end{equation}
 
-where $d_{i}$ are the degrees of the vertices.
-
-
-
-
-
-\newpage
-
-\subsection{Spike train metrics}
-A common approach for quantifying neuronal response variability is through specification of a  similarity or dissimilarity measure between pairs of spike train data \cite{Brown2004, Victor1996, Victor1998,Rossum2001,houghton2010measuring, Schreiber2003}.
-Here a spike train refers to an increasing sequence of action potentials or spikes through which the sensory system perceives real-world information.
-This raises the need for a the notion of distance as discussed in section 3.6.4-3.6.6.  In line with conclusions reached by Victor and Purpura (1996, 1997) and van Raussum (2001) \cite{Victor1996, Victor1998, Rossum2001}, a short distance between two spike trains approximately represents similar inputs (stimuli) while a large distance between spike trains roughly represents divergence between different stimuli.
-How spike trains encode information is not known. In certain instances, information may be encoded through the precise time at which spikes occur (temporal coding) where as in others, it is encoded through the number of spikes in a given interval (rate coding) (cite Rieke, Warland and Bialek 1996 book on Spikes).
-As a remedy for loss of temporal information due to trial averaging, the observation duration is often divided into non-over lapping time intervals called bins. As long as the size of the bin is larger than the average inter-spike interval (ISI), cross-correlation of binned spike trains provides a good estimate of the instantaneous firing rate \cite{Brown2004}. The shortcoming of spike binning in studying temporal patterns, is that, two different spike trains often yield identical binning patterns whenever spikes fall in the same bin. Several spike train measures have been designed to overcome the problem of binning. For instance, the edit-length metric \cite{Victor1996, Victor1998} is based on minimizing the cost of transforming one spike train into another by deleting, inserting or shifting a spike. Another measure, the van Rossum distance \cite{Rossum2001, houghton2010measuring} refers to any metric induced on the space of spike trains by transforming a spike train into a continuous function (i.e. a filtered spike train) using a smoothing kernel (such as a box-car window, Gaussian, decaying exponential and  Laplace Kernel) and then using the standard $L^2$ distance on the corresponding function space as the dissimilarity measure. An additional measure, the the correlation-based distance \cite{Schreiber2003} is based on the filtering the spike trains using a Gaussian kernel and then using the normalized dot product between  spike trains as a  similarity measure.
-The vector space viewpoint uses van Rossum metrics while the point-process viewpoint uses metrics such as the edit-length distance \cite{Victor2005}. 
-Metrics based on the former often Euclidean while those based on the latter are typically non-Euclidean \cite{Aronov2004}.\\
-
-
-%\subsub%section{Cost-based metrics}
-%Describe single neuron case only
-
-\subsubsection{Van Rossum Metrics}
-
-
-\subsubsection{Correlation-based metrics}
+where $d_{i}$ are the degrees of the vertices.\\
 
 
 
@@ -688,7 +664,11 @@ Metrics based on the former often Euclidean while those based on the latter are 
 
 
 
-\newpage
+
+
+
+
+
 
 
 

@@ -10,22 +10,24 @@
 \usepackage{mathtools}
 \newcommand\Set[2]{\{\,#1\mid#2\,\}}
 %add two packages to add tables and graphics
-\usepackage{graphicx} %load the graphics package
-\graphicspath{{/home/tesylvia/Oral_Sept_2017/images/}} %add a path to the image folder
+\usepackage[pdftex]{graphicx} %load the graphics package
+\usepackage{epstopdf} % Convert epstopdf
+\graphicspath{{/home/tesylvia/Oral_Sept_2017/images}} %add a path to the image 
+\graphicspath{{/home/tesylvia/Oral_Sept_2017/images/FakeBrain-plots}} %add a path to the image
+%\graphicspath{{/home/tesylvia/Oral_Sept_2017/images/FakeBrain-plots}}
+%add path to images
 \usepackage{float}
 %add package for multiple figures/subfigures
 \usepackage{caption} 
 \usepackage{subcaption}
 
+\usepackage[export]{adjustbox} %adjust size of figure
+
 %_%%%%7_9_2017
 \usepackage{pgfplots}
 \usepackage{tikz}
 \usepackage{bm}  %make the symbols bold
-
-
-
-
-
+\usepackage{epstopdf}
 
 %add a package for the table of contents
 \usepackage[nottoc, notlot, notlof]{tocbibind}
@@ -111,7 +113,7 @@
 
 \tableofcontents
 \thispagestyle{empty}
-%\clearpage
+\clearpage
 \setcounter{page}{1}
 
 \newpage
@@ -127,17 +129,20 @@
 %\include{chapters/interpretation}
 \input{chapters/dimensionality_reduction}
 
+
+\input{chapters/spike_train_metrics}
+
 %%\include{chapters/nextsteps}
 \input{chapters/current_project}
 %
 %%\include{chapters/conclusion}
-\input{chapters/results}
+%\input{chapters/results}
 %
 %
-\input{chapters/discussion}
+%\input{chapters/discussion}
 %
 %
-\input{chapters/future_work}
+%\input{chapters/future_work}
 
 
 %%%%%%%%%%%%%%%% Generate a Bibliography%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
