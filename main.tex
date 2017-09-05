@@ -1,10 +1,11 @@
 %Latex template designed from scratch by Mary Sylvia %Agwang following a great Youtube video %by Michelle Krummel:
 
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 %set margins to 1in
 \usepackage[margin=1in]{geometry}
 %packages for typing maths stuff
-\usepackage{amsfonts, amsmath, amssymb}
+\usepackage{amsfonts, amsmath, amssymb, latexsym, mathrsfs}
+
 
 % package for Maths tools
 \usepackage{mathtools}
@@ -28,6 +29,9 @@
 \usepackage{tikz}
 \usepackage{bm}  %make the symbols bold
 \usepackage{epstopdf}
+%URLs and links and more
+%\usepackage{hyperref}
+%\usepackage{lipsum} %adds \qed at the end of proofs
 
 %add a package for the table of contents
 \usepackage[nottoc, notlot, notlof]{tocbibind}
@@ -94,9 +98,10 @@
 %add a shortcut to make vectors bold
 \newcommand{\vect}[1]{\boldsymbol{#1}}
 \newcommand{\Bm}[1]{\textbf{#1}}
+
 %abbreviations
-\DeclareMathOperator{\E}{\mathbb{E}}
-\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\E}{\mathbb{E}} %expectation
+\DeclareMathOperator{\R}{\mathbb{R}} %real number
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}%
 
@@ -136,10 +141,10 @@
 \input{chapters/current_project}
 %
 %%\include{chapters/conclusion}
-%\input{chapters/results}
+\input{chapters/results}
 %
 %
-%\input{chapters/discussion}
+\input{chapters/discussion}
 %
 %
 %\input{chapters/future_work}

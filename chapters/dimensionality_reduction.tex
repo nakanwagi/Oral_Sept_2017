@@ -4,59 +4,57 @@
 
 In the the following sections, we review the concept of dimensionality reduction.
 We mainly focus on spectral dimensionality reduction methods where the 
-low dimensional model is obtained from spectral decomposition of n$\times$n
+low dimensional model is obtained from spectral decomposition of $n \times n$
 positive semidefinite matrices.
 
 \subsection{Dimensionality reduction}
-Let \textbf{X} = $\displaystyle \{\vect{x}_{1}, \ldots , \vect{x}_{n} \}$
-be a set of n data points, each of which is associated with D features, so that each $\vect{x}_{i}$ is a point in a high dimensional space $\R^{D}$. Assume that the data points lie on or near an underlying d-dimensional manifold embedded in the high dimensional space where d is much smaller than D. Dimensionality reduction considers the problem of  transforming the high dimensional data set
-$\textbf{X}$ into a new data set \textbf{Y} = $\displaystyle \{ \vect{y}_{1}, \ldots, \vect{y}_{n} \}$  of n points, each of which is associated
-with a fewer set of d features and such that each $\vect{y}_{i} \in \R^{d}$ is a low dimensional representation of $\vect{x}_{i} \in \R^{D}$ in the low dimensional space. In addition the transformation must preserve, as much as possible, the underlying geometry of the data.
+Let $\textbf{X} = \displaystyle \{\vect{x}_{1}, \ldots , \vect{x}_{n} \}$
+be a set of $n$ data points, each of which is associated with $D$ features, so that each $\vect{x}_{i}$ is a point in a high dimensional space $\R^{D}$. Assume that the data points lie on or near an underlying $d$-dimensional manifold embedded in the high dimensional space where $d$ is much smaller than $D$. Dimensionality reduction considers the problem of  transforming the high dimensional data set
+$\textbf{X}$ into a new data set $\textbf{Y} = \displaystyle \{ \vect{y}_{1}, \ldots, \vect{y}_{n} \}$  of $n$ points, each of which is associated
+with a fewer set of $d$ features and such that each $\vect{y}_{i} \in \R^{d}$ is a low dimensional representation of $\vect{x}_{i} \in \R^{D}$ in the low dimensional space. In addition the transformation must preserve, as much as possible, the underlying geometry of the data.
 
 
 
 \subsubsection{Spectral properties of symmetric matrices}
-An n$\times$n matrix $\Bm{A}$ is symmetric if $\Bm{A} = \Bm{A}^{\top}$
+An $n\times n$ matrix $\Bm{A}$ is symmetric if $\Bm{A} = \Bm{A}^{\top}$
 where $\Bm{A}^{\top}$ denotes the transpose of a matrix.\\
-Let \textbf{A} be an n$\times$n real symmetric matrix with a set of 
+Let \textbf{A} be an $n\times n$ real symmetric matrix with a set of 
 orthogonal unit-length eigenvectors  $\{ \vect{v}_{1}, \ldots, \vect{v}_{n} \}$ and corresponding eigenvalues $\{\lambda_{1}, \ldots, \lambda_{n} \}.$ 
 Then \textbf{A} can be written as 
 \[ 
-\bm{A} = \bm{VDV^{T}} = 
-\sum_{i=1}^{n} \lambda_{i} \vect{v}_{i} \vect{v}_{i}^{T} 
+\bm{A} = \bm{VDV^{\top}} = 
+\sum_{i=1}^{n} \lambda_{i} \vect{v}_{i} \vect{v}_{i}^{\top} 
 \]
 
 where $\bm{D} = \text{diag}(\lambda_{1}, \ldots, \lambda_{n})$ and  $ \bm{V} = [\vect{v}_{1}, \ldots, \vect{v}_{n}]$ is an orthonormal matrix i.e.
-$\bm{V^{T}V  = VV^{T} = I}.$\\
+$\bm{V^{\top}V  = VV^{\top} = I}.$\\
 
-An n$\times$n symmetric matrix $\Bm{A}$ is positive semidefinite (PSD) if the quadratic form
+An $n\times n$ symmetric matrix $\Bm{A}$ is positive semidefinite (PSD) if the quadratic form
 \[
 \vect{x} \Bm{A} \vect{x}^{\top} \geq 0,\ \ \text{for all non-zero vectors} \ \ \vect{x} \in \R^{n}
 \]
 
-Given any n$\times$n matrix $\Bm{A}$, the matrices $\Bm{A}\Bm{A}^{\top}$
+Given any $n\times n$ matrix $\Bm{A}$, the matrices $\Bm{A}\Bm{A}^{\top}$
 and $\Bm{A}^{\top}\Bm{A}$ are symmetric PSD.
 
 \subsubsection{Singular value decomposition (SVD)}
-Let $\R^{n \times m}$ denote the vector space of n$\times$m matrices with real entries. Given any n$\times$m matrix $\bm{A}$ with real entries, there exist orthonormal matrices $\bm{U} \in \R^{n \times n}$ and $\bm{V} \in \R^{m \times m}$ such that 
-$\bm{\displaystyle A = U \Sigma V^{T}}$ with $\bm{\Sigma}$ = \text{diag}$(\sigma_{1}, \ldots, \sigma_{k})$ where  k = $\min(n, m)$ and
+Let $\R^{n \times m}$ denote the vector space of $n \times m$ matrices with real entries. Given any $n\times m$ matrix $\bm{A}$ with real entries, there exist orthonormal matrices $\bm{U} \in \R^{n \times n}$ and $\bm{V} \in \R^{m \times m}$ such that 
+$\bm{\displaystyle A = U \Sigma V^{\top}}$ with $\bm{\Sigma}$ = \text{diag}$(\sigma_{1}, \ldots, \sigma_{k})$ where  k = $\min(n, m)$ and
  $\sigma_{1} \geq \sigma_{2} \geq \ldots \geq \sigma_{k} \geq 0$.
 The numbers $\sigma_{i}, 1\leq i\leq n$ are called the singular values of $\bm{A}$. 
 
 
 \subsubsection{Properties of SVD}
-Given any n$\times$m real matrix A of rank r, there exist  orthogonal matrices 
-$\bm{U} \in \R^{n \times r}$ and $\bm{V} \in \R^{r \times r}$ 
-satisfying $\bm{U^{T}U = V^{T}V = I}$ such that $\bm{\text{A} = \text{U} \Sigma_{1} \text{V}^{T}}$ with $\bm{\Sigma}_{1}$ = \text{diag}$(\sigma_{1}, \ldots, \sigma_{r})$ and $\sigma_{1} \geq \sigma_{2} \geq \ldots \geq \sigma_{r} > 0$.
-This factorization of $\bm{A}$ with  is called the truncated SVD of A.
-The rank of A is equal to the number of non-zero singular values of A.
-If $\bm{U}$ and $\bm{V}$ are made up of column vectors so that  $\bm{U} = [\vect{u}_1, \ldots, \vect{u}_{r}]$ and $\bm{V} = [\vect{v}_{1}, \ldots, \vect{v}_{r}\}$ then $\{ \vect{u}_1, \ldots, \vect{u}_{r} \}$  and $\{\vect{v}_{1}, \ldots, \vect{v}_{r} \}$ are called the left and right singular vectors of A respectively. The range of A is equal to the subspace spanned by the left singular vectors of A. The null space of A is equal to the subspace spanned by the set of vectors $\{\vect{v}_{r+1}, \ldots, \vect{v}_{n} \}.$
-The matrix A admits the SVD expansion 
+Given any $n\times m$ real matrix $A$ of rank $r$, there exist  orthogonal matrices  $\bm{U} \in \R^{n \times r}$ and $\bm{V} \in \R^{r \times r}$ 
+satisfying $\bm{U^{\top}U = V^{\top}V = I}$ such that $\bm{\text{A} = \text{U} \Sigma_{1} \text{V}^{\top}}$ with $\bm{\Sigma}_{1}$ = \text{diag}$(\sigma_{1}, \ldots, \sigma_{r})$ and $\sigma_{1} \geq \sigma_{2} \geq \ldots \geq \sigma_{r} > 0$.
+This factorization of $\bm{A}$ is called the truncated SVD of $A$.
+The rank of $A$ is equal to the number of non-zero singular values of $A$.
+If $\bm{U}$ and $\bm{V}$ are made up of column vectors so that  $\bm{U} = [\vect{u}_1, \ldots, \vect{u}_{r}]$ and $\bm{V} = [\vect{v}_{1}, \ldots, \vect{v}_{r}\}$ then $\{ \vect{u}_1, \ldots, \vect{u}_{r} \}$  and $\{\vect{v}_{1}, \ldots, \vect{v}_{r} \}$ are called the left and right singular vectors of $A$ respectively. The range of $A$ is equal to the subspace spanned by the left singular vectors of $A$. The null space of $A$ is equal to the subspace spanned by the set of vectors $\{\vect{v}_{r+1}, \ldots, \vect{v}_{n} \}.$
+The matrix $A$ admits the SVD expansion 
 \[
-A = \sum_{i=1}^{r} \sigma_{i} \vect{u}_{i} \vect{v}_{i}^{T}.
+A = \sum_{i=1}^{r} \sigma_{i} \vect{u}_{i} \vect{v}_{i}^{\top}.
 \]
-The real numbers $\{\lambda_{1}, \ldots, \lambda_{r}\}$ where $\lambda_{i} = \sigma_{i}^{2}$ for all i = $1 , \ldots, r$ are the eigenvalues of both symmetric matrices $\bm{A^{T}A}$ and $\bm{AA^{T}}.$ The right singular vectors of $\bm{A}$ are the eigenvectors of $\bm{A^{T}A}.$ The left singular vectors of $\bm{A}$ are the eigenvectors of $\bm{AA^{T}}.$ The spectral decomposition of $\bm{A^{T}A}$ is given by $\bm{A^{T}A  = V D_{1} V^{T}}$ and that of  $\bm{AA^{T}}$ is given by  $\bm{AA^{T}} = U D_{2} U^{T}$ where $\bm{U}$ and $\bm{V}$ are the SVD factors upto a sign, $\bm{D}_{1}$ and $\bm{D}_{2}$ are diagonal matrices containing the r
-singular values of $A$.
+The real numbers $\{\lambda_{1}, \ldots, \lambda_{r}\}$ where $\lambda_{i} = \sigma_{i}^{2}$ for all i = $1 , \ldots, r$ are the eigenvalues of both symmetric matrices $\bm{A^{\top}A}$ and $\bm{AA^{\top}}.$ The right singular vectors of $\bm{A}$ are the eigenvectors of $\bm{A^{\top}A}.$ The left singular vectors of $\bm{A}$ are the eigenvectors of $\bm{AA^{\top}}.$ The spectral decomposition of $\bm{A^{\top}A}$ is given by $\bm{A^{\top}A  = V D_{1} V^{\top}}$ and that of  $\bm{AA^{\top}}$ is given by  $\bm{AA^{\top}} = U D_{2} U^{\top}$ where $\bm{U}$ and $\bm{V}$ are the SVD factors upto a sign, $\bm{D}_{1}$ and $\bm{D}_{2}$ are diagonal matrices containing the r singular values of $A$.
 
 \subsubsection{Proximity measures}
 A proximity measure characterizes how close two objects are, using
@@ -64,25 +62,25 @@ either a similarity or dissimilarity measure between them.
 A similarity measure characterizes how similar two objects are while
 a dissimilarity measure or distance characterizes how dissimilar two objects are.
 \begin{Def}\label{distance}
-Let X be a set of n objects, $\{x_{1}, \dots, x_{n}\}$, that are not necessarily vectors. A distance, d, on X, is a real-valued  function
-$d: X \times X \rightarrow  \R$ which assigns to each pair of objects, (x$_{i}$, x$_{j}$), a real number, d$_{ij}$, satisfying three conditions, for all i and j from 1 to n. First, $d_{ii} = 0.$ Second, $d_{ij} \geq 0\ \  \text{if}\ \ i \neq j$. Third, $d_{ij} = d_{ji}.$
+Let $X$ be a set of $n$ objects, $\{x_{1}, \dots, x_{n}\}$, that are not necessarily vectors. A distance, $d$, on $X$, is a real-valued  function
+$d: X \times X \rightarrow  \R$ which assigns to each pair of objects, (x$_{i}$, x$_{j}$), a real number, $d_{ij}$, satisfying three conditions, for all $i$ and $j$ from 1 to $n$. First, $d_{ii} = 0.$ Second, $d_{ij} \geq 0\ \  \text{if}\ \ i \neq j$. Third, $d_{ij} = d_{ji}.$
 \end{Def}
 
-The first condition states that the distance of an object to itself is 0.
+The first condition states that the distance of an object to itself is $0$.
 The second condition states that two distinct objects must be a positive distance apart and the third condition says that a distance is a symmetric function.
-A metric is a distance function, d, which satisfies two extra conditions namely:
+A metric is a distance function, $d$, which satisfies two extra conditions namely:
 $d_{jk} \leq d_{ij} + d_{ik}, \ \ \text{for all}\ \ i,j,k$ (the triangle inequality), and $d_{ij} = 0$ if and only if  $x_{i} = x_{j}$ (definiteness). The triangle inequality states that the distance between two objects cannot be larger than the sum of their distance to a third point.\\
 
-A similarity measure $s: X \times X \rightarrow  \R$ is a function which assigns to each pair of objects, (x$_{i}$, x$_{j}$), a real number, s$_{ij}$, such that
-for all i and j, we have that
+A similarity measure $s: X \times X \rightarrow  \R$ is a function which assigns to each pair of objects, (x$_{i}$, x$_{j}$), a real number, $s_{ij}$, such that
+for all $i$ and $j$, we have that
 $s_{ij} = s_{ji}$, $0 \leq s_{ij} \leq 1$ and $s_{ij} \leq s_{ii}$.
-The similarity measure, s$_{ij}$, can be obtained from a distance, d$_{ij}$, using any of the three operations: d$_{ij}$ = c - s$_{ij}$ or  d$_{ij}$ = 1/s$_{ij}$ - c, or $d_{ij}$ = s$_{ii}$ + s$_{jj}$ - 2s$_{ij}$,
-where c is a constant.
+The similarity measure, $s_{ij}$, can be obtained from a distance, $d_{ij}$, using any of the three operations: $s_{ij}$ = c - d$_{ij}$ or  d$_{ij}$ = 1/$s_{ij}$ - c, or $d_{ij} = s_{ii} + s_{jj} - 2s_{ij}$,
+where $c$ is a constant.
 To avoid dividing by zero, we set $s_{ii} = 1$ and $s_{ij} > 0$ whenever $i \neq j$. Thus the similarity of an object to itself is 1.
-A matrix of distances between pairs of objects, D = (d$_{ij}$), is called a distance matrix or dissimilarity matrix and that of similarities, S = (s$_{ij}$), between pairs of objects is called a similarity matrix.
+A matrix of distances between pairs of objects, $D = (d_{ij}$), is called a distance matrix or dissimilarity matrix and that of similarities between pairs of objects, $S = (s_{ij}$), is called a similarity matrix.
 
 \subsubsection{Examples of proximity measures}
-Let $\vect{x}_{i} = (x_{i1}, \ldots, x_{ip} ) \in \R^{p}$. Dissimilarities or distances based on matrix data include:\\
+Let $\vect{x}_{i} = (x_{i1}, \ldots, x_{ip} ) \in \R^{p}$. Dissimilarities or distances based on matrix data include\\
  the Euclidean distance
 \begin{equation}\label{Euclidist}
 \displaystyle{ \norm{\vect{x}_{i} - \vect{x}_{j}}^{2}_{2} = \sum_{k=1}^{p} (x_{ik} - x_{jk})^{2}  },
@@ -98,7 +96,7 @@ the Mahalanobis distance
 \displaystyle{ \sqrt{ (\vect{x}_{i} - \vect{x}_{j})^{T} \Sigma (\vect{x}_{i} - \vect{x}_{j})} } \quad \text{where} \ \  \Sigma \ \ \text{is the any PSD matrix},
 \end{equation}
 
-the correlation dissimilarity measure
+and the correlation dissimilarity measure
 \begin{equation}\label{correlationdist}
 \displaystyle{  1 - \dfrac{ \sum_{k}^{p} (x_{ik} - \bar{\vect{x}_{i}})
  (x_{jk} - \bar{\vect{x}_{j}} )} 
@@ -106,10 +104,10 @@ the correlation dissimilarity measure
  \sum_{k=1}^{p} (x_{jk} -   \bar{\vect{x}_{j}})^{2}    } } } 
 \end{equation}
 
-where  $\bar{\vect{x}_{i}}$ is the mean of $\vect{x}_{i}$, in addition to others.
+where  $\bar{\vect{x}_{i}}$ is the mean of $\vect{x}_{i}$.
 
 \subsubsection{Properties of Euclidean distance}
-The Euclidean distance, $d_{ij}$, (see \eqref{Euclidist}), is invariant under orthogonal transformations. In addition d$_{ij}$ is used to define a positive semi definite (PSD) matrix as follows: Let $\Bm{A} = (a_{ij})$ be a matrix whose elements are given by 
+The Euclidean distance, $d_{ij}$ (equation \eqref{Euclidist}) is invariant under orthogonal transformations. In addition, d$_{ij}$ is used to define a positive semi definite (PSD) matrix as follows: Let $\Bm{A} = (a_{ij})$ be a matrix whose elements are given by 
 \begin{equation}\label{afromEuclidist}
 a_{ij} = -\frac{1}{2}d_{ij}^{2},\quad \text{ for all i and j},
 \end{equation}
@@ -117,7 +115,7 @@ a_{ij} = -\frac{1}{2}d_{ij}^{2},\quad \text{ for all i and j},
 \begin{equation}\label{centerMatrix}
 \Bm{H} = \Bm{I} - n^{-1}\Bm{1}\Bm{1}^{\top}
 \end{equation}
-Then the ,n$\times$n,  inner product matrix, $\Bm{B = HAH}$, is PSD
+Then the $n\times n$ inner product matrix $\Bm{B = HAH}$ is PSD
 with the entries ,$b_{ij}$, given by 
 \[ 
 b_{ij} = a_{ij} - \bar{a}_{i.} - \bar{a}_{.j} + \bar{a}_{..}
@@ -131,74 +129,73 @@ where
 
 
 \subsubsection{Steps of spectral dimensionality reduction Algorithms}
-Let $\Bm{X} \in \R^{n \times D}$ be a matrix of n data points in a high dimensional space $\R^{D}$. Spectral dimensionality reduction refers to all 
+Let $\Bm{X} \in \R^{n \times D}$ be a matrix of $n$ data points in a high dimensional space $\R^{D}$. Spectral dimensionality reduction refers to all 
 dimensionality methods which obtain a low dimensional model of $\Bm{X}$
-by carrying out four main steps:\\
-First, a distance $d_{ij} = \text{dist}(x_{i}, x_{j})$, between data points
-is chosen and a real number k, $1 \leq k < D$ representing the desired dimensionality is fixed.\\
-Second, an n$\times$n PSD similarity matrix, $\Bm{S}$, or distance matrix, $\Bm{D}$, between data points is computed.\\
-Third, spectral decomposition is carried out on the chosen PSD matrix and
-the top k eigen vectors $\{ \vect{v}_{1}, \ldots, \vect{v}_{k} \}$ of $\Bm{S}$
-or $\Bm{D}$ are stack as columns in a new matrix, 
-$\Bm{V} = [\vect{v}_{1}, \ldots, \vect{v}_{k}] \in \R^{n \times k}.$\\
-Finally, viewing the i$^{th}$ row of, $\bm{V}$, as a point, $\vect{y}_{i}$,
-in $\R^{k}$, a configuration of n points 
-$\{\vect{y}_{1}, \ldots, \vect{y}_{k} \}$ is obtained where each
-\[  
-\vect{y}_{i} = (\vect{v}_{1}(i), \ldots, \vect{v}_{k}(i)) \in \R^{k}
-\]
-is a low dimensional representation of $\vect{x}_{i} \in \R^{D}$.\\
-
+by carrying out four main steps.
+\begin{itemize}
+\item[i)] A distance $d_{ij} = \text{dist}(x_{i}, x_{j})$, between data points
+is chosen and a real number $k, 1 \leq k < D$ representing the desired dimensionality is fixed.
+\item[ii)] An $n \times n$ PSD similarity matrix, $\Bm{S}$, or distance matrix, $\Bm{D}$, between data points is computed.
+\item[iii)] Spectral decomposition is carried out on the chosen PSD matrix and
+the top $k$ eigenvectors $\{ \vect{v}_{1}, \ldots, \vect{v}_{k} \}$ of $\Bm{S}$
+or $\Bm{D}$ are stacked as columns in a new matrix, 
+$\Bm{V} = [\vect{v}_{1}, \ldots, \vect{v}_{k}] \in \R^{n \times k}.$
+\item[iv)] Viewing the $i^{th}$ row of $\Bm{V}$ as a point $\vect{y}_{i}$
+in $\R^{k}$, a configuration of $n$ points 
+$\{\vect{y}_{1}, \ldots, \vect{y}_{k} \}$ is obtained such that each
+ $\vect{y}_{i} = (\vect{v}_{1}(i), \ldots, \vect{v}_{k}(i)) \in \R^{k}$
+is a low dimensional representation of $\vect{x}_{i} \in \R^{D}$.
+\end{itemize}
 
 Based on statistical and machine learning literature, we refer to the space 
 in which the original data points lie as the input space and that in which
 the low dimensional representation is sought as the output space. 
-Spectral dimensionality reduction algorithms differ depending to the
+Spectral dimensionality reduction algorithms differ depending on the
 type of distance matrix or similarity matrix used and the relationship
 between the input space and output space.
 
 \subsubsection{Linear dimensionality  reduction}
 Let $\bm{X} \in \R^{n \times D}$ be a design matrix where the rows of
-$\bm{X}$ contain n data points, each of which is associated with D features
+$\bm{X}$ contain $n$ data points, each of which is associated with $D$ features
 in the columns of $\bm{X}$.
-Linear dimensionality reduction techniques find a low dimensional model of the data matrix $\textbf{X}$ using a linear transformation such as an $n \times d$ orthonormal matrix \textbf{M} where d$<<$D. The low dimensional model of the data
-$\Bm{Y}$ is obtained using the relation $\Bm{Y} = \Bm{M}^{\top}X.$\\
-Examples of linear dimensionality techniques include: Factor analysis (FA), Guassian Process Factor Analysis (GPFA), principle component analysis (PCA), in addition to many others. GPFA is not a spectral linear dimensionality technique and is thus not a focus of our project. FA is a spectral linear dimensionality technique but will only focus on PCA.\\ 
-
-
-
+Linear dimensionality reduction techniques find a low dimensional model of the data matrix $\textbf{X}$ using a linear transformation such as an $n \times d$ orthonormal matrix $\textbf{M}$ where $d<<D$. The low dimensional model of the data $\Bm{Y}$ is obtained using the relation $\Bm{Y} = \Bm{M}^{\top}\Bm{X}.$\\
+Examples of linear dimensionality techniques include: Factor analysis (FA), Guassian Process Factor Analysis (GPFA), principle component analysis (PCA), in addition to many others. GPFA is not a spectral linear dimensionality technique and is thus not a focus of our project. FA is a spectral linear dimensionality technique but we will only focus on PCA.\\ 
 
 \subsubsection{Principal Component Analysis (PCA)}
-A common example of a spectral linear method is principle component analysis (PCA) \cite{JolliffeIT1986PCAa}. PCA is a linear technique for finding the directions
-of maximum variance in the data. The main assumption in PCA is that the high dimensional data lies on or near a low d-dimensional subspace embedded in some high dimensional space $\R^{D}$. The best low d-dimensional subspace that describes the data is then found by minimizing the sum of squared residuals    \eqref{PCA}, between the orthogonal projection of the data  points onto the estimated low dimensional subspace and the given points.
+A common example of a spectral linear method is principle component analysis (PCA) \cite{JolliffeIT1986PCAa}. PCA is a linear technique for finding the directions of maximum variance in the data. The main assumption in PCA is that the high dimensional data lies on or near a low $d$-dimensional subspace embedded in some high dimensional space $\R^{D}$. The best low $d$-dimensional subspace that describes the data is then found by minimizing the sum of squared residuals    \eqref{PCA} between the orthogonal projection of the data  points onto the estimated low dimensional subspace and the given points. The optimization problem
+is given by \eqref{PCA} below.
 
 \begin{equation}\label{PCA}
 \begin{aligned}
 & \underset{M}{\text{minimize}}
-& & \sum_{i=1}^{n} \big \lVert \vect{x}_{i} - \textbf{MM}^{T}\vect{x}_{i} \big \rVert_{2}^{2} \\
+& & \sum_{i=1}^{n} \big \lVert \vect{x}_{i} - \textbf{MM}^{\top}\vect{x}_{i} \big \rVert_{2}^{2} \\
 & \text{subject to}
 & & \textbf{M} \in \R^{n \times d} \\
-&&& \textbf{M}^{T}\textbf{M = I}.
+&&& \textbf{M}^{\top}\textbf{M = I}.
 \end{aligned}
 \end{equation}
 
-The solution to PCA, is found via SVD \cite{Agricultural1938,BishopChristopherM2006Pram, AmericanMathematicalSociety.1939Apat} as follows:\\
-1.Compute the mean \textbf{c} of the data set \textbf{X} and center
-the data so that \textbf{X} = \textbf{X} - \textbf{c}\\
-2.Summarize the correlation relationships between the zero-mean data points by computing the covariance matrix $\frac{1}{n}$\textbf{XX}$^{T}$\\
-3.Find the spectral decomposition of \textbf{XX}$^{T}$ or 
-use SVD to find \textbf{X} = $\bm{U\Sigma V^{T}}$\\
-4.Let $\bm{V}_{d}$ denote the top d columns of \textbf{V} corresponding to the  top r singular values of \textbf{X}\\
-5.The optimal point of the optimization problem \eqref{PCA} is \textbf{M} = \textbf{V}$_{d}^{T}$.\\
-The low dimensional model \textbf{Y} is obtained by setting \textbf{Y} = \textbf{V}$^{T}$\textbf{X}.\\
-In other-words, the rows of $\textbf{V}^{T}$ (or the columns of \text{V}) are an orthonormal basis for transforming \textbf{X} into \textbf{Y}.\\
+The solution to PCA, is found via SVD \cite{Agricultural1938, AmericanMathematicalSociety.1939Apat} as follows.
+\begin{itemize}
+\item[i)] Compute the mean $\textbf{c}$ of the data set $\textbf{X}$ and center
+the data so that $\textbf{X} = \textbf{X} - \textbf{c}.$
+\item[ii)] Summarize the correlation relationships between the zero-mean data points by computing the covariance matrix $\frac{1}{n}\textbf{XX}^{\top}.$
+\item[iii)] Find the spectral decomposition of $\textbf{XX}^{\top}$ or 
+use SVD to find $\textbf{X} = \bm{U\Sigma V^{\top}}.$
+\item[iv)] Let $\bm{V}_{d}$ denote the top $d$ columns of $\textbf{V}$ corresponding to the  top $r$ singular values of $\textbf{X}$.
+\item[v)] The optimal point of \eqref{PCA} is 
+$\textbf{M} = \textbf{V}_{d}^{\top}$.
+The low dimensional model $\textbf{Y}$ is obtained by setting $
+\textbf{Y} = \textbf{V}^{\top}\textbf{X}$.
+\end{itemize}
+In other-words, the rows of $\textbf{V}^{\top}$ (or the columns of $\textbf{V}$) are an orthonormal basis for transforming $\textbf{X}$ into $\textbf{Y}$.\\
 
 
 So far, we have looked at spectral linear dimensionality reduction in the case where we have n observed data points in $\R^{p}$ assumed to lie on or near a low dimensional subspace. In that case, a low dimensional model of the data can easily be obtained using PCA. In the next two sections, we review an alternative perspective on dimensionality reduction called Multidimensional scaling (MDS) 
-\cite{CoxT2000, MardiaK.V1979Ma}. In MDS, the data points are unobserved but we are given a distance matrix of pair-wise relations between the points.
+\cite{CoxT2000, MardiaK.V1979Ma}. In MDS, the data points are unobserved but we are given a distance matrix of pairwise relations between the points.
 This means that the researcher has already decided on what distance to use so as
-to visualize the data. This approach helps to high light the main difference between linear and non-linear dimensionality reduction. MDS applies to any set of n objects (not necessarily vectors) with a given pair-wise dissimilarity
-or similarity measure between points. We only focus on MDS in the special case where the data points are represented as vectors in a high dimensional space $\R^{N}$, whose components are numerical values assigned to features associated with each point.
+to visualize the data. This approach helps to highlight the main difference between linear and non-linear dimensionality reduction. MDS applies to any set of n objects (not necessarily vectors) with a given pairwise dissimilarity
+or similarity measure between points. We focus on MDS only in the special case where the data points are represented as vectors in a high dimensional space $\R^{N}$, whose components are numerical values assigned to features associated with each point.
 
 
 %Examples of similarity measures include: the Gaussian Kernel
@@ -217,43 +214,35 @@ or similarity measure between points. We only focus on MDS in the special case w
 
 
 \subsection{Multidimensional scaling (MDS)}
-Assume that an n$\times$n matrix, $\Bm{D}$=(d$_{ij}$), of pair-wise distances
-(not necessarily Euclidean) or similarities, $\Bm{S} = (s_{ij})$, between unobserved  data points, $\{\vect{x}_{1}, \ldots, \vect{x}_{n} \}$, is given and n is large.
-Multidimensional scaling (MDS) \cite{CoxT2000, MardiaK.V1979Ma} considers the the problem of finding a low dimensional model of the high dimensional data by searching for a configuration of n points $\{\vect{y}_{1}, \ldots, \vect{y}_{n} \}$ in $\R^{\text{p}}, \text{p} << \text{n}$, where each $\vect{y}_{i}$ is a low dimensional representation of $\vect{x}_{i}$, and such that the pair-wise distances between points are preserved. Specifically, the Euclidean distances between the configuration points, $\norm{\vect{y}_{i} - \vect{y}_{j}}_{2}$, must be as ``close" as possible to  the given dissimilarities, d$_{ij}$, that is, $\norm{\vect{y}_{i} - \vect{y}_{j}}_{2} \approx \text{d}_{ij}$, for all i and j between 1 and n inclusive. The configuration points $\vect{y}_{i}$ and the intrinsic dimension 
-p are often unknown.\\
+Assume that an $n\times n$ matrix, $\Bm{D}$=(d$_{ij}$), of pair-wise distances
+(not necessarily Euclidean) or similarities, $\Bm{S} = (s_{ij})$, between unobserved  data points, $\{\vect{x}_{1}, \ldots, \vect{x}_{n} \}$, is given and $n$ is large.
+Multidimensional scaling (MDS) \cite{CoxT2000, MardiaK.V1979Ma} considers the the problem of finding a low dimensional model of the high dimensional data by searching for a configuration of $n$ points $\{\vect{y}_{1}, \ldots, \vect{y}_{n} \}$ in $\R^{\text{p}}, \text{p} << \text{n}$, where each $\vect{y}_{i}$ is a low dimensional representation of $\vect{x}_{i}$, and such that the pair-wise distances between points are preserved. Specifically, the Euclidean distances between the configuration points, $\norm{\vect{y}_{i} - \vect{y}_{j}}_{2}$, must be as ``close" as possible to  the given dissimilarities, d$_{ij}$, that is, $\norm{\vect{y}_{i} - \vect{y}_{j}}_{2} \approx \text{d}_{ij}$, for all $i$ and $j$ between 1 and $n$ inclusive. The configuration points $\vect{y}_{i}$ and the intrinsic dimension $p$ are often unknown.\\
 
-The distance matrix, $\Bm{D}$ = (d$_{ij}$), is called a metric if, d$_{ij}$, is a metric for all i and j. The distance matrix, $\Bm{D}$ = (d$_{ij}$), is called Euclidean
-if for some, $p \in \R$, there exists a configuration of n points, $\{\vect{y}_{1}, \ldots, \vect{y}_{n} \}$, in $\R^{\text{p}}$, such that, d$_{ij}$, is exactly equal to $\norm{\vect{y}_{i} - \vect{y}_{j}}_{2}$, for all i and j.
-Configurations obtained using MDS are not unique. Thus the data is usually
+The distance matrix, $\Bm{D}$ = (d$_{ij}$), is called a metric if, $d_{ij}$, is a metric for all $i$ and $j$. The distance matrix, $\Bm{D}$ = ($d_{ij}$), is called Euclidean if for some, $p \in \R$, there exists a configuration of $n$ points, $\{\vect{y}_{1}, \ldots, \vect{y}_{n} \}$, in $\R^{\text{p}}$, such that, $d_{ij}$, is exactly equal to $\norm{\vect{y}_{i} - \vect{y}_{j}}_{2}$, for all $i$ and $j$. Configurations obtained using MDS are not unique. Thus the data is usually
 centered to get a unique solution when $\Bm{D}$ is Euclidean.
 
 
 \subsubsection{Classical MDS}
-Assume that the given n$\times$n distance matrix $\Bm{D} = (d_{ij})$ 
-corresponding to an unobserved data matrix $\Bm{X} \in \R^{n \times p}$ is Euclidean. Let $\hat{d}_{ij} = \norm{\vect{y}_{i} - \vect{y}_{j}}_{2}$  be the Euclidean distance between a set of n configuration points 
-$\displaystyle \{\vect{y}_{i}\}_{i=1}^{n}$ in $\R^{p}$, obtained from the matrix $\Bm{D}.$ Classical MDS or classical scaling  considers the problem of minimizing the reconstruction error function.
+Assume that the given $n\times n$ distance matrix $\Bm{D} = (d_{ij})$, 
+corresponding to an unobserved data matrix $\Bm{X} \in \R^{n \times p}$ is Euclidean. Let $\hat{d}_{ij} = \norm{\vect{y}_{i} - \vect{y}_{j}}_{2}$  be the Euclidean distance between a set of $n$ configuration points 
+$\displaystyle \{\vect{y}_{i}\}_{i=1}^{n}$ in $\R^{p}$, obtained from the matrix $\Bm{D}.$ Classical MDS or classical scaling  considers the problem of minimizing the reconstruction error function, given by
 \begin{equation}\label{error1}
-\displaystyle \sum_{i = 1}^{n} \sum_{j=1}^{n} (d_{ij}^{2} - \hat{d}_{ij}^{2})
+\E(\Bm{X}) = \displaystyle \sum_{i = 1}^{n} \sum_{j=1}^{n} (d_{ij}^{2} - \hat{d}_{ij}^{2})
 \end{equation}
-The optimal linear dimensionality reduction to equation \eqref{error1} is given by the following procedure 
-\cite{MardiaK.V1979Ma}:\\
-First, a real number k, $1 \leq k < p$ is chosen.\\
-Second, an n$\times$n PSD similarity matrix, $\Bm{B}$ = $-\frac{1}{2} \Bm{HDH}$,   is computed from the given distance matrix, $\Bm{D}$, where $\Bm{H}$ is the centering matrix in \eqref{centerMatrix}.\\
-Third, the  spectral decomposition of $\Bm{B}$ is computed to 
-obtain  \textbf{Y} = \textbf{V} \textbf{$\Sigma$} \textbf{V}$^{\top}$,
+The optimal linear dimensionality reduction which minimizes \eqref{error1} is given by the following procedure \cite{MardiaK.V1979Ma}.
+\begin{itemize}
+\item[i)] A real number $k, 1 \leq k < p$ is chosen.
+\item[ii)] An $n\times n$ PSD similarity matrix, $\Bm{B} = -\frac{1}{2} \Bm{HDH}$, is computed from the given distance matrix, $\Bm{D}$, where $\Bm{H}$ is the centering matrix in \eqref{centerMatrix}.
+\item[iii)] Spectral decomposition of $\Bm{B}$ is carried out to 
+obtain $\textbf{Y} = \textbf{V} \textbf{$\Sigma$} \textbf{V}^{\top}$,
 where 
-\[
-\bm{\Sigma} = \text{diag}(\lambda_{1}, \ldots, \lambda_{p}),
+$\bm{\Sigma} = \text{diag}(\lambda_{1}, \ldots, \lambda_{p}),
  \lambda_{1} \geq \lambda_{2} \geq \ldots \geq \lambda_{p} > 0 \ \
- \text{is a diagonal matrix and} \ \    \bm{V} = [\vect{v}_{1}, \ldots, \vect{v}_{p}]
- \]
-is an orthonormal matrix.
-Fourth, the top k eigenvectors of $\textbf{V}$ are chosen
+ \text{is a diagonal matrix and} \ \    \bm{V} = [\vect{v}_{1}, \ldots, \vect{v}_{p}]$ is an orthonormal matrix.
+\item[iv)] The top $k$ eigenvectors of $\textbf{V}$ are chosen
 and the estimated data matrix 
-\[
-\hat{\Bm{X}} = [\sqrt{\lambda_{1}}\vect{v}_{1}, \ldots, \sqrt{\lambda_{k}}\vect{v}_{k} ]
-\]
-gives the optimal solution to \eqref{error1}.\\
+$\hat{\Bm{X}} = [\sqrt{\lambda_{1}}\vect{v}_{1}, \ldots, \sqrt{\lambda_{k}}\vect{v}_{k} ]$ gives the optimal solution to \eqref{error1}.
+\end{itemize}
 
 Observe that 
 \[ \hat{\textbf{X}} = \Bm{X}\Bm{H} = \Bm{X} - n^{-1} \Bm{X}\Bm{1}\Bm{1}^{\top} = \Bm{X} - \bm{\mu}\Bm{1}^{\top}
@@ -267,9 +256,9 @@ is the empirical mean of the unobserved data. Therefore PCA and classical MDS bo
 If a similarity matrix $\Bm{S}$ is PSD, with entries 
 $s_{ij}$ obtained from a distance matrix $D = (d_{ij})$ by the transformation
 \[ 
-d_{ij} = \sqrt{s_{ii} - 2s_{ij} + s_{jj}} \geq 0
+d_{ij} = \sqrt{s_{ii} - 2s_{ij} + s_{jj}} \geq 0,
 \]
-Then $\Bm{S}$ is Euclidean, with centered inner product matrix, $\Bm{B = HSH}$, where the entries of $\Bm{B}$ are given by 
+then $\Bm{S}$ is Euclidean, with centered inner product matrix, $\Bm{B = HSH}$, where the entries of $\Bm{B}$ are given by 
 \[ 
 b_{ij} = s_{ij} - \bar{s}_{i.} - \bar{s}_{.j} + \bar{s}_{..}
 \]
@@ -278,7 +267,7 @@ and the quantities on the right hand side of the preceding equation are defined 
 \subsection{Spectral non-linear dimensionality reduction}
 Spectral non-linear dimensionality reduction (SNLDR) techniques are a 
 class of MDS methods, where there is no linear mapping between the 
-input and output space. Both SNLDR techniques and classical MDS, utilize
+input and output space. Both SNLDR techniques and classical MDS utilize
 either a PSD similarity matrix or distance matrix to find a low dimensional
 model of the data. Examples of SNLDR methods include ISOMAP \cite{TenenbaumJB2000Aggf}, locally linear embedding (LLE)  \cite{roweis2000nonlinear}, Laplacian eigenmaps (LE) \cite{belkin2003laplacian}
 and diffusion maps \cite{belkin2003laplacian}, in addition to many others.
@@ -286,37 +275,33 @@ These methods are different from classical MDS (or linear dimensionality reducti
 superior to classical MDS (linear dimensionality reduction techniques) because they do not make an apriori assumption
 about the underlying geometry of the data manifold and can hence discover 
 interesting structure in the data.
-SNLDR methods use spectral graph theory \cite{Luxburg2007}, where a graph is built on the given data set, using a specified distance, to obtain the graph Laplacian. The eigen vectors of the graph Laplacian, provide a new coordinate system, which is used to embed the data into Euclidean space.
+SNLDR methods use spectral graph theory \cite{Luxburg2007}, where a graph is built on the given data set, using a specified distance, to obtain the graph Laplacian. The eigenvectors of the graph Laplacian provide a new coordinate system, which is used to embed the data into Euclidean space.
 ISOMAP, LLE and LE require dense sampling of the data manifold in order to 
 provide an accurate embedding, and are not very robust to noise and outliers.
-They are static methods like PCA, in that, they provide a good visualization of the data in most cases but they cannot account for temperal changes such as those exhibited in patterns of action potentials or spikes. Diffusion  maps on the other hand is robust to noise and outliers, does not require dense sampling of the data and has a parameter which can be tuned to visualize stochastic random variables such as spike trains.\\
+They are static methods like PCA, in that they provide a good visualization of the data in most cases but they cannot account for temperal changes such as those exhibited in patterns of action potentials or spikes. Diffusion maps algorithm, on the other hand is robust to noise and outliers, does not require dense sampling of the data and has a parameter which can be tuned to visualize stochastic random variables such as spike trains.\\
 
 
-Suppose a data set, $\Bm{X} =  \{x_{1}, \ldots, x_{n} \}$, is given  and assume that the pair-wise distances, $d_{ij} = \text{dist}(x_{i}, x_{j})$, between points are known. A graph, G = (V,E), consisting of n vertices, $V = \{v_{1}, \ldots, v_{n}\}$, and a set of edges, E, between vertices, can be used to define pair-wise  similarities, s$_{ij}$, between points by identifying each data point, $x_{i}$, with a vertex, $v_{i}$, on the graph, for all i from 1 to n.
-The similarities, s$_{ij}$, are assigned such that, points which are close together, have a high similarity while those points that are far apart, have a low similarity. Pair-wise similarities are usually used to model
-local neighborhood relations on the graph. In the next section, we review some basic concepts in spectral graph theory, which we then use to outline the steps for diffusion maps and laplacian eigen  maps.
+Suppose a data set, $\Bm{X} =  \{x_{1}, \ldots, x_{n} \}$, is given  and assume that the pairwise distances, $d_{ij} = \text{dist}(x_{i}, x_{j})$, between points are known. A graph, $G = (V,E)$, consisting of $n$ vertices, $V = \{v_{1}, \ldots, v_{n}\}$, and a set of edges, $E$, between vertices, can be used to define pairwise  similarities, $s_{ij}$, between points by identifying each data point, $x_{i}$, with a vertex, $v_{i}$, on the graph, for all $i$ from 1 to $n$.
+The similarities, $s_{ij}$, are assigned such that points which are close together have a high similarity while points that are far apart have a low similarity. Pairwise similarities are used to model local neighborhood relations on the graph. In the next section, we review some basic concepts in spectral graph theory, which we then use to outline the steps for diffusion maps and Laplacian eigenmaps.
 
 \subsubsection{Graph theory definitions}
-
-A graph, G = (V,E), with a finite set of n vertices or nodes, V = $\{i, j, k,...,m\}$, is called weighted, if any edge joining a pair of vertices, (i,j), has a non-negative weight, $w_{ij} \geq 0$, associated to it.
-The edge weight $w_{ij}=0$ if nodes i and j have no edge between them, that is, $(i,j) \not \in E.$
-A graph G is  undirected if the edges are bi-directional such that, $w_{ij} = w_{ji}$.\\
-A matrix, $\Bm{W} = (w_{ij})$, for all i and j between 1 and n, 
-whose entries are edge weights between pairs of nodes, is called the adjacency matrix or the similarity matrix of G. The degree of the, $i^{th}$, node defined 
+A graph, $G = (V,E)$, with a finite set of $n$ vertices or nodes, $V = \{i, j, k,...,m\}$, is called weighted, if any edge joining a pair of vertices, $(i,j)$, has a non-negative weight, $w_{ij} \geq 0$, associated to it.
+The edge weight $w_{ij}$ is zero if nodes $i$ and $j$ have no edge between them, that is, $(i,j) \not \in E.$
+A graph $G$ is  undirected if the edges are bi-directional such that, $w_{ij} = w_{ji}$.\\
+A matrix, $\Bm{W} = (w_{ij})$, for all $i$ and $j$ between 1 and $n$, 
+whose entries are edge weights between pairs of nodes, is called the adjacency matrix or the similarity matrix of $G$. The degree of the $i^{th}$ node defined 
 as
 \begin{equation}\label{degree}
-d_{i} := \sum_{j}w_{ij}, 
+d_{i} = \sum_{j}w_{ij}, 
 \end{equation}
-
-is the sum of all the weights, $w_{ij}$, such that, $(i,j) \in E.$ In other words, the sum over j above, is non-zero only when two nodes are connected
+is the sum of all the weights $w_{ij}$ such that, $(i,j) \in E.$ In other words, the sum over $j$ above is non-zero only when two nodes are connected
 by a non-zero weight.
-The degree matrix, $\Bm{D}$, is a diagonal matrix with degrees, $d_{i}$, on it's diagonal.
-If A is a subset of V, then the volume of A, vol(A), defined as 
+The degree matrix, $\Bm{D}$, is a diagonal matrix with degrees, $d_{i}$, on its diagonal.
+If $A$ is a subset of $V$, then the volume of $A$, $vol(A)$, defined as 
 \[
 \text{vol(A)} =  \displaystyle \sum_{i \in A} d_{i},
 \]
-is equal to the sum of all node degrees in the set A. The unnormalized graph Laplacian L is defined as
-
+is equal to the sum of all node degrees in the set A. The unnormalized graph Laplacian $\Bm{L}$ is defined as
 \begin{equation}\label{unnormalized Laplacian}
 \Bm{L = D} - \Bm{W} 
 \end{equation}
@@ -328,12 +313,12 @@ $ \Bm{X} = \{x_{1}, \ldots, x_{n}\}$, are known, different SNLDR methods
 use either distances, $d_{ij}$, or similarities, $s_{ij}$, to build a graph 
 on the data set. Diffusion maps and Laplacian eigenmaps build a graph on data using similarities, $s_{ij}$, between points.
 These methods consider the problem of modeling local neighborhood relations
-between points, so that points that are very close together, are assigned a large similarity, while those that are far apart, are assigned a small similarity.
-The neighborhood graphs are formed by connecting together, those points which have a positive similarity, between them based on a given distance, $d_{ij}$.\\
+between points, so that points that are very close together are assigned a large similarity, while those that are far apart are assigned a small similarity.
+The neighborhood graphs are formed by connecting together those points which have a positive similarity between them based on a given distance, $d_{ij}$.\\
 
-There are three common methods for building similarity graphs:
-The first method is called, the $\epsilon-$nearest neighbor graph, where a threshold, $\epsilon$, is fixed and then  all points which are within a distance, $\epsilon$, from each other are connected. The second method is called, the mutual k-nearest neighbor graph, where two points, $x_{i}$, and ,$x_{j}$, are connected together if and only if, $x_{i}$,  is among the k-nearest neighbors of ,$x_{j}$, and, $x_{j}$, is among the k-nearest neighbors of, $x_{i}$.
-The third method is called, the fully connected graph. In this method, all 
+There are three common methods for building similarity graphs.
+The first method is called the $\epsilon-$nearest neighbor graph, where a threshold, $\epsilon$, is fixed and then  all points which are within a distance $\epsilon$ from each other are connected. The second method is called, the mutual $k$-nearest neighbor graph, where two points, $x_{i}$, and ,$x_{j}$, are connected together if and only if, $x_{i}$ is among the $k$-nearest neighbors of $x_{j}$ and $x_{j}$ is among the $k$-nearest neighbors of, $x_{i}$.
+The third method is called the fully connected graph. In this method, all 
 points with a positive similarity between them are connected.
 The most widely used measure for a fully connected similarity graph is the Gaussian kernel given by 
 \[
@@ -348,40 +333,41 @@ The tuning parameter, $\sigma$, controls the width of a given neighborhood.
 
 
 \subsubsection{Embedding a graph on the real line}
-Suppose that G = (V, E) is a connected, weighted and undirected graph.
-The minimum cut denoted Cut(A,B) refers to the problem of partitioning the set of a disjoint union of vertices, V = A $\displaystyle \cup$ B  such that there is a minimal number of edges connecting the two subsets A and B.
-Given two disjoint subsets A and B of V, Cut(A,B), is defined as
+Suppose that $G=(V,E)$ is a connected, weighted and undirected graph.
+The minimum cut denoted Cut$(A,B)$ refers to the problem of partitioning the set of a disjoint union of vertices, $V = A  \displaystyle \cup B$  such that there is a minimal number of edges connecting the two subsets $A$ and $B$.
+Given two disjoint subsets $A$ and $B$ of $V$, Cut$(A,B)$, is defined as
 
 \begin{equation}\label{cut}
 Cut(A,B) = \displaystyle \frac{1}{2} \sum_{i \in A,  j \in B } w_{ij} 
 \end{equation}
 
 
-The normalised cut denoted, Ncut(A,B), a relaxed version of, Cut(A, B), is defined as
+The normalised cut denoted, Ncut$(A,B)$, a relaxed version of Cut$(A, B)$, is defined as
 
 \begin{equation}\label{Ncut}
 \displaystyle \text{Ncut}(A,B) = \frac{\text{Cut}(A, B)}{\text{vol}(A)}
 + \frac{\text{Cut}(A, B)}{\text{vol}(B)} 
 \end{equation}
 
-Spectral graph partitioning\cite{Luxburg2007} was designed as solution to the relaxed hard, Ncut(A, B), problem above.
-A simple example of Spectral Graph partitioning is the problem of embedding a finite Graph G=(V,E) onto the real line $\R$ so that neighboring points on the graph remain  close in the low dimensional representation. To see this, assume that there are n vertices in the set V where $V = \{i, j, k, \ldots\, m\}.$
+Spectral graph partitioning\cite{Luxburg2007} was designed as solution to the relaxed hard Ncut$(A, B)$, problem above.
+A simple example of Spectral Graph partitioning is the problem of embedding a finite Graph $G=(V,E)$ onto the real line $\R$ so that neighboring points on the graph remain  close in the low dimensional representation. To see this, assume that there are $n$ vertices in the set $V$ where $V = \{i, j, k, \ldots\, m\}.$
 Let $\vect{y} = (y_{1}, \ldots, y_{n})$  be any vector in Euclidean space $\R^{n}$. The vector $\vect{y}$ can be viewed as a function
 
 \[ \vect{y}: V \rightarrow \mathbb{R}, \ \  \ \  \vect{y}(i) \mapsto y_i \]
 
-on the set of vertices V of  G which assigns to each vertex i in V, a real number $\vect{y}(i) = y_{i}$.  Using this definition, it follows that
+on the set of vertices $V$ of $G$ which assigns to each vertex $i$ in $V$, a real number $\vect{y}(i) = y_{i}$.  
 
+\begin{Lem}
 \begin{equation}\label{Ccut}
-\text{Cut(A,B)} = \displaystyle{ \sum_{i,j} (y_{i} - y_{j})^{2}w_{ij} }
+\text{Cut$(A,B)$} = \displaystyle{ \sum_{i,j} (y_{i} - y_{j})^{2}w_{ij} }
 \end{equation}
 and
 \begin{equation}\label{Nncut}
-\text{Ncut(A,B)} = \displaystyle{ \frac{1}{\text{vol}(V)} y^{T}\Bm{L}y}   
+\text{Ncut$(A,B)$} = \displaystyle{ \frac{1}{\text{vol}(V)} y^{T}\Bm{L}y}.   
 \end{equation}
-
+\end{Lem}
+Below is a simple proof for \eqref{Ccut}.
 \begin{proof}
-
 \text{Let} 
 \[
  y_{i} =
@@ -404,7 +390,7 @@ and
   \end{cases}
 \]
 
-Let  W = $(w_{ij})$ be defined by
+Let  $W = (w_{ij})$ be defined by
 \[
  w_{ij} =
   \begin{cases} 
@@ -418,24 +404,23 @@ using \eqref{cut}, we have
 \begin{align*}
 Cut(A, B) &= \frac{1}{4} \sum_{(i, j) \in E} (y_{i} - y_{j})^{2}  \\
 & =  \frac{1}{8} \sum_{i} \sum_{j} (y_{i}-y_{j})^{2}w_{ij} \\
-& \approx  \sum_{i,j} (y_{i} - y_{j})^{2}w_{ij}
+& \approx  \sum_{i,j} (y_{i} - y_{j})^{2}w_{ij}.
 \end{align*}
-
-
+This completes the proof.
 \end{proof}
-Thus
-Solving the Cut(A,B) is equivalent to minimizing \eqref{Ccut},
-which is equivalent to requiring that points which are close on the graph, are mapped to neighboring points on the real line.
-To see this, observe that if, $y_{i}$ is very similar to $y_{j}$, then, w$_{ij} \approx 1$, by definition of a similarity measure. Since, $(y_{i}-y_{j})^2 > 0$, equation \eqref{Ccut} is minimized only if $y_{i}$ is very close to $y_{j}$. Thus neighboring points on the graph, are mapped to neighboring points on the real line. On the other hand, if $y_{i}$ is very dissimilar to $y_{j}$, then $w_{ij} \approx 0$. Therefore when equation  \eqref{Ccut} is minimized,
-the points which are very far apart will not matter in the final embedding.
+
+Thus solving the Cut$(A,B)$ is equivalent to minimizing \eqref{Ccut},
+which is equivalent to requiring that points that are close on the graph are mapped to neighboring points on the real line.
+To see this, observe that if, $y_{i}$ is very similar to $y_{j}$, then, $w_{ij} \approx 1$, by definition of a similarity measure. Since, $(y_{i}-y_{j})^2 > 0$, equation \eqref{Ccut} is minimized only if $y_{i}$ is very close to $y_{j}$. Thus neighboring points on the graph are mapped to neighboring points on the real line. On the other hand, if $y_{i}$ is very dissimilar to $y_{j}$, then $w_{ij} \approx 0$. Therefore when equation  \eqref{Ccut} is minimized,
+the points that are very far apart will not matter in the final embedding.
 
 \subsubsection{Graph Laplacians and their properties}
 The unnormalized graph Laplacian $\Bm{L = D} - \Bm{W}$  of a connected, weighted,
-undirected graph G with n vertices is positive semidefinite hence 
-has a basis of n non-negative eigenvalues with corresponding  eigenvectors.
+undirected graph G with $n$ vertices is positive semidefinite and hence 
+has a basis of $n$ non-negative eigenvalues with corresponding  eigenvectors.
 The smallest eigenvalue of $\Bm{L}$ is $\vect{0}$ with corresponding eigenvector $\vect{1}$. 
 The second eigenvalue of $\Bm{L}$ is positive if and only if the graph G is connected.\\
-There are two other types of graph Laplacians namely the symmetric normalized
+There are two other types of graph Laplacians, namely the symmetric normalized
 graph Laplacian 
 \begin{equation}\label{normalizedLaplacian}
 \Bm{L}_{sym} = \Bm{D}^{-\frac{1}{2}} \Bm{L} \Bm{D}^{-\frac{1}{2}} =
@@ -447,14 +432,14 @@ the graph Laplacian related to a random walk on a graph which is not symmetric
 \Bm{L}_{rw} = \Bm{D}^{-1}\Bm{L} = \Bm{I} - \Bm{D}^{-1}\Bm{W}
 \end{equation}
 where $\Bm{D}$ is the degree matrix and $\Bm{W}$ is the similarity matrix.
-Diffusion maps uses a variant of \eqref{RandomWalk} to get a symmetric similarity
+The diffusion maps algorithm uses a variant of \eqref{RandomWalk} to get a symmetric similarity
 matrix. 
 Both Laplacian eigenmaps and diffusion maps use the degree matrix $\Bm{D}$
-and the similarity matrix $\Bm{W}$ to normalize \eqref{unnormalized Laplacian}\\
+and the similarity matrix $\Bm{W}$ to normalize \eqref{unnormalized Laplacian}.\\
 
-The Cut(A,B) problem is solved by using the signs of components of the bottom non-constant eigen vector of $\Bm{L}$ to partition the vertex set into two disjoint subsets\cite{Luxburg2007}.
-From properties of $\Bm{L}$, any graph G with n vertices can be embedded in $\R^{k}$ where $1 \leq k \leq n-1$ by taking the top k or bottom k eigenvectors of the graph Laplacian.
-The constant eigen vector corresponding to the zero eigen value is normally
+The Cut$(A,B)$ problem is solved by using the signs of components of the bottom non-constant eigen vector of $\Bm{L}$ to partition the vertex set into two disjoint subsets \cite{Luxburg2007}.
+From properties of $\Bm{L}$, any graph $G$ with $n$ vertices can be embedded in $\R^{k}$ where $1 \leq k \leq n-1$ by taking the top $k$ or bottom $k$ eigenvectors of the graph Laplacian.
+The constant eigenvector corresponding to the zero eigenvalue is normally
 discarded when using the normalized graph Laplacian.
 
 
@@ -520,13 +505,12 @@ discarded when using the normalized graph Laplacian.
 %
 
 \subsubsection{Random walk on a graph}
-Let G=(V,E) be a connected, weighted and undirected graph with a set of n vertices, V = $\{v_{1}, \dots, v_{n} \}$.
-A stochastic process which jumps from one vertex, $v_{i}$, to another vertex, $v_{j}$, on the graph, G, is called a random walk on G.
-Denote the random walk on G by the set $\{X(t)\}_{t \in \mathbb{N}}$.
-A matrix M is called a stochastic transition matrix or a transition probability
-matrix, if the entries in each row of M are non-negative and add upto one.
-We know that the transition probability of jumping from vertex $v_{i}$
-to vertex, $v_{j}$, on , G, is proportional to the edge weight, $w_{ij}$, between the two vertices. 
+Let $G=(V,E)$ be a connected, weighted and undirected graph with a set of $n$ vertices, $V = \{v_{1}, \dots, v_{n} \}$.
+A stochastic process that jumps from one vertex, $v_{i}$, to another vertex, $v_{j}$, on the graph, $G$, is called a random walk on $G$.
+Denote the random walk on $G$ by the set $\{X(t)\}_{t \in \mathbb{N}}$.
+A matrix $\Bm{M}$ is called a stochastic transition matrix or a transition probability matrix, if the entries in each row of $\Bm{M}$ are non-negative and add up to one.
+We require that the transition probability of jumping from vertex $v_{i}$
+to vertex $v_{j}$ on $G$ is proportional to the edge weight, $w_{ij}$, between the two vertices. 
 Let $p_{ij} = \text{Prob} \left(X(t+1) = j | X(t) = i \right)$ be the transition probability of jumping from vertex $v_{i}$ to vertex $v_{j}$ in one step. Define $p_{ij}$ by
 \begin{equation}
 p_{ij}   = \frac{w_{ij}}{d_{i}}
@@ -537,13 +521,12 @@ we know that the matrix
 \begin{equation}\label{transitmatrix}
 \Bm{P} = \Bm{D}^{-1}\Bm{W} 
 \end{equation}
-is indeed a transition probability matrix. This follows from the fact that, $d_{i} > 0$, (because G is connected) and $w_{ij} \geq 0$ since it's a similarity. Moreover, the definition of $\Bm{D}$ implies that the rows of $\Bm{P}$ sum upto one. 
+is indeed a transition probability matrix. This follows from the fact that $d_{i} > 0$ (because G is connected) and $w_{ij} \geq 0$ since it is a similarity. Moreover, the definition of $\Bm{D}$ implies that the rows of $\Bm{P}$ sum to one. 
 $\Bm{P}$ is a probability transition matrix implies that it satisfies
-the equation $\Bm{P} \vect{1} = \vect{1}$. Thus one is an eigenvalue of 
-$\Bm{P}$ with corresponding constant eigenvector $\vect{1}$.
+the equation $\Bm{P} \vect{1} = \vect{1}$ where $\vect{1}$ is the constant vector of all ones. Thus 1 is an eigenvalue of $\Bm{P}$ with corresponding constant eigenvector $\vect{1}$.
 
-Observe that $\Bm{P}$ is precisely, the random walk graph Laplacian, $\Bm{L}_{rw}$, in equation\eqref{RandomWalk}.
-Given that the random walk starts at node i, so that, $X(0) = i$, the probability
+Observe that $\Bm{P}$ is precisely the random walk graph Laplacian, $\Bm{L}_{rw}$, in equation \eqref{RandomWalk}.
+Given that the random walk starts at node $i$, so that $X(0) = i$, the probability
 that the random walk is at vertex $v_{j}$ after t steps is given by
 \[
 \text{Prob}\left( X(t) = j | X(0) = i  \right) = p_{ij}^{t}
@@ -552,103 +535,101 @@ Thus the probability distribution of the random walk at time t, given that it st
 \begin{equation}\label{pdftime}
 \text{Prob}\left( X(t) | X(0) = i  \right) = \vect{1}^{\top}\Bm{P}^{t} = \Bm{P}^{t}(i, :)
 \end{equation}
-However, we cannot apply spectral decomposition to, $\Bm{P}$, because it's
+However, we cannot apply spectral decomposition to $\Bm{P}$, because it is
 not symmetric hence not PSD.
 This requires a normalization using the adjacency matrix, $\Bm{W}$, in order
 to get a PSD similarity matrix $\Bm{S}$.
 
-The eigenvalues, $\lambda_{k}$, of ,$\Bm{P}$, satisfy $\abs{\lambda}_{k} < 1$
-for all k.
+The eigenvalues, $\lambda_{k}$, of $\Bm{P}$ satisfy $\abs{\lambda}_{k} < 1$
+for all $k$.
 
 \subsubsection{Diffusion maps algorithm}
-1). Given an $n \times n$ distance matrix D = ($d_{ij}$), build a graph G = (V, E) on the data by identifying the each data point
-as a vertex $v_{i}$ from the vertex set  ,V = $\{v_{1}, \ldots, v_{n}\}$, on  G.\\
-2). Compute the similarity matrix or weight matrix, $\bm{W} = (w_{ij})$ between
-the vertices $v_{i}$ using weights
+The diffusion maps algorithm is given by the following steps.
+\begin{itemize}
+\item[1)] Given an $n \times n$ distance matrix $D = (d_{ij}$), build a graph $G = (V,E)$ on the data by identifying the each data point
+as a vertex $v_{i}$ from the vertex set, $V = \{v_{1}, \ldots, v_{n}\}$, on  $G$.
+\item[2)] Compute the similarity matrix or weight matrix, $\bm{W} = (w_{ij})$, between the vertices $v_{i}$ using weights
 \[
 w_{ij} = e^{-\dfrac{\text{dist}^{2}(x_{i}, x_{j})}{2\sigma^2}} 
 = e^{-\dfrac{d_{ij}^{2}}{2\sigma^2}}
-\] \\
-
-2(a). The weight matrix, $\Bm{W}$, can be any PSD kernel (similarity) and, $d_{ij}$, is any distance appropriate for the data. $\sigma$, is a band width or tuning parameter which restricts transitions between points to a, $\sqrt{\epsilon}$, neighborhood.\\
-2(b). Diffusion maps uses Euclidean distance 
-$d_{ij} = \norm{x_{i} - x_{j}}^{2}_{2}$ in the Gaussian Kernel above
-and all theoretical results only hold when the Gaussian Kernel is used.\\
-3). Compute degree matrix $\Bm{D} = \text{diag}(d_{1}, \ldots, d_{n})$
-where $d_{i}$ is the degree of the $i^{th}$ node.\\
-4). Define a random walk on the graph by specifying the transition probabilities
-defining 
+\] 
+\item[2a)] The weight matrix, $\Bm{W}$ can be any PSD kernel (similarity) and $d_{ij}$ is any distance appropriate for the data. The bandwidth or tuning parameter, $\sigma$ restricts transitions between points to a $\sqrt{\epsilon}$ neighborhood.
+\item[2b)] Diffusion maps algorithm uses Euclidean distance 
+$d_{ij} = \norm{x_{i} - x_{j}}^{2}_{2}$ in the Gaussian kernel above
+and all theoretical results only hold when the Gaussian kernel is used.
+\item[3)] Compute degree matrix $\Bm{D} = \text{diag}(d_{1}, \ldots, d_{n})$
+where $d_{i}$ is the degree of the $i^{th}$ node.
+\item[4)] Define the random walk on the graph by specifying the transition probabilities, defining 
 \[
-p_{ij} = \frac{w_{ij}}{d_{i}}
-\]\\
-5). Obtain the random walk graph Laplacian or transition probability
+p_{ij} = \frac{w_{ij}}{d_{i}}.
+\]
+\item[5)] Obtain the random walk graph Laplacian or transition probability
 matrix $\Bm{P}$ by defining 
 \begin{equation}\label{transit} 
 (p_{ij}) = \Bm{P} = \Bm{D}^{-1}\Bm{W}.
 \end{equation}
 
-6). Since ,$\Bm{P}$, is not symmetric, normalize \eqref{transit}
+\item[6)] Since $\Bm{P}$ is not symmetric, normalize \eqref{transit}
 using $\Bm{D}$ to obtain a PSD similarity matrix S given by
 \begin{equation}\label{simPSD}
-\Bm{S} = \Bm{D}^{\frac{1}{2}}\Bm{P}\Bm{D}^{\frac{-1}{2}} = \Bm{D}^{-\frac{1}{2}}\Bm{W}\Bm{D}^{\frac{-1}{2}} 
-\end{equation} \\
+\Bm{S} = \Bm{D}^{\frac{1}{2}}\Bm{P}\Bm{D}^{\frac{-1}{2}} = \Bm{D}^{-\frac{1}{2}}\Bm{W}\Bm{D}^{\frac{-1}{2}}. 
+\end{equation} 
 
-7). Apply spectral decomposition to $\Bm{S}$ in \eqref{simPSD} and write
-
+\item[7)] Apply spectral decomposition to $\Bm{S}$ in \eqref{simPSD}, write
 \begin{equation}
-\Bm{S} = \Bm{V}\bm{\Sigma}\bm{V^{\top}}
+\Bm{S} = \Bm{V}\bm{\Sigma}\bm{V^{\top}},
 \end{equation}
-
 and order the eigenvalues, $\lambda_{1}\geq \lambda_{2} \geq \ldots \geq \lambda_{n}$, where,  
 $\bm{\Sigma} = \text{diag}(\lambda_{1}, \ldots, \lambda_{n})$. Write 
-$\Bm{S} = [\vect{v}_{1}, \ldots, \vect{v}_{n}].$\\
+$\Bm{S} = [\vect{v}_{1}, \ldots, \vect{v}_{n}].$
 
-8). From \eqref{simPSD}, write 
+\item[8)] From \eqref{simPSD}, write 
 
 \[\Bm{P} = (\Bm{D}^{-\frac{1}{2}}) \Bm{S} (\Bm{D}^{\frac{1}{2}} ) = 
- (\Bm{D}^{-\frac{1}{2}} \Bm{V}) \bm{\Sigma} (\Bm{D}^{\frac{1}{2}} \Bm{V} )^{\top}
-\] \\
-9). Let $\bm{\Phi} = \Bm{D}^{-\frac{1}{2}} \Bm{V}  = [\phi_{1}, \ldots, \phi_{n}]$ and 
+ (\Bm{D}^{-\frac{1}{2}} \Bm{V}) \bm{\Sigma} (\Bm{D}^{\frac{1}{2}} \Bm{V} )^{\top}.
+\] 
+\item[9)] Let $\bm{\Phi} = \Bm{D}^{-\frac{1}{2}} \Bm{V}  = [\phi_{1}, \ldots, \phi_{n}]$ and 
 $\bm{\Psi} = \Bm{D}^{\frac{1}{2}} \Bm{V} = [\psi_{1}, \ldots, \psi_{n}] $
 to get  
-\[\Bm{P} = \bm{\Phi \Sigma \Psi^{\top}}
-\].
-The bases $\bm{\Phi}$ and $\bm{\Psi}$ are a biorthorgonal system hence satisfy
-$ \bm{\Phi}\bm{\Psi}^{\top} =  \bm{\Phi}^{\top}\bm{\Psi}  = \bm{I}_{n \times n}$
-which implies that $\phi_{j}^{\top}\psi_{k} = \delta_{ij}$.\\
-10). Observe that  $[\phi_{1}, \ldots, \phi_{n}]$ and $[\psi_{1}, \ldots, \psi_{n}]$ are the right and left singular vectors of $\Bm{P}$ respectively.
-Hence we can write for any time t,
+\[\Bm{P} = \bm{\Phi \Sigma \Psi^{\top}}.
+\]
+The bases $\bm{\Phi}$ and $\bm{\Psi}$ are a biorthorgonal system, and hence satisfy
+$ \bm{\Phi}\bm{\Psi}^{\top} =  \bm{\Phi}^{\top}\bm{\Psi}  = \bm{I}_{n \times n},$
+which implies that $\phi_{j}^{\top}\psi_{k} = \delta_{ij}$.
+\item[10)] Observe that  $[\phi_{1}, \ldots, \phi_{n}]$ and $[\psi_{1}, \ldots, \psi_{n}]$ are the right and left singular vectors of $\Bm{P}$, respectively.
+Hence we can write for any time $t$,
 \begin{equation}\label{expansion}
- \bm{P}^{t} = \bm{\Phi \Sigma^{t} \Psi^{\top}} = \displaystyle \sum_{k=1}^{n} \lambda_{k}^{t} \phi_{k} \psi_{k}^{\top}
-\end{equation} \\
+ \bm{P}^{t} = \bm{\Phi \Sigma^{t} \Psi^{\top}} = \displaystyle \sum_{k=1}^{n} \lambda_{k}^{t} \phi_{k} \psi_{k}^{\top}.
+\end{equation} 
 
-11) Equation \eqref{expansion} shows the expansion of $\bm{P}^{t}$ 
-in terms of  the basis vectors $\{psi_{k}\}$, 
+\item[11)] Equation \eqref{expansion} shows the expansion of $\bm{P}^{t}$ 
+in terms of  the basis vectors $\{\psi_{k}\}$, 
 
-Thus by the observation on \ref{pdftime}, it follows that diffusion map
-for the $i^{th}$ vertex $v_{i}$ is given by
+thus by the observation in equation \eqref{pdftime}, it follows that the diffusion map for the $i^{th}$ vertex $v_{i}$ is given by
 
 $$ v_{i} \mapsto \bm{P}^{t}(i,:) = \begin{bmatrix}
          \lambda_{1}^{t}\phi_{1}(i)\\
          \lambda_{2}^{t}\phi_{2}(i)\\
          \vdots\\
          \lambda_{n}^{t}\phi_{2}(i)
-        \end{bmatrix} $$
+        \end{bmatrix} .$$
         
-12). Since $\abs{\lambda_{k}} < 1$, for a sufficiently high power of t,
+\item [12)] Since $\abs{\lambda_{k}} < 1$, for a sufficiently high power of $t$,
 most $\lambda_{k}^{t}$ are very small and hence can be discarded.
 Also $\Bm{P}\vect{1} = \vect{1}$ implies that the first constant vector
 yields a trivial solution and can be discarded.
-Hence a diffusion map $\phi_{t}$ for a embedding the $i^th$ vertex $v_{i}$ of a graph  G in  low dimension
-$p << n$ is the map $$\phi_{t}(v_{i}) = \begin{bmatrix}
+Hence a diffusion map $\phi_{t}$ for a embedding the $i^{th}$ vertex $v_{i}$ of a graph $G$ in  low dimension $p << n$ is the map 
+$$\phi_{t}(v_{i}) = \begin{bmatrix}
          \lambda_{2}^{t}\phi_{1}(i)\\
          \lambda_{3}^{t}\phi_{2}(i)\\
          \vdots\\
          \lambda_{p+1}^{t}\phi_{2}(i)
-        \end{bmatrix} $$
-13). The diffusion distance between two probability distributions of random
+        \end{bmatrix} .$$
+\item[13)] The diffusion distance between two probability distributions of random
 walks on a graph after t steps is related to Euclidean distance as follows:
 For any vertices $v_{k}$ and $v_{m}$ on the graph, we have that
+\end{itemize}
+
 
 \begin{equation}\label{diffusionDistance}
 \norm{\phi_{t}(v_k) - \phi_{t}(v_m)}_{2}^{2} = 

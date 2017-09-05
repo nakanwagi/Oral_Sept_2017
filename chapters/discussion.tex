@@ -1,8 +1,7 @@
 %\mychapter{7}{Discussion}
-\section{Discussion/interpretation}
+\section{Discussion and future direction}
 In this section, first, we explain our observations based on our experimental
-results on synthetic and real-world data. We also justify our use of the l$_{1}$ norm for our distance measure.
-Finally, we discuss the strengths our model and suggest possible future directions of addressing some short comings of our model.
+results on synthetic data. We also justify our use of the l$_{1}$ norm for our distance measure. Finally, we suggest possible future directions of addressing some short comings of our approach.
 
 
 \subsection{Interpretation of our results}
@@ -11,27 +10,17 @@ While the differences are prominent, as revealed in the preceding plots, their
 statistical significance is as yet unknown. We regard this observation as a potentially exciting area for future investigation and believe it is worthwhile 
 to highlight several of the salient differences.\\
 
-For instance, in figure (), the output based on previous time shows that 
-the animal made about four laps around the  simulated track. This is not visible while using the firing rate.\\
 
-In addition, variability is apparent along the different trajectories taken by the animal around the track while using previous time data, whereas data based on the firing rate shows no such variability. The variability revealed by previous time data is an exciting area for future investigation.\\
+For instance, figure \ref{fig:Output-on-SimPrevtime} shows that diffusion maps with $l_{1}$ distance reveals that the animal made about 4 laps around the truck.
+We believe that this is due to the fact that previous time appears to capture the changes in spike timing, hence revealing distinct paths taken by the animal on each lap. We think that is is an exciting observation which may be very useful
+in anlyzing data sets in which absolute spike timing matters.\\
 
-Synthetic results based on using the l$_{1}$ distance in the diffusion maps algorithm appear to yield a perfect reconstruction of the simulated position of the animal compared to that using PCA. \\
 
-On the real-world results, we see that the portion of the circular truck reconstructed by the diffusion maps algorithm on previous time data is larger than that returned by PCA, which further emphasizes the exciting nature of our approach.\\
+Figure \ref{fig:Output-on-SimFR} shows that the circular truck reconstructed by PCA has sharp corners which suggest that the linear algorithm may not be
+suitable for our analysis. However, diffusion maps appears to trace out a more smooth circular simulated path. The inferiority for linear methods such as PCA
+is further demonstrated by the poor results in  \ref{fig:Output-on-SimPrevtime}.\\
 
-Finally, both the diffusion maps algorithm and PCA are unable to reconstruct the real-world circular truck based on firing rate data which shows that our approach of preprocessing data by looking the time since the previous spike, may be a possible worthwhile approach to analyzing spike train data from the rat hippocampus.
 
-\subsection{Strengths of our approach}
-First, preprocessing spike train data by forming new previous time vectors and using the diffusion maps algorithm with an appropriate metric provides a low dimensional model for the data which is independent of the labels of the neurons nor the positions of the place fields in space. 
-Second, since only a very small subpopulation of neurons is active at a particular moment, there is often a lot of missing information in the firing rate data provided by the experimentalist.
-In particular, this phenomenon corresponds to having gaps between 
-neighboring place fields within our simulated place field model. Nevertheless, sampling data from the previous time function provides information about neural activity even when a large portion of the neural population is inactive. 
-
-(To Duane: it looks like the point below negates what I just wrote above.
-Should I delete it?)
-In addition, using the diffusion maps algorithm does not require a dense sampling
-of the neural space like other non-linear methods do, such as Laplacian eigen maps.
 
 \subsection{Future directions}
 First, at the beginning of the experiment, there are no recorded spike times.
