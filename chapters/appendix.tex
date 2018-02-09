@@ -1,0 +1,239 @@
+\section{Linear algebra review}\label{SVD}
+\subsection{Definitions}
+
+
+\begin{Def}
+An $n\times n$ symmetric matrix $\Bm{A}$ is positive semidefinite (PSD) if the quadratic form
+\[
+\vect{x} \Bm{A} \vect{x}^{\top} \geq 0,\ \ \text{for all non-zero vectors} \ \ \vect{x} \in \R^{n}
+\]
+
+Given any $n\times n$ matrix $\Bm{A}$, the matrices $\Bm{A}\Bm{A}^{\top}$
+and $\Bm{A}^{\top}\Bm{A}$ are symmetric PSD.
+
+\end{Def}
+
+\begin{Def}
+Let $\R^{n \times m}$ denote the vector space of $n \times m$ matrices with real entries. Given any $n\times m$ matrix $\bm{A}$ with real entries, there exist orthonormal matrices $\bm{U} \in \R^{n \times n}$ and $\bm{V} \in \R^{m \times m}$ such that 
+$\bm{\displaystyle A = U \Sigma V^{\top}}$ with $\bm{\Sigma}$ = \text{diag}$(\sigma_{1}, \ldots, \sigma_{k})$ where  k = $\min(n, m)$ and
+ $\sigma_{1} \geq \sigma_{2} \geq \ldots \geq \sigma_{k} \geq 0$.
+The numbers $\sigma_{i}, 1\leq i\leq n$ are called the singular values of $\bm{A}$. 
+\end{Def}
+
+
+\subsection{Properties of SVD}
+Given any $n\times m$ real matrix $A$ of rank $r$, there exist matrices  $\bm{U} \in \R^{n \times r}$ and $\bm{V} \in \R^{r \times r}$ satisfying $\bm{U^{\top}U = V^{\top}V = I}$ such that $\bm{\text{A} = \text{U} \Sigma_{1} \text{V}^{\top}}$ with $\bm{\Sigma}_{1}$ = \text{diag}$(\sigma_{1}, \ldots, \sigma_{r})$ and $\sigma_{1} \geq \sigma_{2} \geq \ldots \geq \sigma_{r} > 0$.
+This factorization of $\bm{A}$ is called the truncated SVD of $A$.
+The rank of $A$ is equal to the number of non-zero singular values of $A$.
+If $\bm{U}$ and $\bm{V}$ are made up of column vectors so that  $\bm{U} = [\vect{u}_1, \ldots, \vect{u}_{r}]$ and $\bm{V} = [\vect{v}_{1}, \ldots, \vect{v}_{r}]$ then $\{ \vect{u}_1, \ldots, \vect{u}_{r} \}$  and $\{\vect{v}_{1}, \ldots, \vect{v}_{r} \}$ are called the left and right singular vectors of $A$ respectively. \\
+The matrix $A$ admits the SVD expansion 
+\[
+A = \sum_{i=1}^{r} \sigma_{i} \vect{u}_{i} \vect{v}_{i}^{\top}.
+\]
+The real numbers $\{\lambda_{1}, \ldots, \lambda_{r}\}$ where $\lambda_{i} = \sigma_{i}^{2}$ for all i = $1 , \ldots, r$ are the non-zero eigenvalues of both symmetric matrices $\bm{A^{\top}A}$ and $\bm{AA^{\top}}.$ The right singular vectors of $\bm{A}$ are the eigenvectors of $\bm{A^{\top}A}.$ The left singular vectors of $\bm{A}$ are the eigenvectors of $\bm{AA^{\top}}.$ The spectral decomposition of $\bm{A^{\top}A}$ is given by $\bm{A^{\top}A  = V D_{1} V^{\top}}$ and that of  $\bm{AA^{\top}}$ is given by  $\bm{AA^{\top}} = U D_{2} U^{\top}$ where $\bm{U}$ and $\bm{V}$ are the SVD factors upto a sign, $\bm{D}_{1}$ and $\bm{D}_{2}$ are diagonal matrices containing the r singular values of $A$.
+
+
+\section{Proximity measures}\label{proximity}
+
+\begin{Def}
+A proximity measure characterizes how close two objects are, using
+either a similarity or dissimilarity measure between them \cite{CoxT2000}.
+A similarity measure characterizes how similar two objects are while
+a dissimilarity measure or distance characterizes how dissimilar two objects are.
+\end{Def}
+
+
+\begin{Def}\label{distance}
+Let $X$ be a set of $n$ objects, $\{x_{1}, \dots, x_{n}\}$, that are not necessarily vectors. A distance, $d$, on $X$, is a real-valued  function
+$d: X \times X \rightarrow  \R$ which assigns to each pair of objects, (x$_{i}$, x$_{j}$), a real number, $d_{ij}$, satisfying two conditions, for all $i$ and $j$ from 1 to $n$. 
+\begin{itemize}
+\item [i)] $d_{ij} \geq 0$ and $d_{ij} = 0$ if and only if $i=j$
+\item [ii)] $d_{ij} = d_{ji}$
+\end{itemize}
+\end{Def}
+
+
+A metric is a distance function, $d$, which satisfies the triangle inequality:
+$d_{jk} \leq d_{ij} + d_{ik}, \ \ \text{for all}\ \ i,j,k$ 
+
+
+\begin{Def}
+A similarity measure $s: X \times X \rightarrow  \R$ is a function which assigns to each pair of objects, (x$_{i}$, x$_{j}$), a real number, $s_{ij}$, such that
+for all $i$ and $j$, we have:
+\begin{itemize}
+\item [i)]   $0 < s_{ij} \leq s_{ii}$ 
+\item [ii)]  $s_{ij} = s_{ji}$
+\end{itemize}
+\end{Def}
+
+The similarity measure, $s_{ij}$, can be obtained from a distance, $d_{ij}$, using any of the three operations: $s_{ij}$ = c - d$_{ij}$ or  d$_{ij}$ = 1/$s_{ij}$ - c, or $d_{ij} = s_{ii} + s_{jj} - 2s_{ij}$, where $c$ is a constant.\\
+
+A matrix of distances between pairs of objects, $D = (d_{ij}$), is called a distance matrix or dissimilarity matrix and that of similarities between pairs of objects, $S = (s_{ij}$), is called a similarity matrix.
+
+
+\section{Graph Laplacians and their properties} \label{graph laplacians}
+\begin{itemize}
+\item[1)] The unnormalized graph Laplacian $\Bm{L = D} - \Bm{W}$  of a connected, weighted,
+undirected graph $G$, with $n$ vertices is positive semidefinite and hence 
+has a basis of $n$ non-negative eigenvalues with corresponding  eigenvectors.
+\item[2)] The smallest eigenvalue of $\Bm{L}$ is $\vect{0}$ with corresponding eigenvector $\vect{1}$. 
+\item[3)]The second eigenvalue of $\Bm{L}$ is positive if and only if the graph G is connected.
+\end{itemize}
+
+
+There are two other types of graph Laplacians, namely the symmetric normalized
+graph Laplacian 
+\begin{equation}\label{normalizedLaplacian}
+\Bm{L}_{sym} = \Bm{D}^{-\frac{1}{2}} \Bm{L} \Bm{D}^{-\frac{1}{2}} =
+\Bm{I} - \Bm{D}^{-\frac{1}{2}} \Bm{W} \Bm{D}^{-\frac{1}{2}}
+\end{equation}
+and 
+the graph Laplacian related to a random walk on a graph which is not symmetric
+\begin{equation}\label{RandomWalk}
+\Bm{L}_{rw} = \Bm{D}^{-1}\Bm{L} = \Bm{I} - \Bm{D}^{-1}\Bm{W}
+\end{equation}
+where $\Bm{D}$ is the degree matrix and $\Bm{W}$ is the similarity matrix.\\
+
+
+
+\section{Random walk on a graph}\label{random walk}
+Let $G=(V,E)$ be a connected, weighted and undirected graph with a set of $n$ vertices, $V = \{v_{1}, \dots, v_{n} \}$.
+A stochastic process that jumps from one vertex, $v_{i}$, to another vertex, $v_{j}$, on the graph, $G$, is called a random walk on $G$.
+Denote the random walk on $G$ by the set $\{X(t)\}_{t \in \mathbb{N}}$.
+A matrix $\Bm{M}$ is called a stochastic transition matrix or a transition probability matrix, if the entries in each row of $\Bm{M}$ are non-negative and add up to one.
+We require that the transition probability of jumping from vertex $v_{i}$
+to vertex $v_{j}$ on $G$ is proportional to the edge weight, $w_{ij}$, between the two vertices. 
+Let $p_{ij} = \text{Prob} \left(X(t+1) = j | X(t) = i \right)$ be the transition probability of jumping from vertex $v_{i}$ to vertex $v_{j}$ in one step. Define $p_{ij}$ by
+\begin{equation}
+p_{ij}   = \frac{w_{ij}}{d_{i}}
+\end{equation}
+where, $d_{i}$,  denotes the degree of the $i^{th}$ vertex as in \eqref{degree}, and 
+set $\Bm{P} = (p_{ij})$. Since the degree matrix $\Bm{D} = \text{diag}(d_{1}, \ldots, d_{n})$, contains the sum of the $i^{th}$ row of the adjacency matrix, $\Bm{W}$,
+we know that the matrix 
+\begin{equation}\label{transitmatrix}
+\Bm{P} = \Bm{D}^{-1}\Bm{W} 
+\end{equation}
+is indeed a transition probability matrix. This follows from the fact that $d_{i} > 0$ (because G is connected) and $w_{ij} \geq 0$ since it is a similarity. Moreover, the definition of $\Bm{D}$ implies that the rows of $\Bm{P}$ sum to one. 
+$\Bm{P}$ is a probability transition matrix implies that it satisfies
+the equation $\Bm{P} \vect{1} = \vect{1}$ where $\vect{1}$ is the constant vector of all ones. Thus 1 is an eigenvalue of $\Bm{P}$ with corresponding constant eigenvector $\vect{1}$.
+
+Observe that $\Bm{P}$ is precisely the random walk graph Laplacian, $\Bm{L}_{rw}$, in equation \eqref{RandomWalk}.
+Given that the random walk starts at node $i$, so that $X(0) = i$, the probability
+that the random walk is at vertex $v_{j}$ after t steps is given by
+\[
+\text{Prob}\left( X(t) = j | X(0) = i  \right) = p_{ij}^{t}
+\]
+Thus the probability distribution of the random walk at time t, given that it started from vertex $v_{i}$ is given by the  $i^{th}$ row of $\Bm{P}^{t}$, i.e.
+\begin{equation}\label{pdftime}
+\text{Prob}\left( X(t) | X(0) = i  \right) = \vect{1}^{\top}\Bm{P}^{t} = \Bm{P}^{t}(i, :)
+\end{equation}
+However, we cannot apply spectral decomposition to $\Bm{P}$, because it is
+not symmetric hence not PSD.
+This requires a normalization using the adjacency matrix, $\Bm{W}$, in order
+to get a PSD similarity matrix $\Bm{S}$.
+
+The eigenvalues, $\lambda_{k}$, of $\Bm{P}$ satisfy $\abs{\lambda}_{k} < 1$
+for all $k$.
+
+\section{Diffusion maps algorithm}\label{diffusion maps}
+The diffusion maps algorithm is given by the following steps.
+\begin{itemize}
+\item[1)] Given an $n \times n$ distance matrix $D = (d_{ij}$), build a graph $G = (V,E)$ on the data by identifying the each data point
+as a vertex $v_{i}$ from the vertex set, $V = \{v_{1}, \ldots, v_{n}\}$, on  $G$.
+\item[2)] Compute the similarity matrix or weight matrix, $\bm{W} = (w_{ij})$, between the vertices $v_{i}$ using weights
+\[
+w_{ij} = e^{-\dfrac{\text{dist}^{2}(x_{i}, x_{j})}{2\sigma^2}} 
+= e^{-\dfrac{d_{ij}^{2}}{2\sigma^2}}
+\] 
+\item[2a)] The weight matrix, $\Bm{W}$ can be any PSD kernel (similarity) and $d_{ij}$ is any distance appropriate for the data. The bandwidth or tuning parameter, $\sigma$ restricts transitions between points to a $\sqrt{\epsilon}$ neighborhood.
+\item[2b)] Classically, the diffusion maps algorithm uses Euclidean distance 
+$d_{ij} = \norm{x_{i} - x_{j}}^{2}_{2}$ in the Gaussian kernel above.
+\item[3)] Compute degree matrix $\Bm{D} = \text{diag}(d_{1}, \ldots, d_{n})$
+where $d_{i}$ is the degree of the $i^{th}$ node.
+\item[4)] Define the random walk on the graph by specifying the transition probabilities, defining 
+\[
+p_{ij} = \frac{w_{ij}}{d_{i}}.
+\]
+\item[5)] Obtain the random walk graph Laplacian or transition probability
+matrix $\Bm{P}$ by defining 
+\begin{equation}\label{transit} 
+(p_{ij}) = \Bm{P} = \Bm{D}^{-1}\Bm{W}.
+\end{equation}
+
+\item[6)] Since $\Bm{P}$ is not symmetric, normalize \eqref{transit}
+using $\Bm{D}$ to obtain a PSD similarity matrix S given by
+\begin{equation}\label{simPSD}
+\Bm{S} = \Bm{D}^{\frac{1}{2}}\Bm{P}\Bm{D}^{\frac{-1}{2}} = \Bm{D}^{-\frac{1}{2}}\Bm{W}\Bm{D}^{\frac{-1}{2}}. 
+\end{equation} 
+
+\item[7)] Apply spectral decomposition to $\Bm{S}$ in \eqref{simPSD}, write
+\begin{equation}
+\Bm{S} = \Bm{V}\bm{\Sigma}\bm{V^{\top}},
+\end{equation}
+and order the eigenvalues, $\lambda_{1}\geq \lambda_{2} \geq \ldots \geq \lambda_{n}$, where,  
+$\bm{\Sigma} = \text{diag}(\lambda_{1}, \ldots, \lambda_{n})$. Write 
+$\Bm{S} = [\vect{v}_{1}, \ldots, \vect{v}_{n}].$
+
+\item[8)] From \eqref{simPSD}, write 
+
+\[\Bm{P} = (\Bm{D}^{-\frac{1}{2}}) \Bm{S} (\Bm{D}^{\frac{1}{2}} ) = 
+ (\Bm{D}^{-\frac{1}{2}} \Bm{V}) \bm{\Sigma} (\Bm{D}^{\frac{1}{2}} \Bm{V} )^{\top}.
+\] 
+\item[9)] Let $\bm{\Phi} = \Bm{D}^{-\frac{1}{2}} \Bm{V}  = [\phi_{1}, \ldots, \phi_{n}]$ and 
+$\bm{\Psi} = \Bm{D}^{\frac{1}{2}} \Bm{V} = [\psi_{1}, \ldots, \psi_{n}] $
+to get  
+\[\Bm{P} = \bm{\Phi \Sigma \Psi^{\top}}.
+\]
+The bases $\bm{\Phi}$ and $\bm{\Psi}$ are a biorthorgonal system, and hence satisfy
+$ \bm{\Phi}\bm{\Psi}^{\top} =  \bm{\Phi}^{\top}\bm{\Psi}  = \bm{I}_{n \times n},$
+which implies that $\phi_{j}^{\top}\psi_{k} = \delta_{ij}$.
+\item[10)] Observe that  $[\phi_{1}, \ldots, \phi_{n}]$ and $[\psi_{1}, \ldots, \psi_{n}]$ are the right and left singular vectors of $\Bm{P}$, respectively.
+Hence we can write for any time $t$,
+\begin{equation}\label{expansion}
+ \bm{P}^{t} = \bm{\Phi \Sigma^{t} \Psi^{\top}} = \displaystyle \sum_{k=1}^{n} \lambda_{k}^{t} \phi_{k} \psi_{k}^{\top}.
+\end{equation} 
+
+\item[11)] Equation \eqref{expansion} shows the expansion of $\bm{P}^{t}$ 
+in terms of  the basis vectors $\{\psi_{k}\}$, 
+
+thus by the observation in equation \eqref{pdftime}, it follows that the diffusion map for the $i^{th}$ vertex $v_{i}$ is given by
+
+$$ v_{i} \mapsto \bm{P}^{t}(i,:) = \begin{bmatrix}
+         \lambda_{1}^{t}\phi_{1}(i)\\
+         \lambda_{2}^{t}\phi_{2}(i)\\
+         \vdots\\
+         \lambda_{n}^{t}\phi_{n}(i)
+        \end{bmatrix} .$$
+        
+\item [12)] Since $\abs{\lambda_{k}} < 1$, for a sufficiently high power of $t$,
+most $\lambda_{k}^{t}$ are very small and hence can be discarded.
+Also $\Bm{P}\vect{1} = \vect{1}$ implies that the first constant vector
+yields a trivial solution and can be discarded.
+Hence a diffusion map $\phi_{t}$ for a embedding the $i^{th}$ vertex $v_{i}$ of a graph $G$ in  low dimension $p << n$ is the map 
+$$\phi_{t}(v_{i}) = \begin{bmatrix}
+         \lambda_{2}^{t}\phi_{1}(i)\\
+         \lambda_{3}^{t}\phi_{2}(i)\\
+         \vdots\\
+         \lambda_{p+1}^{t}\phi_{p+1}(i)
+        \end{bmatrix} .$$
+\item[13)] The diffusion distance between two probability distributions of random
+walks on a graph after t steps is related to Euclidean distance as follows:
+For any vertices $v_{k}$ and $v_{m}$ on the graph, we have that
+\end{itemize}
+
+
+\begin{equation}\label{diffusionDistance}
+\norm{\phi_{t}(v_k) - \phi_{t}(v_m)}_{2}^{2} = 
+\displaystyle \sum_{j=1}^{n} \frac{1}{d_{i}} 
+[ \text{Prob}\left( X(t) = j | X(0) = k \right) -  \text{Prob}\left( X(t) = j | X(0) = m \right) ]^{2}
+\end{equation}
+
+where $d_{i}$ are the degrees of the vertices.\\
+
+
+
+
+
+
+
+

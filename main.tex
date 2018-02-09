@@ -5,6 +5,7 @@
 \usepackage[margin=1in]{geometry}
 %packages for typing maths stuff
 \usepackage{amsfonts, amsmath, amssymb, latexsym, mathrsfs}
+\usepackage{lipsum}
 
 
 % package for Maths tools
@@ -88,6 +89,7 @@
 
 
 %\newtheorem ---a command used to define theorems, lemmas, definitions and corollaries.
+%\theoremstyle{plain}
 \newtheorem{Def}{Definition}
 \newtheorem{Thm}{Theorem}
 \newtheorem{Lem}{Lemma}
@@ -104,6 +106,9 @@
 \DeclareMathOperator{\R}{\mathbb{R}} %real number
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+%package for an appendix
+\usepackage[toc,page]{appendix}
 
 
 %start writing the content in here
@@ -162,6 +167,12 @@
 \bibliographystyle{unsrt}
 
 
+\pagebreak
+
+
+\appendix
+
+\input{chapters/appendix}
 
 
 \end{document}

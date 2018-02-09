@@ -1,7 +1,0 @@
-\contentsline {section}{\numberline {1}Big picture}{1}
-\contentsline {section}{\numberline {2}Biological background}{1}
-\contentsline {subsection}{\numberline {2.1}Structure of a neuron}{1}
-\contentsline {subsection}{\numberline {2.2}Membrane potential}{1}
-\contentsline {subsection}{\numberline {2.3}Generation of an action potential}{2}
-\contentsline {subsection}{\numberline {2.4}Measuring Neurons.}{3}
-\contentsline {subsection}{\numberline {2.5}Point Processes}{4}
