@@ -1,43 +1,45 @@
 
 \subsection{Spike train metrics}
+So far, the dimensionality reduction algorithms we have reviewed require a distance matrix
+as an input. Since our data consists of spike trains, we need a measure of quantifying how 
+similar or dissimilar two spike trains are.
+A common approach for quantifying neuronal response variability is through specification of a  similarity or dissimilarity measure between pairs of spike train data \cite{Brown2004, Victor1996, Victor1998,Rossum2001,houghton2010measuring}. In line with conclusions reached by Victor and Purpura \cite{Victor1996, Victor1998}, and van Raussum \cite{Rossum2001}, a short distance between two spike trains approximately represents similar neuronal inputs while a large distance between spike trains roughly represents divergence between different neuronal inputs.\\
 
-In the thus section, we review two previous approaches for analyzing response variability using spike train dissimilarity measures which do not require binning of spikes. In those approaches, a distance measure is used to quantify the dissimilarity between a new spike train and a reference set of spike trains corresponding to known stimuli. In the cost-based metrics,
-the distance measure is applied directly to a pair of given spike trains whereas in the Van Rossum metrics, the spike trains are first mapped to continuous functions, and then the distance is computed between the transformed spike trains. Our current approach does not assume knowledge of any underlying stimuli.\\
-
-A common approach for quantifying neuronal response variability is through specification of a  similarity or dissimilarity measure between pairs of spike train data \cite{Brown2004, Victor1996, Victor1998,Rossum2001,houghton2010measuring}.
-This raises the need for the notion of distance defined in the previous section. In line with conclusions reached by Victor and Purpura \cite{Victor1996, Victor1998}, and van Raussum \cite{Rossum2001}, a short distance between two spike trains approximately represents similar inputs while a large distance between spike trains roughly represents divergence between different inputs.
 How spike trains encode information is not known. In certain instances, information may be encoded through the precise time at which spikes occur (temporal coding) where as in others, it is encoded through the number of spikes in a given interval (rate coding) \cite{Abbott2001}.
-As a remedy for loss of temporal information due to trial averaging, the observation duration is often divided into non-over lapping time intervals called bins. As long as the size of the bin is larger than the average inter-spike interval (ISI), the mean of binned spike trains provides a good estimate of the instantaneous firing rate \cite{Brown2004}. The shortcoming of spike binning in studying temporal patterns is that two different spike trains often yield identical binning patterns whenever spikes fall in the same bin. Several spike train measures have been designed to overcome the problem of binning. For instance, the edit-length metric \cite{Victor1996, Victor1998} is based on minimizing the cost of transforming one spike train into another by deleting, inserting or shifting a spike. Another measure, the van Rossum distance \cite{Rossum2001,houghton2010measuring}, refers to any metric induced on the space of spike trains by transforming a spike train into a continuous function using a smoothing kernel and then using the standard $L^2$ distance on the corresponding function space as the dissimilarity measure. An additional measure, the the correlation-based distance \cite{Schreiber2003} is based on filtering the spike trains using a Gaussian kernel and then using the normalized dot product between  spike trains as a  similarity measure.
-The vector space viewpoint uses van Rossum metrics while the point-process viewpoint uses metrics such as the edit-length distance \cite{Victor2005}. 
-Metrics based on the former are often Euclidean while those based on the latter are typically non-Euclidean \cite{Aronov2004}.\\
+As a remedy for loss of temporal information due to trial averaging, the observation duration is often divided into non-over lapping time intervals called bins. The shortcoming of spike binning in studying temporal patterns is that two different spike trains often yield identical binning patterns whenever spikes fall in the same bin.\\
 
+Several spike train measures have been designed to overcome the problem of binning. For instance, the edit-length metric \cite{Victor1996, Victor1998} is based on minimizing the cost of transforming one spike train into another by deleting, inserting or shifting a spike. Another measure, the van Rossum distance \cite{Rossum2001,houghton2010measuring}, refers to any metric induced on the space of spike trains by transforming a spike train into a continuous function using a smoothing kernel and then using the standard $L^2$ distance on the corresponding function space as the dissimilarity measure. An additional measure, the the correlation-based distance \cite{Schreiber2003} is based on filtering the spike trains using a Gaussian kernel and then using the normalized dot product between  spike trains as a  similarity measure.
+We only review the cost-based and Van Rossum spike train metrics. Both metrics allow one to control the sensitivity to differences in spike timing versus spike count.
 
 \subsubsection{Cost-based spike metrics}
-The Victor and Purpura (VP) metric \cite{Victor1996, Victor1998}, denoted
-$D^{\text{spike}}[q]$, where $q$, is defined below, is defined as the minimum cost of transforming one spike train into another, using a set of three elementary operations:
+The Victor and Purpura (VP) metric \cite{Victor1996, Victor1998}, is defined as the minimum cost of transforming one spike train into another, using a set of three elementary operations:
 deleting a spike, inserting a spike and moving or shifting a spike. Define a metric $d$ between spike trains $A$ and $B$ as follows:
 \begin{equation}\label{VPmetric}
-\text{d(A, B)} = \displaystyle \min_{S(T_{0}, T_{n})} \sum_{k=0}^{n-1} c_{q}(T_{k}, T_{k+1}). 
+\text{$d^{VP}$(A,B;q)} = \displaystyle \min_{S(A,B)} \sum_{k} c_{q}(T_{k}, T_{k+1}). 
 \end{equation} 
-Then the VP metric, D$^{\text{spike}}[q]$, is the spike train metric in \eqref{VPmetric}, together with the three elementary operations above.
-The quantity c$_{q}(T_{k}, T_{k+1})$ denotes the cost of transforming a spike train $T_{k}$ to a spike train $T_{k+1}$, where the minimum is taken over the set S($T_{0}, T_{n}$), of all possible sequences of elementary operations that transform a spike train $A$ to a spike train $B$.
-In the VP metric, the cost of inserting or deleting a spike is set to 1.
-The quantity D$^{\text{spike}}[q]$ expresses the relative importance between
-spike count and spike timing.
-To see this, consider two spike trains $T_{A}$ and $T_{B}$, each containing 
-one spike occurring at time $t_{m}^{A}$ in $T_{A}$ and at time $t_{n}^{B}$ in $T_{B}$. Let $q$ denote the cost (in 1/seconds) of shifting a spike, to perfectly align the two spike trains.
-Then \eqref{VPmetric} implies that we can write 
+Then the VP metric is the spike train metric in \eqref{VPmetric}, together with the three elementary operations above.
+The quantity c$_{q}(T_{k},T_{k+1})$ denotes the cost of transforming a spike train $T_{k}$ to a spike train $T_{k+1}$. The minimum is taken over the set S($A,B$), of all possible sequences of spike trains $\{T_{k}\}$, obtained from elementary operations, that transform the spike train $A$ to the spike train $B$.
+In the VP metric, the cost of inserting or deleting a spike is set to 1.\\
+
+The non-negative quantity $q$ denotes the cost (in 1/seconds) of shifting a spike, specifying the relative cost of the shifting operation compared to inserting or deleting. In this way, one can use $q$ to specify the relative cost of discrepancies in spike count versus spike timing.
+The effect of $q$ on the relative importance of spike timing is illustrated by a simple example 
+of two spike trains $A_1 = \{t^A\}$ and $B_1 = \{t^B\}$, each containing one spike.
+In this case \eqref{VPmetric} implies that we can write 
 \begin{align*}
-d(T_{A}, T_{B}) &= \displaystyle \min \{ q\abs{t_{m}^{A} - t_{n}^{B}},  2 \}\\
+d^{VP}(A_1,B_1;q) &= \displaystyle \min \{ q\abs{t^{A} - t^{B}},  2 \}\\
   &= \begin{cases} 
-       q\abs{t_{m}^{A} - t_{n}^{B}} & \text{if} \quad  \abs{t_{m}^{A} - t_{n}^{B}} < 2/q \\
+       q\abs{t^{A} - t^{B}} & \text{if} \quad  \abs{t^{A} - t^{B}} < 2/q \\
 2 & \text{otherwise}.        
 \end{cases}
 \end{align*}
-Consequently, if the two spike times differ by an amount less than $2/q$, then the cost of shifting a spike varies linearly with the difference between the two spike times.
-Next, observe that if $q=0$, then the distance between two spike trains does not depend on spike timing (shifting a spike has zero cost) but instead depends on the number of spikes in each spike train. Thus deleting the spike from $T_{A}$ and inserting a new spike would suffice to transform $T_{A}$ to $T_{B}$.
-If $q$ is very small and positive, then shifting a spike in time does not significantly affect the distance between two spike trains. Hence the precise timing of a spike does not matter and the algorithm is insensitive to the parameter $q$.
-However, if $q$ is very large and there is  a need to shift a spike in time, then the distance between the two spike trains increases and in this case, the algorithm is sensitive to spike timing. The VP metric was initially designed for analysis of spike trains corresponding to a single neuron, obtained on multiple presentations of different known stimuli. Based on Victor and Purpura's work, spike trains are considered to have similar post synaptic effects if they are similar, as measured by $D^{\text{spike}}[q]$.
+Consequently, if the two spike times differ by an amount less than $2/q$, then the cost of shifting a spike varies linearly with the difference between the two spike times. Otherwise
+the cost 2, of deleting or inserting a spike is cheaper. In the extreme case when $q=0$, the distance depends only on the number of spikes in each spike train and not on spike timing.
+Hence for our simple example of spike trains with one spike each, $d(A_1,B_1) = 0.$
+If $q$ is very small, then shifting a spike in time does not significantly affect the distance between two spike trains. Hence the precise timing of a spike does not matter and the distance is
+essentially a measure of difference in spike count.
+However, if $q$ is very large then small differences in spike timing lead to large distances so that the algorithm is sensitive to spike timing.\\
+
+The VP metric was initially designed for analysis of spike trains corresponding to a single neuron, obtained on multiple presentations of different known stimuli. Based on Victor and Purpura's work, spike trains are considered to have similar post synaptic effects if they are similar, as measured by $\text{$d^{VP}$(A,B;q)}$.
 
 
 
@@ -75,9 +77,8 @@ and the Laplace kernel
 K(t) = \frac{1}{\tau}e^{-\dfrac{\abs{t}}{\tau}}  
 \]
 where $\sigma, \Delta t, \tau$ are positive free parameters, referred to as the bandwidth, and control the width of the kernels.
-The kernels can be viewed as representing the effect of a given spike across time. The kernel bandwidths determine how much variability is allowed among spike times and how this variability is incorporated into the distance measure.
-In general, when the bandwidth is large, the corresponding metrics approximate
-the spike count rate. On the other hand, when the band width is small, the corresponding metrics are sensitive to changes in the firing rate even for small distances in spike times.
+The kernels can be viewed as representing the effect of a given spike across time. The kernel bandwidths determine how much variability in the spike times is incorporated into the distance measure. In general, when the bandwidth is large, the corresponding metrics approximate
+the spike count rate. On the other hand, when the band width is small, the corresponding metrics are sensitive to small changes in spike times.
 
 
 
