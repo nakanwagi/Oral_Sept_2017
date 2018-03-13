@@ -1,7 +1,7 @@
 %\mychapter{4}{Dimensionality Reduction}
 
 \subsection{Dimensionality reduction}\label{spectral decomp}
-In this section, we review some linear and non-linear dimensionality reduction techniques. We focus on spectral dimensionality reduction methods where the low dimensional model is obtained from spectral decomposition of an $n \times n$ positive semidefinite (PSD) proximity matrix (see appendices \ref{SVD} and \ref{proximity}). We start by defining dimensionality reduction and outline steps of spectral dimensionality reduction. Next, we give a brief description of PCA and the diffusion maps algorithm for dimensionality reduction. In later sections, we compare the performance of PCA and diffusion maps on our spike train data set.
+In this section, we review some linear and non-linear dimensionality reduction techniques. We focus on spectral dimensionality reduction methods where the low dimensional model is obtained from spectral decomposition of an $n \times n$ positive semidefinite (PSD) proximity matrix (see appendices \ref{SVD} and \ref{proximity}). We start by defining dimensionality reduction and outlining steps of spectral dimensionality reduction. Next, we give a brief description of PCA and the diffusion maps algorithm for dimensionality reduction. In later sections, we compare the performance of PCA and diffusion maps on our spike train data set.
 
 
 \subsubsection{Overview of spectral dimensionality reduction}
@@ -43,8 +43,8 @@ $\textbf{Y} = \textbf{V}^{\top}\textbf{X}$.
 \subsubsection{Non-linear dimensionality reduction}
 
 Methods like PCA assume that the underlying manifold on which the data lie is globally linear. This implies that the shortest distance between any two points while traveling along the data manifold is a straight line.
-However, any dimensionality reduction technique must preserve the underlying geometry of the data manifold. In particular, points that are close together in the high dimensional space should be mapped closer to each other in the low dimensional space where as points that are far apart in the high dimensional space must remain far apart in the embedded space. In particular, we ignore long distances in the embedded space. This idea of preserving relative distances between points
-in both the input space and embedded space is based on the multidimensional scaling (MDS) approach.
+However, any dimensionality reduction technique must preserve the underlying geometry of the data manifold. In particular, points that are close together in the high dimensional space should be mapped closer to each other in the low dimensional space where as points that are far apart in the high dimensional space must remain far apart in the embedded space. To accomplish this goal, we must ignore long distances in the embedded space, as long distances computed in the embedded space
+may be the result of shortcuts that ignore the non-linear geometry of the manifold.
 Figure \ref{fig:Swiss roll} illustrates the limitations of linear techniques on highly curved manifolds like the swiss roll and helps to highlight the importance of non-linear dimensionality reduction techniques.
 
 \begin{figure}[h]
@@ -57,9 +57,8 @@ Figure \ref{fig:Swiss roll} illustrates the limitations of linear techniques on 
 
 
 \subsubsection{Multidimensional scaling (MDS)}
-Assume that an $n\times n$ matrix, $\Bm{B}$=(b$_{ij}$), of pair-wise distances
-(not necessarily Euclidean) or similarities (see appendix \ref{proximity}), $\Bm{S} = (s_{ij})$, between data points, $\{\vect{x}_{1}, \ldots, \vect{x}_{n} \}$, is given and $n$ is large.
-Multidimensional scaling (MDS) \cite{CoxT2000, MardiaK.V1979Ma} considers the the problem of finding a low dimensional model of the high dimensional data by searching for a configuration of $n$ points $\{\vect{y}_{1}, \ldots, \vect{y}_{n} \}$ in $\R^{\text{l}}, \text{l} \ll \text{n}$, where each $\vect{y}_{i}$ is a low dimensional representation of $\vect{x}_{i}$, and such that relative pair-wise distances between points are preserved. Specifically, the Euclidean distances between the configuration points, $\norm{\vect{y}_{i} - \vect{y}_{j}}_{2}$, must be as ``close" as possible to  the given distances, b$_{ij}$, that is, $\norm{\vect{y}_{i} - \vect{y}_{j}}_{2} \approx \text{b}_{ij}$, for all $1 \leq i, j \leq n$.
+This idea of preserving relative distances between points in both the input space and embedded space is based on the multidimensional scaling (MDS) approach. Assume that an $n\times n$ matrix, $\Bm{B}$=(b$_{ij}$), of pair-wise distances (not necessarily Euclidean) or similarities (see appendix \ref{proximity}), $\Bm{S} = (s_{ij})$, between data points, $\{\vect{x}_{1}, \ldots, \vect{x}_{n} \}$, is given and $n$ is large.
+MDS \cite{CoxT2000, MardiaK.V1979Ma} considers the the problem of finding a low dimensional model of the high dimensional data by searching for a configuration of $n$ points $\{\vect{y}_{1}, \ldots, \vect{y}_{n} \}$ in $\R^{\text{l}}, \text{l} \ll \text{n}$, where each $\vect{y}_{i}$ is a low dimensional representation of $\vect{x}_{i}$, and such that relative pair-wise distances between points are preserved. Specifically, the Euclidean distances between the configuration points, $\norm{\vect{y}_{i} - \vect{y}_{j}}_{2}$, must be as ``close" as possible to  the given distances, b$_{ij}$, that is, $\norm{\vect{y}_{i} - \vect{y}_{j}}_{2} \approx \text{b}_{ij}$, for all $1 \leq i, j \leq n$.
 
 \subsubsection{Spectral non-linear dimensionality reduction}
 Spectral non-linear dimensionality reduction (SNLDR) techniques are a 
@@ -82,11 +81,11 @@ The unnormalized graph Laplacian is the  matrix $\Bm{L = D} - \Bm{W}$.
 We can approximate small distances between points in the input space using the usual Euclidean distance between nearby points in the embedded space as in linear approaches. However, long distances in the input space are not necessarily equal to long distances in the feature space (see figure \ref{fig:Swiss roll}). One way to address this problem is to ignore long distances in the embedded space by building a graph $G = (V, E)$ on the data. We ignore long distances by placing an edge $e_{ij} \in E$ only between neighboring vertices $(v_i, v_j) \in V$. The result is called 
 a neighborhood graph.\\
 
-A particular type of neighborhood graph is the $\epsilon-$neighborhood graph constructed as follows. Suppose we are given a data set, $\Bm{X} =  \{\vect{x}_{1}, \ldots, \vect{x}_{n} \}$ and assume that the pairwise distances, $b_{ij} = \text{dist}(\vect{x}_{i}, \vect{x}_{j})$, between points are known. Identifying each data point with a vertex $v_{i} \in V$, on a graph $G = (V, E)$, we can build a weighted  undirected graph on the data by placing an edge $e_{ij} \in E$, between vertices $(v_i, v_j) \in V$, if $x_i$ and $x_j$ are sufficiently close. We weight the edge $e_{ij} \in E$, by a similarity measure $s_{ij}$, derived from the given distances (see appendix \ref{proximity}). The resulting $\epsilon-$nearest neighborhood graph represents the local distances among points.\\
+A particular type of neighborhood graph is the $\epsilon-$neighborhood graph constructed as follows. Suppose we are given a data set, $\Bm{X} =  \{\vect{x}_{1}, \ldots, \vect{x}_{n} \}$ and assume that the pairwise distances, $b_{ij} = \text{dist}(\vect{x}_{i}, \vect{x}_{j})$, between points are known. Identifying each data point with a vertex $v_{i} \in V$, on a graph $G = (V, E)$, we can build a weighted  undirected graph on the data by placing an edge $e_{ij} \in E$, between vertices $(v_i, v_j) \in V$, if $x_i$ and $x_j$ are sufficiently close i.e., dist$(x_i, x_j) < \epsilon$. We weight the edge $e_{ij} \in E$, by a similarity measure $s_{ij}$, derived from the given distances (see appendix \ref{proximity}). The resulting $\epsilon-$nearest neighborhood graph represents the local distances among points.\\
 
 For diffusion maps, the neighborhood graph is modified to a fully connected graph, but where the weights are approximately zero whenever the distance between data points is large.
 To do this, we use a similarity function that captures local neighborhood relations between points and at the same time decays to zero so fast that we do not have to truncate the weights. In particular, in diffusion maps, we use the similarity function 
-$w_{ij} = e^{- \frac{\text{dist}^{2}(\vect{x}_i, \vect{x}_j)}{2 \sigma^2}}$. 
+$$w_{ij} = \exp \{- \frac{\text{dist}^{2}(\vect{x}_i, \vect{x}_j)}{2 \sigma^2} \}.$$ 
 In this way, $\sigma$ plays the role of $\epsilon$, in that it specifies the width of the neighborhood.
 
 \subsubsection{Basic idea of the diffusion maps algorithm}
@@ -95,7 +94,7 @@ The diffusion maps algorithm consists of several steps which are outlined in app
 \begin{itemize}
 \item[1)] Given the pairwise distance dist$(\vect{x}_i, \vect{x}_j)$, compute the weight matrix 
 $\Bm{W} = (w_{ij})$, between data points by setting
-$w_{ij} = \displaystyle e^{- \frac{\text{dist}^{2}(\vect{x}_i, \vect{x}_j)}{2 \sigma^2}}$.
+$$w_{ij} = \displaystyle \exp \{- \frac{\text{dist}^{2}(\vect{x}_i, \vect{x}_j)}{2 \sigma^2} \}.$$
 \item[2)] Let $d_{i} = \sum_{j = 1}^{n} w_{ij}$ be the degree of the $i^{th}$ node and compute the degree matrix $\Bm{D} = \text{diag}(d_{1}, \ldots, d_{n})$.
 \item[3)] Define a random walk on the graph of the data (see appendix \ref{random walk}) by specifying $p_{ij} = \displaystyle \frac{w_{ij}}{d_{i}}$, the probability of going from vertex $v_i$ to $v_j$ in one-step. Organize the pair-wise transition probabilities in an $n \times n$ 
 transition probability matrix $\Bm{P} = \Bm{D}^{-1}\Bm{W}$ with $\Bm{P} = (p_{ij})$.

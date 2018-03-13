@@ -88,17 +88,32 @@ fires an action potential (spike) \cite{Dayan2001}.
 \subsection{Raster plot}
 A raster plot is a graphical representation of spike trains. In this graph,
 a short vertical line is used to show the time at which a spike occurred
-in a recorded voltage trace.
-Figure \ref{fig:Raster} shows a raster plot of real-world data
+in a recorded voltage trace. Figure \ref{fig:RasterPlot}(a) shows a raster plot of real-world data
 from the CA1 region of the rat hippocampus. The y-axis represents the neuron
 label while the x-axis represents spike times.\\
- \begin{figure}[H]
-  \centering
-    \includegraphics[scale=0.5]{/home/tesylvia/Oral_Sept_2017/images/RasterPlot.png}
-     \caption{Raster plot for real-world data from a rat hippocampus provided by the Redish Lab}
-     %label the figure so latex can reference it
-      \label{fig:Raster}
-\end{figure}
+
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.8\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{/home/tesylvia/Oral_Sept_2017/images/RasterPlot_large.pdf}
+            \caption[Raster plot]%
+            {{\small Raster plot for 32 neurons from the CA1 region of the rat hippocampus}}    
+            \label{fig:Cell activity}
+        \end{subfigure}
+        
+        \vskip\baselineskip
+        \begin{subfigure}[b]{0.8\textwidth}   
+            \centering 
+            \includegraphics[width=\textwidth]{/home/tesylvia/Oral_Sept_2017/images/burstNeuronSmall.pdf}
+            \caption[]%
+            {{\small Firing activity of 32 neurons whose raster plot is shown in (a)}}    
+            \label{fig:Prevtime}
+        \end{subfigure}
+        \caption[Raster plot and bursting neuron]
+        {\small Raster plot (a) and firing activity (b) of 32 neurons from the CA1 region of the rat hippocampus based on real-world data provided by the Redish Lab.} 
+        \label{fig:RasterPlot}
+  \end{figure}
 
 The goal of our analysis is to investigate the relationship between
 spike trains (neural activity) and other variables such as stimuli and location.

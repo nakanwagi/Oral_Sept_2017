@@ -5,7 +5,7 @@
 \subsection{Our framework}
 
 We propose a method of pre-processing spike times by looking at the time since the previous spike, which we refer to as the previous time. 
-Preliminary simulations reveal that previous time vectors capture changes in spike timing during the four and a half laps taken by the animal around a simulated circular truck where as using the traditional firing rate makes no such distinction. We use the diffusion maps algorithm \cite{coifman2006diffusion}, together with the $l_{1}$ distance, to obtain a low dimensional model of the simulated data.\\
+Preliminary simulations reveal that previous time vectors capture changes in spike timing during the four and a half laps taken by the animal around a simulated circular truck whereas using the traditional firing rate makes no such distinction. We use the diffusion maps algorithm \cite{coifman2006diffusion}, together with the $l_{1}$ distance, to obtain a low dimensional model of the simulated data.\\
 
 %The measure of ``goodness" of our low dimensional model is done by comparing the mutual information  \cite{quiroga2009extracting, Dayan2001}  between the resultant eigen vectors and and the position of the animal. 
 
@@ -25,17 +25,11 @@ $\displaystyle  \{t_{i}^{j}\} =  \{t_{1}^{j}, ....., t_{n_{i}}^{j} \} $, represe
 
 
 \subsubsection{Preprocessing raw spike train data}
-We pre-process the raw spike trains using two methods.
-In the first method, the raw spike trains are smoothed with a Gaussian kernel to obtain the firing rate, as outlined in section 3.1. In the second method, we compute the previous time as introduced in section 4.1.\\
+We pre-process the raw spike trains using two methods: In the first method, the raw spike trains are smoothed with a Gaussian kernel to obtain the firing rate (see section 3.4.2). In the second method, we compute the previous time defined in section 4.2.3.\\
 
 
 \subsubsection{Conversation to a firing rate}
-For each neuron labeled $j$,  we smooth the corresponding spike train
-T$^{\text{spike}}_{j}(t) = \displaystyle \sum_{i=1}^{n_{i}} \delta(t-t_{i}^{j})$ (as in section 3.1), to obtain the firing rate function,
- $R^{j}(t)$, by replacing $K$ in \eqref{firerate} with the  Gaussian kernel
-defined in section 3.7.2. \\
-% K(t) =  $\displaystyle \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{t^2}{2\sigma^2}} $.
-Thus, the firing rate function, for the $j^{th}$ neuron is given by
+For each neuron labeled $j$,  we smooth the corresponding spike train T$^{\text{spike}}_{j}(t)$ to obtain the firing rate function $R^{j}(t).$ The  firing rate function, for the $j^{th}$ neuron is given by
 
 \begin{equation} \label{jfirerate}
 \text{R}^{j}(t) = \displaystyle \sum_{i=1}^{n_{i}}  \frac{1}{\sigma \sqrt{2\pi}} 
@@ -43,88 +37,51 @@ e^{-\dfrac{(t_{i_{k}}^{j}  - t_{i_{l}}^{j})^2}{2\sigma^2}}.
 \end{equation}
 
 \subsubsection{The previous time function}
-Given any time $t$, define the previous time of the $j^{th}$ neuron, denoted $\text{P}^{j}(t)$ as follows. Let 
+Given any time $t$, define the previous time of the $j^{th}$ neuron, denoted by $\text{P}^{j}(t)$ as follows. Let 
 \[
-t^{\text{spike}}_{\text{prev}}(t) = \displaystyle \max  \{  t^{j}_{i} \ \ | \ \ t^{j}_{i} < t, 1 \leq i \leq n_{i}, 1 \leq j \leq 32 \} \ \ \text{for all spike trains} \quad  \{t^{j}_{i}\} \in T^{\text{spike}}.
+t^{j}_{\text{prev}}(t) = \displaystyle \max  \{  t^{j}_{i} \ \ | \ \ t^{j}_{i} < t, 1 \leq i \leq n_{i} \} \ \ \text{for all spike trains} \quad  \{t^{j}_{i}\} \in T^{\text{spike}}.
 \]
 The previous time function, P$^{j}(t)$, is given by, 
 \begin{equation}\label{prevtimefun}
-\text{P}^{j}(t) = t^{\text{spike}}_{\text{prev}} - t.
+\text{P}^{j}(t) = t^{j}_{\text{prev}}(t) - t.
 \end{equation}
 
 
-Example \eqref{ex1} and Figure \eqref{prevtimeplot} below illustrate how the previous time vectors are obtained from a raster plot.\\
-
-\begin{figure}[h]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    %title={Converting a raster plot of 3 neurons to previous time vectors},
-    xlabel={spike time [t in sec]},
-    ylabel={neuron label [j]},
-    xmin=-4, xmax=5,
-    ymin=0, ymax= 4,
-    xtick={-4, -3,-2,-1,0,1,2,3,4},
-    ytick={1,2,3,4},
-    legend pos=north west,
-    ymajorgrids=true,
-    grid style= solid,
-]
- 
-\addplot[
-    color=black,
-    only marks,
-    mark = |
-    ]
-    coordinates {
-    (-3, 1)(-1,2)(-2, 3)(1, 3)(2,1)(4,2)
-    };
-    \legend{spike}
- 
-\end{axis}
-\end{tikzpicture}
-
-\caption{Converting a raster plot of 3 neurons to previous time vectors}
-\label{prevtimeplot}
-\end{figure}
+Figures \ref{fig:CellActivity_Prevtime} below illustrate how the previous time function is obtained from
+the firing activity of a given neuron.
 
 
-\begin{Ex}\label{ex1}
-For a fixed state time $t=0,  t^{1}_{\text{prev}} = -3,  t^{2}_{\text{prev}} = -1,  t^{3}_{\text{prev}} = -2 $ which implies that
+ \begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.8\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{/home/tesylvia/Oral_Sept_2017/images/CellActivityGraph.pdf}
+            \caption[Cell activity]%
+            {{\small Cell activity}}    
+            \label{fig:Cell activity}
+        \end{subfigure}
+        
+        \vskip\baselineskip
+        \begin{subfigure}[b]{0.8\textwidth}   
+            \centering 
+            \includegraphics[width=\textwidth]{/home/tesylvia/Oral_Sept_2017/images/PrevTime_graph.pdf}
+            \caption[]%
+            {{\small Previous time function}}    
+            \label{fig:Prevtime}
+        \end{subfigure}
+        \caption[The previous time function for a single neuron ]
+        {\small The previous time function based on the activity of a single neuron} 
+        \label{fig:CellActivity_Prevtime}
+  \end{figure}
 
-\[ \text{P}^{j}(0) =  \begin{cases} 
-      -3 & \text{if} \quad j=1 \\
-      -1 & \text{if} \quad j=2 \\
-      -2 & \text{if} \quad  j=3
-   \end{cases}
-\]
-
-\text{where as for a fixed state time} \ \  $t=2, t^{1}_{\text{prev}} = -3, t^{2}_{\text{prev}} = -1, t^{3}_{\text{prev}} = 1,$ \ \ \text{and we have} \ \
 
 
-\quad
-
-\[ \text{P}^{j}(2) =  \begin{cases} 
-      -5 & \text{if} \quad j=1 \\
-      -3 & \text{if} \quad j=2 \\
-      -1 & \text{if} \quad j=3
-   \end{cases}
-\]
-  
-\end{Ex}
 
 
-%\begin{tikzpicture}
-%\begin{axis}[
-%    axis lines=middle,
-%    xmin=-4.3,xmax=7.8,ymin=-4.5,ymax=4.5,
-%    xlabel={$x$},
-%    ylabel={$y$}
-%    ]
-%  \addplot[blue,samples=200] {tan(deg(x))}node[right]{$y=\tan x$};
-%\end{axis}
-%
-%\end{tikzpicture}
+
+
+
+
 
 
 
@@ -136,9 +93,7 @@ a behavioral task.
 We let $\theta(t) = c t \ \ (\text{mod} \ \ 2\pi)$, where time $t$, is in seconds, $c = \dfrac{2\pi}{T_{\text{lap}}}$ is the speed of the animal, and
 $\text{T}_{\text{lap}}$ is the time taken for the animal to make one lap around the circle.
 For this synthetic experiment, we assume that information about the animal's
-environment is encoded by both the firing rate, $\text{R}^{j}(t)$,
-and the precise time, $t$, at which individual spikes within a given time window
-$(t, t+\Delta t)$ occurred.
+environment is encoded by the firing rate, $\text{R}^{j}(t).$
 We model the place field of the $j^{th}$ neuron using a Gaussian 
 
 \begin{equation}
@@ -147,10 +102,7 @@ We model the place field of the $j^{th}$ neuron using a Gaussian
 \end{equation}
 
 
-%\begin{equation}
-%{g}^{j}(\theta) = \displaystyle  f_{\text{bg}} + \sum_{j=1}^{2} f_{j} 
-%\exp\bigg(-\dfrac{\text{dist}^{2}(\theta - \phi_{j})}{2\sigma_{j}^{2}} \bigg)
-%\end{equation}
+
 where $f_{bg}$ is the background firing rate that is independent of the underlying stimulus, $f_{\max}$ denotes the maximum firing rate of each 
 neuron and $\phi_{j}$ is the preferred position of the $j^{th}$ 
 neuron or the center of the j$^{th}$ place field.
@@ -158,19 +110,20 @@ Given any two angles, $\theta_{1}, \theta_{2} \in [0, 2\pi]$, the quantity
 $\text{dist}(\theta_{1}, \theta_{2})$ denotes the shortest distance between 
 two points on a unit circle, given by
 \[
-\text{dist}(\theta_{1}, \theta_{2}) = \big( \big( [\theta_{1} - \theta_{2}] + \pi  \big) \ \ \text{mod} \ \ 2\pi \big) - \pi.
+\text{dist}(\theta_{1}, \theta_{2}) = \abs{\big( \big( [\theta_{1} - \theta_{2}] + \pi  \big) \ \ \text{mod} \ \ 2\pi \big) - \pi}.
 \]
-The experiment consists of a single trial, in which the spike train of the $j^{th}$, neuron is generated according to a non-homogeneous poisson process with firing rate $R^{j}(t)$ defined by $R^{j}(t) = g^{j}(\theta(t))$ in the interval $[0, T]$. Choosing m time points and setting the step size $\Delta t = \dfrac{\text{T}}{m}$, we subdivide the interval [0, T] into short sub intervals [t$_{i}$, t$_{i} + \Delta t$] where $t_{i} = i \Delta t$, and generate
-a spike with probability of $\text{R}^{j}(t)\Delta t << 1$, otherwise no spike is generated.  We then sample the brain state uniformly at random at these times $t_{i}$, to obtain the firing rate and previous time data. For each time $t_{i}$, we sample from  \eqref{jfirerate} and  \eqref{prevtimefun}, to obtain the firing rate vectors 
+The experiment consists of a single trial, in which the spike train of the $j^{th}$, neuron is generated according to a non-homogeneous poisson process with firing rate $R^{j}(t)$ defined by $R^{j}(t) = g^{j}(\theta(t))$ in the interval $[0, T]$. Choosing $m$ time points and setting the step size $\Delta t = \frac{\text{T}}{m}$, we subdivide the interval $[0, T]$ into short sub intervals $[t_{i}, t_{i} + \Delta t]$ where $t_{i} = i \Delta t$, and generate
+a spike with probability $\text{R}^{j}(t)\Delta t \ll 1$, otherwise no spike is generated.
+For each time $t_{i}$, we sample from  the firing rate function \eqref{jfirerate} and  previous time function \eqref{prevtimefun} respectively, to obtain the firing rate vectors 
 \[ \vect{r}(t_{i}) = (r^{1}(t_{i}), r^{2}(t_{i}), \ldots, r^{N}(t_{i}))^{\top},
 \]
 and previous time vectors
 \[
-\vect{p}(t_{i}) = (p^{1}(t_{i}), p^{2}(t_{i}), \ldots, p^{N}(t_{i}))^{\top},
-\] respectively.
+\vect{p}(t_{i}) = (p^{1}(t_{i}), p^{2}(t_{i}), \ldots, p^{N}(t_{i}))^{\top}.
+\]
 Thus at each time, $t_{i} \in [0,T]$, the position of the animal, $\theta(t_{i})$, is associated with a previous time vector, $\vect{p}(t_{i})$,
 and a firing rate vector, $\vect{r}(t_{i})$.
-These vectors are our data points.  Here, N=32 since we are analyzing data from 32 single-unit recordings. 
+These vectors are our data points.  Here, N=32 since we are analyzing simulated data from 32 multiple single-unit single-trial recordings.
 
 
 
