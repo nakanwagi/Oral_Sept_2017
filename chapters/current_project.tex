@@ -47,8 +47,7 @@ The previous time function, P$^{j}(t)$, is given by,
 \end{equation}
 
 
-Figures \ref{fig:CellActivity_Prevtime} below illustrate how the previous time function is obtained from
-the firing activity of a given neuron.
+Figure \ref{fig:CellActivity_Prevtime} below illustrates how the previous time function is obtained from the firing activity of a given neuron.
 
 
  \begin{figure}[H]
@@ -112,7 +111,8 @@ two points on a unit circle, given by
 \[
 \text{dist}(\theta_{1}, \theta_{2}) = \abs{\big( \big( [\theta_{1} - \theta_{2}] + \pi  \big) \ \ \text{mod} \ \ 2\pi \big) - \pi}.
 \]
-The experiment consists of a single trial, in which the spike train of the $j^{th}$, neuron is generated according to a non-homogeneous poisson process with firing rate $R^{j}(t)$ defined by $R^{j}(t) = g^{j}(\theta(t))$ in the interval $[0, T]$. Choosing $m$ time points and setting the step size $\Delta t = \frac{\text{T}}{m}$, we subdivide the interval $[0, T]$ into short sub intervals $[t_{i}, t_{i} + \Delta t]$ where $t_{i} = i \Delta t$, and generate
+The experiment consists of a single trial, in which the spike train of the $j^{th}$, neuron is generated according to a non-homogeneous poisson process with firing rate $R^{j}(t)$ defined by $R^{j}(t) = g^{j}(\theta(t))$ in the interval $[0, T]$. Choosing $m$ time points and setting the step size $\Delta t = \frac{\text{T}}{m}$, we divide the interval $[0, T]$ into short sub
+intervals $[t_{i}, t_{i} + \Delta t]$ where $t_{i} = i \Delta t$, and generate
 a spike with probability $\text{R}^{j}(t)\Delta t \ll 1$, otherwise no spike is generated.
 For each time $t_{i}$, we sample from  the firing rate function \eqref{jfirerate} and  previous time function \eqref{prevtimefun} respectively, to obtain the firing rate vectors 
 \[ \vect{r}(t_{i}) = (r^{1}(t_{i}), r^{2}(t_{i}), \ldots, r^{N}(t_{i}))^{\top},
@@ -154,7 +154,7 @@ s_{ij} = e^{-\dfrac{\text{dist}^{2}(\vect{x}_{i}, \vect{x}_{j})}{2\sigma^2}}
 where $\text{dist}(\vect{x}_{i}, \vect{x}_{j})$ is given by equations
 \eqref{distPrevtime} and \eqref{distFirerate}.
 We then apply diffusion maps to the resultant similarity matrix S = (s$_{ij}$) 
-as described in section 3.6.6, to obtain a low dimensional model for the 
+as described in section 3.3.8, to obtain a low dimensional model for the 
 firing rate and previous time data.
 The two parameters in diffusion maps are $\sigma$ and $\alpha$.
 We set $\sigma =1$ and $\alpha = 0.5$ for all our synthetic results.
