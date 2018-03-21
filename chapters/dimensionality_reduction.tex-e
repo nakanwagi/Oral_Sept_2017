@@ -49,7 +49,7 @@ Figure \ref{fig:Swiss roll} illustrates the limitations of linear techniques on 
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=3.5in]{./images/ISOMAP.png}
+\includegraphics[width=3.5in]{/./images/ISOMAP.png}
 %label the figure so latex can reference it
 \caption{For a linear method like PCA, the two circled points on the swiss roll would be close together even though they are far apart when using geodesic distances. Taken from \cite{TenenbaumJB2000Aggf}.}
       \label{fig:Swiss roll}

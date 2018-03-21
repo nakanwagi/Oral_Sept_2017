@@ -9,7 +9,7 @@ as the animal makes 4 laps around the circle.\\
         \centering
         \begin{subfigure}[b]{0.475\textwidth}
             \centering
-            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimPrevtime.eps}
+            \includegraphics[width=\textwidth]{/./images/FinalOralPlots/SyntheticOralPaper/SimPrevtime.pdf}
             \caption[Simulated prevtime]%
             {{\small Simulated previous time data (Prevtime)}}    
             \label{fig:Prevtime in 3D}
@@ -17,7 +17,7 @@ as the animal makes 4 laps around the circle.\\
         \hfill
         \begin{subfigure}[b]{0.475\textwidth}  
             \centering 
-            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimFiringRate-with-Time.eps}
+            \includegraphics[width=\textwidth]{/./images/FinalOralPlots/SyntheticOralPaper/SimFiringRate-with-Time.pdf}
             \caption[]%
             {{\small Simulated firing rate data (FR)}}    
             \label{fig:Sim animal position in 3D}
@@ -25,7 +25,7 @@ as the animal makes 4 laps around the circle.\\
         \vskip\baselineskip
         \begin{subfigure}[b]{0.475\textwidth}   
             \centering 
-            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimPrevtimePCA.eps}
+            \includegraphics[width=\textwidth]{/./images/FinalOralPlots/SyntheticOralPaper/SimPrevtimePCA.pdf}
             \caption[]%
             {{\small PCA on Prevtime}}    
             \label{fig:PCA on Prevtime in 3D}
@@ -33,7 +33,7 @@ as the animal makes 4 laps around the circle.\\
         \quad
         \begin{subfigure}[b]{0.475\textwidth}   
             \centering 
-            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimFRPCA.eps}
+            \includegraphics[width=\textwidth]{/./images/FinalOralPlots/SyntheticOralPaper/SimFRPCA.pdf}
             \caption[]%
             {{\small PCA on FR}}    
             \label{fig:PCA on prevtime in 2D }
@@ -41,7 +41,7 @@ as the animal makes 4 laps around the circle.\\
         \vskip\baselineskip
         \begin{subfigure}[b]{0.475\textwidth}   
             \centering 
-            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimPrevtimeDML1.eps}
+            \includegraphics[width=\textwidth]{/./images/FinalOralPlots/SyntheticOralPaper/SimPrevtimeDML1.pdf}
             \caption[]%
             {{\small Diffusion Maps on Prevtime}}    
             \label{fig:Diffusion maps on Prevtime in 3D}
@@ -49,7 +49,7 @@ as the animal makes 4 laps around the circle.\\
         \quad
         \begin{subfigure}[b]{0.475\textwidth}   
             \centering 
-            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimFRDML1.eps}
+            \includegraphics[width=\textwidth]{/./images/FinalOralPlots/SyntheticOralPaper/SimFRDML1.pdf}
             \caption[]%
             {{\small Diffusion Maps on FR}}    
             \label{fig:Diffusion maps on Prevtime in 3D }
@@ -86,7 +86,7 @@ as the animal makes 4 laps around the circle.\\
 %        \centering
 %        \begin{subfigure}[b]{0.475\textwidth}
 %            \centering
-%            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimFRPCA.pdf}
+%            \includegraphics[width=\textwidth]{/./images/FinalOralPlots/SyntheticOralPaper/SimFRPCA.pdf}
 %            \caption[PCA on FR]%
 %            {{\small PCA on FR}}    
 %            \label{fig:PCA on FR in 3D}
@@ -94,7 +94,7 @@ as the animal makes 4 laps around the circle.\\
 %        \hfill
 %        \begin{subfigure}[b]{0.475\textwidth}  
 %            \centering 
-%            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimFRPCA-with-time.pdf}
+%            \includegraphics[width=\textwidth]{/./images/FinalOralPlots/SyntheticOralPaper/SimFRPCA-with-time.pdf}
 %            \caption[]%
 %            {{\small PCA on FR}}    
 %            \label{fig:PCA on FR in 2D}
@@ -102,7 +102,7 @@ as the animal makes 4 laps around the circle.\\
 %        \vskip\baselineskip
 %        \begin{subfigure}[b]{0.475\textwidth}   
 %            \centering 
-%            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimFRDML1.pdf}
+%            \includegraphics[width=\textwidth]{/./images/FinalOralPlots/SyntheticOralPaper/SimFRDML1.pdf}
 %            \caption[]%
 %            {{\small Diffusion Maps on FR}}    
 %            \label{fig:Diffusion maps on FR in 3D}
@@ -110,7 +110,7 @@ as the animal makes 4 laps around the circle.\\
 %        \quad
 %        \begin{subfigure}[b]{0.475\textwidth}   
 %            \centering 
-%            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimFRDML1-with-time.pdf}
+%            \includegraphics[width=\textwidth]{/./images/FinalOralPlots/SyntheticOralPaper/SimFRDML1-with-time.pdf}
 %            \caption[]%
 %            {{\small Diffusion Maps on FR}}    
 %            \label{fig:Diffusion maps on FR in 2D }
@@ -132,7 +132,7 @@ as the animal makes 4 laps around the circle.\\
 %        \centering
 %        \begin{subfigure}[b]{0.475\textwidth}
 %            \centering
-%            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimPrevtime.pdf}
+%            \includegraphics[width=\textwidth]{/./images/FinalOralPlots/SyntheticOralPaper/SimPrevtime.pdf}
 %            \caption[Simulated Prevtime]%
 %            {{\small Simulated Prevtime}}    
 %            \label{fig:Prevtime in 3D}
@@ -140,7 +140,7 @@ as the animal makes 4 laps around the circle.\\
 %        \hfill
 %        \begin{subfigure}[b]{0.475\textwidth}  
 %            \centering 
-%            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimRatPosition.pdf}
+%            \includegraphics[width=\textwidth]{/./images/FinalOralPlots/SyntheticOralPaper/SimRatPosition.pdf}
 %            \caption[]%
 %            {{\small Simulated animal position}}    
 %            \label{fig:Sim animal position in 3D}
@@ -148,7 +148,7 @@ as the animal makes 4 laps around the circle.\\
 %        \vskip\baselineskip
 %        \begin{subfigure}[b]{0.475\textwidth}   
 %            \centering 
-%            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimPrevtimePCA.pdf}
+%            \includegraphics[width=\textwidth]{/./images/FinalOralPlots/SyntheticOralPaper/SimPrevtimePCA.pdf}
 %            \caption[]%
 %            {{\small PCA on Prevtime}}    
 %            \label{fig:PCA on Prevtime in 3D}
@@ -156,7 +156,7 @@ as the animal makes 4 laps around the circle.\\
 %        \quad
 %        \begin{subfigure}[b]{0.475\textwidth}   
 %            \centering 
-%            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimPrevtimePCA-with-Position.pdf}
+%            \includegraphics[width=\textwidth]{/./images/FinalOralPlots/SyntheticOralPaper/SimPrevtimePCA-with-Position.pdf}
 %            \caption[]%
 %            {{\small PCA on prevtime}}    
 %            \label{fig:PCA on prevtime in 2D }
@@ -164,7 +164,7 @@ as the animal makes 4 laps around the circle.\\
 %        \vskip\baselineskip
 %        \begin{subfigure}[b]{0.475\textwidth}   
 %            \centering 
-%            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimPrevtimeDML1.pdf}
+%            \includegraphics[width=\textwidth]{/./images/FinalOralPlots/SyntheticOralPaper/SimPrevtimeDML1.pdf}
 %            \caption[]%
 %            {{\small Diffusion Maps on Prevtime}}    
 %            \label{fig:Diffusion maps on Prevtime in 3D}
@@ -172,7 +172,7 @@ as the animal makes 4 laps around the circle.\\
 %        \quad
 %        \begin{subfigure}[b]{0.475\textwidth}   
 %            \centering 
-%            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimPrevtimeDML1-with-Position.pdf}
+%            \includegraphics[width=\textwidth]{/./images/FinalOralPlots/SyntheticOralPaper/SimPrevtimeDML1-with-Position.pdf}
 %            \caption[]%
 %            {{\small Diffusion Maps on Prevtime}}    
 %            \label{fig:Diffusion maps on Prevtime in 3D }

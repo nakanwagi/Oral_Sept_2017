@@ -1,0 +1,167 @@
+%\mychapter{5}{Simulation Results}
+
+\section{Generation of Spikes}
+In this section, we describe the standard procedure of estimating the 
+firing rate and average spike count. We then use these estimates
+to simulate spikes using a non-homogeneous poisson process.
+Finally, we give a detailed description of the point process framework and 
+state its advantages over using the estimated firing rate
+
+\subsection{Derivation of the time varying firing rate}
+Recall that for j=1, the neural response function $\eqref{spiketrain}$ represents a sequence of recorded times in an interval [0, T] at which a neuron fires an action potential (spike train)
+
+\begin{equation}\label{response function}
+ \rho(t) = \sum_{i=1}^{n} \delta(t-t_{i})  
+\end{equation}
+where n is the total number of spikes in the spike train and $t_{i}$ is the time at which the i$^{th}$ spike occurred. Using \eqref{DiracDelta}
+We can write the total the number of spikes in the train by integrating the response function
+\begin{align*}
+\int_{\mathbb{R}}  \rho(t)  dt &=   \int_{0}^{T}  \rho(t)  dt\\
+      &= \displaystyle  \sum_{i=1}^{n}    \int_{0}^{T}  \delta(t-t_{i}) dt\\
+              & = \displaystyle  \sum_{i=1}^{n} 1 = \text{n}
+\end{align*}
+
+
+Thus the spike-count rate, r,  on the interval [0, T]  given by
+
+\[ \dfrac{\text{the number of spikes over the time interval of length T }}{T} \]
+
+can also be expressed as the average of the neural response function
+over a single trial of duration T
+
+\begin{equation}\label{spike-count rate}
+  \text{r} =  \frac{1}{T}  \int_{0}^{T}  \rho(t)  dt
+\end{equation}
+
+We know that to reduce loss of temporal information due to averaging over a long period of time, the duration T of the experiment is often divided into small intervals [t, t+$\Delta$t] of length $\Delta$t so that the firing rate at time t,
+denoted fr(t)  is  given by
+
+\begin{equation}\label{single-trial emprical-spike count}
+fr(t) = \dfrac{\text{number of spikes in the time interval} \quad [t, t+\Delta t]}
+{\Delta t}
+\end{equation}
+
+
+\begin{Def}\label{trial-average neural response}
+Let \text{M} be the total number of trials during an experiment
+of multiple presentation of the same stimulus starting at time t=0 and to t=T. 
+Let \[ \rho_{j}(t) = \displaystyle \sum_{i=1}^{n} \delta(t-t_{i})\] 
+be the neural response function for the the j$^{th}$ trial for all j=1, $\dots$ M. The quantity 
+\[ \langle \rho(t) \rangle  = 
+\displaystyle  \frac{1}{M} \sum_{j=1}^{M} \rho_{j}(t)\] 
+
+is called the trial-averaged neural response function
+
+\end{Def}
+
+The instantaneous time-varying firing rate, r(t), is the expectation of the 
+trial-averaged neural response function over an infinite number of trials i.e.
+
+\begin{equation} \label{expected FireRate}
+r(t) = \displaystyle  \lim_{\Delta t \rightarrow 0}    \frac{1}{\Delta t}  \int_{t}^{t+\Delta t} 
+ \langle \rho(t) \rangle \quad dt 
+\end{equation}
+
+
+In empirical experiments, the limit ${\Delta t \rightarrow 0}$ is usually
+omitted since it's not possible to carry out an infinite number of experiments
+in practice. Instead a sufficiently large number of trials is used
+to estimate r(t), that is,
+
+\[ 
+r(t) \approx  \displaystyle  \frac{1}{\Delta t}  \int_{t}^{t+\Delta t} 
+ \langle \rho(t) \rangle \quad dt 
+\]
+
+provided that there are enough spikes in the interval defining the r(t)
+to yield a reliable estimate of the firing rate.
+
+For a large $\Delta$t (long intervals), the average spike count denoted $\langle n  \rangle$ can then be  defined from the instantaneous firing rate as follows:
+
+\begin{equation}\label{average spike count}
+\langle n \rangle =  \displaystyle  \frac{1}{\Delta t}  
+\int_{t}^{t+\Delta t}  r(t)  \quad dt 
+\end{equation}
+
+From equation \eqref{average spike count}, the average spike count is equivalent
+to counting the number $n_{i}$  of spikes in the i$^{th}$ trial, for an infinitely large number of trials and taking the average of those spikes across the trials.
+
+
+However for short intervals around t such as $(t-\Delta t, t+\Delta t)$, the average spike count    $\langle n \rangle$ is approximately equal 
+to r(t)$\Delta$t for small $\Delta$t.
+In addition, $\Delta$t can be made arbitrarily small such that
+the probability of getting more than one spike in the interval
+ $(t-\Delta t, t+\Delta t)$ is zero. 
+Hence in this interval, the average spike count is precisely the probability of getting one spike for sufficiently small $\Delta$t.
+
+
+\subsection{Probabilistic interpretation of firing rate}
+The probability of getting one spike in a short time interval  $(t-\Delta t, t+\Delta t)$ is equal to the value of the instantaneous firing rate, r(t) during that interval multiplied by the length of that interval, that is,
+
+\[ 
+\displaystyle  \text{p}(\{ \text{one spike during the interval interval} \quad  (t-\Delta t, t+\Delta t)  \}) = \text{r}(t)\Delta t. 
+\]
+
+\subsection{Short comings of using the firing rate}
+First, the firing rate is an average of the neural response function over
+multiple trials which gives only a partial description of the neuron's responses
+unlike the spike train itself.
+Second, the method of averaging across multiple trials is contrary to the way
+the sensory system operates in general.
+For instance a sequence of action potentials is sent from the optic nerves
+to the brain which sends impulses to motor neurons so that muscles in eyes can close an animal's eye lids when a fly gets close to the eye's pupil.
+The nervous system does not wait for the fly to get close to the pupil multiple
+times before our eye lids shut to such a threat.
+Thirdly, the firing rate does not take into account other patterns of spikes
+that convey information such as the inter-spike intervals.
+Thirdly, there are several underlying neural mechanisms such as cognition, memory
+and olfaction which the experimentalist cannot control and hence cannot be extensively studied by presentation of controlled stimuli.
+Finally, the firing rate r(t) determines the probability of getting one spike
+in a short time interval $(t-\Delta t, t+\Delta t)$ but is generally not sufficient to determine the probability of getting an entire sequence of n spikes
+in that short time interval.
+
+
+
+
+\subsection{The point process framework}
+In the point-process framework, we view the neural response function as a point process. This implies that each spike train (a discrete event) consists of a sequence of spike times $\{t_{1}, \ldots, t_{n_{i}} \}$ which
+are continuous random variables. Thus we know that each out come (spike train)
+obtained during an intracellular recording is characterized by some underlying continuous probability density function. Denote this probability density function by p($\vect{t}$) where $\vect{t}$ denotes the vector of spike times $(t_{1}, \ldots t_{n})$. By the properties of a continuous random variable, the probability of obtaining a spike at time $t_{i}$ is equal to zero. Thus to obtain a non-zero probability, we seek the probability of obtaining a spike in a given time interval $(t_{i}, t_{i}+\Delta t)$ of length $\Delta$t.
+Since we are assuming that each spike time $t_{i}$ is a stochastic random variable, it follows that  probability of getting one spike in a short time interval $(t_i, t_i+\Delta t)$ is equal to the product of  the probability density of $t_{i}$ also denoted by p(t$_{i}$) multiplied by the length 
+of that interval ($\Delta$t), that is,
+
+\[
+\displaystyle \text{p}(\{\text{one spike during the interval} \quad (t_{i}, t_{i}+\Delta t) \}) = \text{p}(t_{i})\Delta t  
+\]
+
+\newpage
+
+Thus the expected spike count rate, the probabilistic (theoretical) counter part
+of \eqref{single-trial emprical-spike count}, is given by
+
+\begin{equation}\label{expected count rate}
+\displaystyle 
+\dfrac{\text{p}(\{\text{one spike during the interval} \quad (t_{i}, t_{i}+\Delta t)}{\Delta t} 
+\end{equation}
+
+Taking the limit as $\Delta t \rightarrow 0$, we obtain the expected instantaneous  firing rate
+ 
+\begin{equation}\label{expected instant Firerate}
+\displaystyle 
+\text{FR}(t) =  \lim_{\Delta t \rightarrow t}  \dfrac{\text{p}(\{\text{one spike during the interval} \quad (t_{i}, t_{i}+\Delta t)}{\Delta t} 
+\end{equation}
+
+
+The beauty of the point process framework is that it provides a way of determining the probability of obtaining a sequence of n spikes i.e spike train.
+
+Indeed, viewing the neural response function as a point process, the
+probability of getting a sequence of n spikes in a short time interval
+$(t_{i}, t_{i}+\Delta t)$ for all $i=1, \ldots n$ is given by the
+product of the joint probability density of the random n-dimensional
+vector of spike times p($t_{1}, \ldots, t_{n}$) multiplied by the quantity
+$(\Delta t)^{n}$\\
+
+
+Still working on this to get to a non-homogeneous poisson process simulation.....
+
+

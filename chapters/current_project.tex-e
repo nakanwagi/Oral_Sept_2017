@@ -54,7 +54,7 @@ Figure \ref{fig:CellActivity_Prevtime} below illustrates how the previous time f
         \centering
         \begin{subfigure}[b]{0.8\textwidth}
             \centering
-            \includegraphics[width=\textwidth]{./images/CellActivityGraph.pdf}
+            \includegraphics[width=\textwidth]{/./images/CellActivityGraph.pdf}
             \caption[Cell activity]%
             {{\small Cell activity}}    
             \label{fig:Cell activity}
@@ -63,7 +63,7 @@ Figure \ref{fig:CellActivity_Prevtime} below illustrates how the previous time f
         \vskip\baselineskip
         \begin{subfigure}[b]{0.8\textwidth}   
             \centering 
-            \includegraphics[width=\textwidth]{./images/PrevTime_graph.pdf}
+            \includegraphics[width=\textwidth]{/./images/PrevTime_graph.pdf}
             \caption[]%
             {{\small Previous time function}}    
             \label{fig:Prevtime}

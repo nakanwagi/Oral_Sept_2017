@@ -1,0 +1,161 @@
+\mychapter{4}{Dimensionality  Reduction}
+
+\section{Definition of dimensionality reduction}
+Let \textbf{X} = $\displaystyle \{\vect{x}_{1}, \ldots , \vect{x}_{n} \}$
+be a data set of n points, each of which is associated D features, so that each $x_{i}$ is a point in $D-$dimensional space. Assume that the data points lie on or near an underlying d-dimensional manifold embedded in the high D-dimensional space where d is much smaller than D. Dimensionality reduction refers to the search for a  transformation of the high dimensional data set
+$\textbf{X}$ into a new data set \textbf{Y} = $\displaystyle \{ \vect{y}_{1}, \ldots, \vect{y}_{n} \}$  of n points, each of which is associated
+a fewer set of d features and such that each $\vect{y}_{i} \in \R^{d}$ is a low dimensional representation of $\vect{x}_{i} \in \R^{D}$ in the low dimensional space. In addition the transformation must preserve, as much as possible, the underlying geometry of the data such as the inter-point distances between the observed data points.
+
+
+\section{Matrices and Linear Algebra}
+\subsection{Spectral properties of symmetric matrices}
+Let \textbf{A} be an n$\times$n real symmetric matrix with a set of 
+orthogonal unit-length eigenvectors  $\{ \vect{v}_{1}, \ldots, \vect{v}_{n} \}$ and corresponding eigenvalues $\{\lambda_{1}, \ldots, \lambda_{n} \}.$ 
+Then \textbf{A} can be written as 
+\[ 
+\bm{A} = \bm{VDV^{T}} = 
+\sum_{i=1}^{n} \lambda_{i} \vect{v}_{i} \vect{v}_{i}^{T} 
+\]
+
+where $\bm{D} = \text{diag}(\lambda_{1}, \ldots, \lambda_{n})$ and  $ \bm{V} = [\vect{v}_{1}, \ldots, \vect{v}_{n}]$ is an orthonormal matrix i.e.
+$\bm{V^{T}V  = VV^{T} = I}.$
+
+\subsection{Singular value decomposition (SVD)}
+Let $\R^{n \times m}$ denote the vector space of n$\times$m matrices with real entries. Given any n$\times$m matrix $\bm{A}$ with real entries, there exist orthonormal matrices $\bm{U} \in \R^{n \times n}$ and $\bm{V} \in \R^{m \times m}$ such that 
+$\bm{\displaystyle A = U \Sigma V^{T}}$ with $\bm{\Sigma}$ = \text{diag}$(\sigma_{1}, \ldots, \sigma_{k})$ where  k = $\min(n, m)$ and
+ $\sigma_{1} \geq \sigma_{2} \geq \ldots \geq \sigma_{k} \geq 0$.
+The numbers $\sigma_{i}, 1\leq i\leq n$ are called the singular values of $\bm{A}$. 
+
+\newpage
+\subsection{Properties of SVD}
+Given any n$\times$m real matrix A of rank r, there exist  orthogonal matrices 
+$\bm{U} \in \R^{n \times r}$ and $\bm{V} \in \R^{r \times r}$ 
+satisfying $\bm{U^{T}U = V^{T}V = I}$ such that $\bm{\text{A} = \text{U} \Sigma_{1} \text{V}^{T}}$ with $\bm{\Sigma}_{1}$ = \text{diag}$(\sigma_{1}, \ldots, \sigma_{r})$ and $\sigma_{1} \geq \sigma_{2} \geq \ldots \geq \sigma_{r} > 0$.
+This factorization of $\bm{A}$ with  is called the truncated SVD of A.
+The rank of A is equal to the number of non-zero singular values of A.
+If $\bm{U}$ and $\bm{V}$ are made up of column vectors so that  $\bm{U} = [\vect{u}_1, \ldots, \vect{u}_{r}]$ and $\bm{V} = [\vect{v}_{1}, \ldots, \vect{v}_{r}\}$ then $\{ \vect{u}_1, \ldots, \vect{u}_{r} \}$  and $\{\vect{v}_{1}, \ldots, \vect{v}_{r} \}$ are called the left and right singular vectors of A respectively. The range of A is equal to the subspace spanned by the left singular vectors of A. The null space of A is equal to the subspace spanned by the set of vectors $\{\vect{v}_{r+1}, \ldots, \vect{v}_{n} \}.$
+The matrix A admits the SVD expansion 
+\[
+A = \sum_{i=1}^{r} \sigma_{i} \vect{u}_{i} \vect{v}_{i}^{T}.
+\]
+The real numbers $\{\lambda_{1}, \ldots, \lambda_{r}\}$ where $\lambda_{i} = \sigma_{i}^{2}$ for all i = $1 , \ldots, r$ are the eigenvalues of both symmetric matrices $\bm{A^{T}A}$ and $\bm{AA^{T}}.$ The right singular vectors of $\bm{A}$ are the eigenvectors of $\bm{A^{T}A}.$ The left singular vectors of $\bm{A}$ are the eigenvectors of $\bm{AA^{T}}.$ The spectral decomposition of $\bm{A^{T}A}$ is given by $\bm{A^{T}A  = V D_{1} V^{T}}$ and that of  $\bm{AA^{T}}$ is given by  $\bm{AA^{T}} = U D_{2} U^{T}$ where $\bm{U}$ and $\bm{V}$ are the SVD factors upto a sign, $\bm{D}_{1}$ and $\bm{D}_{2}$ are diagonal matrices containing the r singular values of $A$.
+
+\section{Linear dimensionality  reduction}
+Let $\bm{X} \in \R^{n \times D}$ be a design matrix where the rows of
+$\bm{X}$ contain n data points, each of which is associated with D features
+in the columns of $\bm{X}$.
+Linear dimensionality reduction techniques find a low dimensional model of the design matrix $\textbf{X}$ using a linear transformation such as an $n \times d$ orthogonal matrix \textbf{M} where d$<<$D. A common example of a linear technique is principle component analysis (PCA) \cite{JolliffeIT1986PCAa}.
+The main assumption in PCA is that the high dimensional data lies on or near a low d-dimensional subspace embedded in the high dimensional space $\R^{D}$. The best low d-dimensional subspace that describes the data is then found by minimizing the sum of squared residuals between the orthogonal projection of the data  points onto the estimated low dimensional subspace and the input points (see equation \eqref{PCA}).
+
+
+
+\begin{equation}\label{PCA}
+\begin{aligned}
+& \underset{M}{\text{minimize}}
+& & \sum_{i=1}^{n} \big \lVert \vect{x}_{i} - MM^{T}\vect{x}_{i} \big \rVert_{2}^{2} \\
+& \text{subject to}
+& & M \in \R^{n \times d} \\
+&&& M^{T}M = I.
+\end{aligned}
+\end{equation}
+
+The solution  to PCA is found via SVD \cite{Agricultural1938,BishopChristopherM2006Pram, AmericanMathematicalSociety.1939Apat} as follows:\\
+1. Compute the mean c of the data set \textbf{X} and center
+the data so that \textbf{X} = \textbf{X} - c\\
+2. Summarize the correlation relationships between the zero-mean data points  data by computing the covariance matrix $\frac{1}{n}$XX$^{T}$\\
+3. Find the spectral decomposition  \textbf{XX}$^{T}$ = VDV$^{T}$ or 
+use SVD on the centered data, \textbf{X} = $\bm{U\Sigma V^{T}}$\\
+4. Let $\bm{V}_{d}$ denote the top d columns of \textbf{V} corresponding to the  top r singular values of \textbf{X}\\
+5. The optimal point of the optimization problem \eqref{PCA} is M = V$_{d}^{T}$.\\
+The low dimensional model \textbf{Y} is obtained by setting \textbf{Y} = V$^{T}$\textbf{X}.\\
+In otherwords, the rows of $V^{T}$ (or the columns of V) are an orthonormal basis for transforming \textbf{X} into \textbf{Y}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%\section{Multidimensional scaling (MDS)}
+%Let $\{\vect{x}_{1}, \ldots , \vect{x}_{n}\}$  be a set of n inputs in a high dimensional input space $\R^{p}$ and $\{ \text{m}_{ij}\}$ be a set of pair-wise dissmimilarity measures between the i$^{th}$ and j$^{th}$ inputs, $\vect{x}_{i}$ and $\vect{x}_{j}$. Multidimensional scaling (MDS) refers to the search for a low dimensional space (output space) and a set of n outputs $\{\vect{y}_{1}, \ldots, \vect{y}_{n}\}$ such that each $\vect{y}_{i}$ is a low dimensional representation of  $\vect{x}_{i}$ and such that the set of inter-point distances 
+%$\{\text{d}_{ij}\}$ between the the i$^{th}$ and j$^{th}$ outputs $\vect{y}_{i}$ and $\vect{y}_{j},$ approximates the original set of dissimilarities  $\{\text{m}_{ij}\}$, as much as possible \cite{CoxT2000}.
+%
+%
+%\subsection{Classical MDS}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%\section{Dimensionality reduction}
+%Let \textbf{X} = $\displaystyle \{\vect{x}_{1}, \ldots , \vect{x}_{n} \}$
+%be a data set of n points in a D-dimensional space $\R^{D}$, where D is very large.
+%Assume that the data points lie on or near an underlying d-dimensional manifold embedded in the high dimensional space $\R^{D}$ where d is much smaller than D.
+%Dimensionality reduction refers to the process of transforming the high dimensional data 
+%$\textbf{X}$ into a new data set \textbf{Y} = $\displaystyle \{ \vect{y}_{1}, \ldots, \vect{y}_{n} \}$  of n points in $\R^{d}$ such that each $\vect{y}_{i}$ is a low dimensional representation of  $\vect{x}_{i}$ in the low dimensional space. In addition the transformation must preserve, as much as possible,  the the observed properties in the data such as its underlying geometry. In this case d  is called the intrinsic  dimensionality of the data. 
+%
+%\subsection{Singular Value Decomposition}
+%Given any $n \times D$ matrix A with real entries, AA$^{T}$ and A$^{T}$A are 
+%both real symmetric matrices hence diagonalizable. Hence we can write AA$^{T}$ = VDV$^{T}$ and A$^{T}$A = UDU$^{T}$ where the U and V are orthogonal matrices. The columns of U and V contain the eigen vectors of A$^{T}$A  and AA$^{T}$ respectively. D is a diagonal matrix containing the eigenvalues of AA$^{T}$ which are the same as those for A$^{T}$A. The singular value decomposition (SVD) of A is given by A = U$\Sigma$V$^{T}$ where  $\Sigma$ is a diagonal matrix containing the square roots of the eigen values  of AA$^{T}$ (i.e the singular values of A).
+%
+%
+%\subsection{Linear dimensionality reduction}
+
+%
+%\subsection{SVD algorithm}
+%1. Compute the mean c of the data set \textbf{X} and center
+%the data so that \textbf{X} = \textbf{X} - c\\
+%2. Summarize the zero-mean data by computing the covariance matrix $\frac{1}{n}$XX$^{T}$\\
+%3. Find the spectral decomposition  \textbf{XX}$^{T}$ = VDV$^{T}$ or 
+%use SVD on centered data, X = U$\Sigma V^{T}$\\
+%4. Let V$_{d}$ denote the top d columns of V corresponding to the  top r singular values of \textbf{X}\\
+%5. The optimal point of the optimization problem \eqref{PCA} is M = V$_{d}^{T}$.\\
+%The low dimensional model \textbf{Y} is obtained by setting \textbf{Y} = V$^{T}$\textbf{X}.\\
+%In otherwords, the rows of $V^{T}$ (or the columns of V) are an orthonormal basis for transforming \textbf{X} into \textbf{Y}.
+%
+%
+%
+%
+%\section{Non-linear dimensionality reduction}
+%The main observation in non-linear dimensionality reduction is that there is no explicit mapping P such that low dimensional model can be obtained via the relationship 
+%$\textbf{Y} = P\textbf{X}$.
+%
+%Details to be added soon.....
+%
+%
+%

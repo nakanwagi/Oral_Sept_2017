@@ -1,0 +1,92 @@
+%\mychapter{2}{previouswork}
+
+\section{Previous work}
+In this section, we review some approaches for analyzing neuronal responses.
+First, we review the classical single-unit multiple trial approach based 
+on estimating the firing rate and highlight the strengths
+and weaknesses of this approach. Second, we review the dimensionality
+reduction approach as a means of addressing the problem of trial-to-trial variability of neural responses. Our approach is also dimensionality reduction. Finally, we review two spike train metrics that have been used to study dissimilarity measures between spike trains. 
+We review spike train metrics because the dimensionality reduction algorithms we use require a distance matrix as an input.
+
+
+\subsection{Single-unit multiple trial experimental design}
+Traditionally, spike trains are obtained by recording from a single sensory neuron during multiple presentations of the same stimulus over a fixed period of time. The neural responses are decoded by counting the total number of spikes in a given time window following onset of the stimulus (firing rate) \cite{Abbott2001}.
+This approach is based on the rate-coding hypothesis which states that the rate of spike generation varies with stimulus intensity (cite Adrian ED 1928).
+The goal of these classical experiments is to answer the question:
+Given a set of stimulus features, what is the neural response (spike train) elicited by the presented stimulus? The neuron is then characterized by plotting the firing rate as a function of given stimulus feature values. This plot is referred to as a tuning curve of the cell.
+In modern single-unit multiple trial recordings, the mean firing rate is estimated by averaging neural responses across repeated trials.
+
+
+Experimenters developed substantial scientific theories based on single-unit 
+multiple trial recordings. For instance, it is known that activity patterns from sensory neurons in the motor cortex of primates are tuned to the direction of the subject's arm movements \cite{Georgopoulos1982}, that neurons in the visual cortex of primates are tuned to the orientation of a stimulus \cite{Hubel1968}, that place cells in the CA1 region of the rat hippocampus are tuned to the animal's position in the environment \cite{OKeefe1971}. However, methods of analyzing single-unit multiple trial recordings require trial averaging in order to estimate the firing rate. This often results in the smoothing over of rapid fluctuations in the responses, which may lead to loss of temporal information in spike trains, thus yielding incorrect interpretations of the underlying neural mechanisms. Moreover, neural responses vary substantially between trials even on presentation of the same stimulus due to many variables.
+This trial-to-trial variability makes singe-unit multiple trial analyses hard.
+In addition, there are some internal neural mechanisms such as olfaction, cognition and decision making that cannot be controlled by researchers, as can other forms of stimuli. \cite{Hopfield1995,Redish2016,Vos2015, Kaufman2014, Mazor2005}. Such observed phenomena therefore could instead be analyzed using single trial recordings from multiple single units. We refer to this alternative option as multiple single-unit single trial experimental design.
+
+
+\subsection{Multiple single-unit single trial experimental design}
+The use of multi-electrode \cite{Kipke2008} recording technologies has enabled  multiple single-unit single trial recording from various brain structures. However, trying to identify all possible activity patterns  corresponding to  a single neuron within the recorded neural population leads to an amplification in the number of variables to be considered while modeling collective neural responses. Consequently, biologically motivated assumptions have to be made in order to model population activity. For instance, a common approach in analyzing population activity is to assume that the activity patterns of one neuron are independent of other neurons which simplifies  analyses as in the single-unit experimental design. However, in the dynamical systems perspective, neurons belong to an underlying connected network within the brain  which may lead to correlated responses between neurons \cite{Shenoy2013}. In addition, among a population of neurons that encode features of a stimulus, the population activity is correlated with the features of the stimulus \cite{Georgopoulos1982, Hubel1968}. This suggests that relaxing the independence assumption by
+taking into account correlations among population activity patterns may be useful in studying neuronal response
+variability. Lately, dimensionality reduction \cite{Cunningham2014a}, has been suggested as a tool for studying collective neural activity patterns. The technique can be applied to multiple single-unit single trial recordings so as to obtain a low dimensional model of the data which captures similar activity patterns among neuronal populations.\\
+
+In order to better analyze neural response variability, our approach is to use dimensionality reduction on a set of spike trains recorded from 32 neurons in the CA1 region of the rat hippocampus in a single trial.
+Our focus is to study collective neural activity patterns using a low dimensional model which captures similar activity patterns among neural populations. The low dimensional model should also enable us to approximately recover the location of the animal (rat) based on the fact that place cell firing is correlated with position.
+Moreover, reconstructing information about an organism's environment based on neuronal responses enables the experimenter to interpret information in a way that an organism is likely to interpret it \cite{Bialek1992}. For instance, it may be possible to predict what the animal is ``thinking about" at a particular moment in time based on our low dimensional model.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%\begin{itemize}
+%\item what are your long term objectives?
+%\item Describe the model you've designed and the metric you're proposing to use
+%\item How is this model and metric helping to address short comings of the previous model?
+%\item What do you hope to accomplish with this new model?
+%\item What new maths theories can be derived from this model?
+%\item What are the applications to real world problems
+%
+%\end{itemize}
+
+
+
+
+
+
+
+
+
+
+

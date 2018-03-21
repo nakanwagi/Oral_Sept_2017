@@ -1,0 +1,104 @@
+%\mychapter{7}{Discussion}
+\section{Discussion and future direction}
+In this section, first, we explain our observations based on our experimental
+results on synthetic data. We also justify our use of the l$_{1}$ norm for our distance measure. Finally, we suggest possible future directions of addressing some short comings of our approach.
+
+
+\subsection{Interpretation of our results}
+Analyzing synthetic data using previous time vectors produces a wide variety of geometric differences, as compared to  using firing rate vectors, as is typical.
+While the differences are prominent, as revealed in the preceding plots, their 
+statistical significance is as yet unknown. We regard this observation as a potentially exciting area for future investigation and believe it is worthwhile 
+to highlight several of the salient differences.\\
+
+
+For instance, the left column of figure \ref{fig:DiffMaps_PCA_on_Prevtime_FR} shows that diffusion maps with $l_{1}$ distance reveals that the animal made about 4 laps around the track.
+We believe that this is due to the fact that previous time appears to capture the changes in spike timing, hence revealing distinct paths taken by the animal on each lap. We think that is is an exciting observation which may be very useful in analyzing data sets in which absolute spike timing matters.\\
+
+
+The right column of figure \ref{fig:DiffMaps_PCA_on_Prevtime_FR} shows that the circular track reconstructed by PCA has sharp corners which suggest that the linear algorithm may not be
+suitable for our analysis. However, diffusion maps appears to trace out a more smooth circular simulated path. The inferiority of linear methods such as PCA is further demonstrated by the poor results in the left column of \ref{fig:DiffMaps_PCA_on_Prevtime_FR}.\\
+
+
+
+\subsection{Future directions}
+First, at the beginning of the experiment, there are no recorded spike times.
+However, we require that there is atleast one spike before a given brain state,
+in order to have the previous time function defined for all time.
+This raises a problem on how to address the boundary condition at the beginning
+of the experiment. As it stands, we have addressed this problem by first running the experiment once to obtain the mean of the sampled previous time data, and afterwords, we insert a spike before the beginning of the experiment based on the computed previous time average, and then we recompute the new the previous time data. We think that this is not the best approach for instance in the case where the mean of underlying distribution is not defined. In addition, computing the previous time vectors twice increases the computational complexity of our algorithm. We plan to find another way of addressing the boundary condition
+for the previous time vectors. For example, we plan to insert a spike before the beginning of the experiment based on samples drawn from a correctly estimated underlying model of the data.\\
+
+Second, we currently do not have a measure of error for analysing the  effectiveness of our approach. One possible confound in the plots is that the high  mutual information may be to due space noise, such as the animals head directions while running along the truck. This opens a variety of possible interpretations of the data. We plan to use the Fisher information as a goodness of measure in future work. We think that the Fisher information is a likely a good measure of error, since it imposes a continuity assumption on the underlying model and is highest when then the variance of the estimated model parameter is very small.
+This should help to yield a more reliable estimate of the animal's position along the truck. \\
+
+In addition, non-linear methods like diffusion maps do not yield an explicit function between the input and output space. This provides a challenge on how to evaluate the performance of the algorithm. Current approaches first add a new column to the original data set and then recompute the embedding on order to obtain a prediction of the new point in the embedded space. However, diffusion maps runs out of memory for large data sets since it requires computation of a full $n \times n$ matrix given n data points. This makes it difficult to use out-of-sample extensions as a goodness of measure in large scale neural recordings.\\
+
+Third, in our current approach, we do not have an explicit model which enables
+us to see how the system evolves over time.
+Our results are independent of the precise time at which the spikes occur since the position of the animal is encoded by vectors corresponding to brain states
+sampled uniformly at random. Thus we are unable us to quantify the impact of precise spike timing on decoding the underlying stimuli such as the position
+of the animal on the truck. We aim to design a model which takes into account the precise timing of the spikes. 
+
+Finally, we plan to look at other types of distance measures for quantifying neural response variability such as variants of the kendal tau distance 
+or a weighted combination of some existing distances. We have used the l$_1$
+norm instead of the l$_{2}$ norm because the latter emphasizes large differences between data points which diverges from our goal of learning similar brain states 
+based on pairwise distances between spike trains.
+
+
+An improved approach such as the one we envision and outline here 
+may lead to new theories of mathematical neuroscience for analysing spike train data from animal hippocampuses.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%Our first step was to determine what dimensionality reduction algorithms to use.
+%We decided to use Laplacian eigmaps \cite{belkin2003laplacian} and Diffusion Maps \cite{coifman2006} which are both non-linear dimensionality reduction algorithms.
+%why?----to be addressed later.
+%Initially, we smoothed the spike data using an exponential kernel defined by
+%
+%\[
+%  K_{\tau}(t) =
+%  \begin{cases}
+%                 \frac{1}{\tau} \exp(-\frac{t}{\tau}) & \text{if $t > 0$} \\
+%                  0 & \text{elsewhere} 
+%  \end{cases}
+%\]
+%
+%\subsection{Observations}
+%We found that using Laplacian eigen maps to get an embedding based on the firing rate tried to
+%recovered the position of the rat but could not reflect any variations along the path
+%e.g the animal could have looked away from the track or run in a ragged fashion around the track.\\
+%
+%We also found that whenever there were gaps between the receptive fields (cases with no spikes),Laplacian Eigen Maps (LAM) performed poorly.
+%This is because the nearest neighbor graph (based on the Euclidean distance used in (LAM) yields several connected components (i.e, the graph is disconnected).
+%Since the eigen value decomposition step  in LAM is only applied on the largest connected
+%component of the graph, the eigen vectors output by LAM are shorter than the total number of original data points (spike times). Thus the embedding provided by LAM is in accurate in some
+%instances due to the "coverage" problem.\\
+%
+%Diffusion Maps (DM) algorithm tends to run out of memory in case of large instances
+%so we were unable to compare the performance of both LAM and DM when using the firing rate.
+%This is not true: First redo the analysis on sonet since you need to show that
+%previous/next time is an improvement over the traditional firing rate.
+%
+%\subsection{Remedy for the coverage problem}
+%Inspired by David Redish's idea, we decided to create previous and next time vectors which
+%give us information even when there is no spike.
+%This is the direction which seems promising at the moment since it tends to over come
+%the problem of coverage. what is the coverage problem? (see reference on tunning curves).
+%We then used the exponential kernel as our metric on the previous and next time data
+%to generate a distance metric which is the main input in Diffusion Maps algorithm.
+%
+%
+%
+%

@@ -1,0 +1,9 @@
+# Help Commands
+
+# To Change or replaces texts in multiples files
+
+sed -i -e 's/\/\.\/images/\.\/images/g' ./*.tex
+
+sed -i -e 's/\/\.\/images/\.\/images/g' ./*/*.tex
+
+

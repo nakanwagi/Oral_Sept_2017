@@ -14,9 +14,9 @@
 %add two packages to add tables and graphics
 \usepackage[pdftex]{graphicx} %load the graphics package
 \usepackage{epstopdf} % Convert epstopdf
-\graphicspath{{./images}} %add a path to the image 
-\graphicspath{{./images/FakeBrain-plots}} %add a path to the image
-%\graphicspath{{./images/FakeBrain-plots}}
+\graphicspath{{/./images}} %add a path to the image 
+\graphicspath{{/./images/FakeBrain-plots}} %add a path to the image
+%\graphicspath{{/./images/FakeBrain-plots}}
 %add path to images
 \usepackage{float}
 %add package for multiple figures/subfigures
