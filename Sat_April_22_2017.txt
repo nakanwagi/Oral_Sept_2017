@@ -1,0 +1,168 @@
+# how to connect to sonet from my laptop
+ ssh agwan003@sonet.math.umn.edu
+
+# type alt A to append(save) changes
+
+# This is the directory where you store large files
+cd /project/agwan003
+
+# To run the Oral_analysis, addpath(pwd) at the
+#beginning of your .m files in MATLAB only works
+# if you started by typing the following on 
+# commandline
+
+ssh agwan003@sonet.math.umn.edu
+cd Sylvia_analysis
+matlab
+
+# delete from terminal temporarily
+mv name_of-file /tmp
+
+# delete permanently
+rm -rf name_of_file
+
+# check how much space is on home directory at school
+csequota -s
+
+# copy the zip file from your personal computer to sonet
+# under the projects directory
+scp -r file_name.zip agwan003@sonet.math.umn.edu:/project/agwan003
+
+# to comeout of a current directory
+cd ../
+
+# unzip all files to a  main directory called directory_name
+#and extract them in a sub_directory called sub_directory_name
+# inside this new main_directory_name
+
+first type: cd project/agwan003
+then type: unzip filename.zip -d  Main_Directory_name/sub_directory_name_of_extracted_content excluding the .zip part
+
+# Copy a list of files using cp command and specify the 
+# directory_name you want to put the list in
+# make sure the directory name exists in the place
+# from where you are copying otherwise first create it.
+
+cp file_name1 file_name2 directory_name
+
+# Check the size of your Directory_name
+du -hs Directory_name
+
+# Avoid using move (mv) instead use copy (cp)
+
+# To copy a Directory_name to the home directory called (~/)
+# do the following
+
+cp copy_entire_string_of_current_directory/Directory_name  ~/ 
+
+#To go to home directory from any other directory type
+cd ~
+
+# copy codes/Data/dim_tool_box to the David_Data (denoted ./)
+#by following the commands below
+
+cd Sylvia_Analysis/David_Data$ cp -r /project/agwan003/Oral_2017_analysis/David_Hippocampal_Data/David_Hippocampal_Data/R232-2011-10-16/ ./
+
+# To move file_name to Sylvia_Analysis (previous directory)
+# from David_Data (present Directory) type the command # below
+
+mv file_name ../
+
+# To access all four zip files in the 
+# /project/agwan003 space always type:
+
+cd /project/agwan003/Oral_2017_analysis
+
+#Must include the / before project because project
+
+#========= creating  git files=============
+
+#if you're creating a completely new project
+# do the following steps:
+
+1. log into git.com and clike on the project title
+2. Click on clone/download
+3. copy the link there
+4. go to your home directory on your lap top
+and type the following:
+git clone https://github.com/nakanwagi/new_project_name.git
+5. great! new_project_name is now an existing
+git hub document.
+
+
+#===Updating an existing github project===============
+
+#=======updating changes in matlab code==============
+
+#======== if you change a .m file on sonet===========
+#=== do the following ===============================
+
+1. cd current_git_project_name directory
+2. git add --all .  
+3. git commit -m "specify the files you edited"
+for example "changed hello.py"
+4. git push origin master
+
+# The command in step 4 above updates your files
+# on the cloud.
+
+#======= if the above change wasn't done on==========
+#===personal computer====tesylvia===to the following==
+
+1. cd /home/Documents/Matlab_work_dir/current_project_directory
+2. git pull 
+(to pull cloud info to your personal laptop)
+
+#great! in step 2 above, all the info on the cloud
+# was recorded on your personal computer.
+# repeat steps 1-4 and 1-2 if you pushed to the cloud
+# on tesylvia but want to pull to sonet i.e vice 
+# versa.
+
+
+# copy folder  from Documents.. to current folder (./)
+cp -r ~/Documents/MATLAB_working_d
+ir/Oral_2017_analysis/Oral_2017_analysis/Real_Data_analsysi/Fast_Code/ ./
+
+# how to open matlab with graphics on sonet
+ssh -XY agwan003@sonet.math.umn.edu
+
+
+
+# how to create another branch on git
+1. git checkout -b file_name
+2. git status %find out if the file has been created
+3. git add --all file_name %add the new file name to git
+4. 
+
+
+# Linux commands saved on my git project
+ 568  git push origin master
+  578  sudo dpkg -i mendeleydesktop_1.17.10-stable_amd64.deb 
+  579  sudo apt-get upgrade
+  589  git push origin master
+  594  apt-get update
+  605  sudo dpkg -i gitkraken-amd64.deb 
+  606  sudo apt-get install -f
+  607  gitkraken 
+  614  mv 5_29_2017/ /project/agwan003
+  618  rm -rf 5_30_2017_realData_analysis/
+  620  rm -rf Oral_2017_results/
+  632  git pull
+  644  scp -r agwan003@sonet.math.umn.edu:~/Spike_Analysis_Project/hello.py  ./Spike_Analysis_Project/
+  645  scp -r agwan003@sonet.math.umn.edu:/home/agwan003/Spike_Analysis_Project/SyntheticData/  ./Spike_Analysis_Project/
+  651  sudo rm -rf Spike_Analysis_Project/
+  652  git clone git@github.com:nakanwagi/Spike_Analysis_Project.git
+  655  git status
+  658  git pull
+  667  history 100 > bash_help_commands.log
+
+
+
+
+
+
+
+
+
+
