@@ -33,11 +33,6 @@ This should help to yield a more reliable estimate of the animal's position alon
 
 In addition, non-linear methods like diffusion maps do not yield an explicit function between the input and output space. This provides a challenge on how to evaluate the performance of the algorithm. Current approaches first add a new column to the original data set and then recompute the embedding on order to obtain a prediction of the new point in the embedded space. However, diffusion maps runs out of memory for large data sets since it requires computation of a full $n \times n$ matrix given n data points. This makes it difficult to use out-of-sample extensions as a goodness of measure in large scale neural recordings.\\
 
-Third, in our current approach, we do not have an explicit model which enables
-us to see how the system evolves over time.
-Our results are independent of the precise time at which the spikes occur since the position of the animal is encoded by vectors corresponding to brain states
-sampled uniformly at random. Thus we are unable us to quantify the impact of precise spike timing on decoding the underlying stimuli such as the position
-of the animal on the truck. We aim to design a model which takes into account the precise timing of the spikes. 
 
 Finally, we plan to look at other types of distance measures for quantifying neural response variability such as variants of the kendal tau distance 
 or a weighted combination of some existing distances. We have used the l$_1$
