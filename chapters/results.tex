@@ -1,61 +1,73 @@
 %\mychapter{6}{Results}
 
 \section{Results}
-In this section, we report our results on noisy synthetic data using diffusion maps with the $l_{1}$ distance. We compare our results with those obtained via PCA, a popular linear dimensionality technique. Figure \ref{fig:DiffMaps_PCA_on_Prevtime_FR} (right column) shows that diffusion maps  with $l_{1}$ distance appears to capture the animal's circular motion better than PCA when applied on firing rate data. Using previous time data, diffusion maps with $l_{1}$ distance appears to outperform PCA (see the left column of Figure  \ref{fig:DiffMaps_PCA_on_Prevtime_FR}).
-We also see that using previous time data captures changes in spike timing
-as the animal makes 4 laps around the circle.\\
+In this section, we only report results on  synthetic data using diffusion maps with the $l_{1}$ distance. We compare our results with those obtained via PCA, a popular linear dimensionality technique.  Figure \ref{fig:DiffMaps_PCA_on_Prevtime_FR} (left column) shows that both diffusion maps with $l_1$  distance and PCA capture the animals motion around the circular track when applied on firing rate data. This is not surprising since we are using clean firing rate data that encodes the animals position around the track. However, when using previous time data corrupted  with poisson noise, diffusion maps with $l_{1}$ distance appears to outperform PCA (see the right column of Figure  \ref{fig:DiffMaps_PCA_on_Prevtime_FR}).
+We  see that analyzing previous time data using diffusion maps captures the simulated four and half laps taken by the animal around the circular track while PCA  performs poorly on the same data.
 
 \begin{figure}[H]
         \centering
         \begin{subfigure}[b]{0.475\textwidth}
             \centering
-            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimPrevtime.eps}
-            \caption[Simulated prevtime]%
-            {{\small Simulated previous time data (Prevtime)}}    
+            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimFiringRate-with-Time.eps}
+           % \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimPrevtime.eps}
+            \caption[]%
+            {{\small Simulated firing rate data (FR)}}  
+            %{{\small Simulated previous time data (Prevtime)}} 
+               
             \label{fig:Prevtime in 3D}
         \end{subfigure}
         \hfill
         \begin{subfigure}[b]{0.475\textwidth}  
             \centering 
-            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimFiringRate-with-Time.eps}
+           % \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimFiringRate-with-Time.eps}
+            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimPrevtime.eps}
             \caption[]%
-            {{\small Simulated firing rate data (FR)}}    
+            {{\small Simulated previous time data (Prevtime)}}  
+            %{{\small Simulated firing rate data (FR)}}    
             \label{fig:Sim animal position in 3D}
         \end{subfigure}
         \vskip\baselineskip
         \begin{subfigure}[b]{0.475\textwidth}   
             \centering 
-            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimPrevtimePCA.eps}
+            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimFRPCA.eps}
+           % \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimPrevtimePCA.eps}
             \caption[]%
-            {{\small PCA on Prevtime}}    
+             {{\small PCA on FR}}   
+            %{{\small PCA on Prevtime}}    
             \label{fig:PCA on Prevtime in 3D}
         \end{subfigure}
         \quad
         \begin{subfigure}[b]{0.475\textwidth}   
             \centering 
-            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimFRPCA.eps}
+            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimPrevtimePCA.eps}
+           % \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimFRPCA.eps}
             \caption[]%
-            {{\small PCA on FR}}    
+             {{\small PCA on Prevtime}}   
+           % {{\small PCA on FR}}    
             \label{fig:PCA on prevtime in 2D }
         \end{subfigure}
         \vskip\baselineskip
         \begin{subfigure}[b]{0.475\textwidth}   
             \centering 
-            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimPrevtimeDML1.eps}
+             \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimFRDML1.eps}
+          %  \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimPrevtimeDML1.eps}
             \caption[]%
-            {{\small Diffusion Maps on Prevtime}}    
+             {{\small Diffusion Maps on FR}}    
+            %{{\small Diffusion Maps on Prevtime}}    
             \label{fig:Diffusion maps on Prevtime in 3D}
         \end{subfigure}
         \quad
         \begin{subfigure}[b]{0.475\textwidth}   
             \centering 
-            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimFRDML1.eps}
+             \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimPrevtimeDML1.eps}
+           % \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimFRDML1.eps}
             \caption[]%
-            {{\small Diffusion Maps on FR}}    
+            {{\small Diffusion Maps on Prevtime}}  
+           % {{\small Diffusion Maps on FR}}    
             \label{fig:Diffusion maps on Prevtime in 3D }
         \end{subfigure}
         \caption[Performance of Diffusion maps and PCA on data ]
-        {\small Performance of Diffusion maps and PCA on simulated previous time data (left column) and on simulated firing rate data (right column).} 
+         {\small Performance of Diffusion maps and PCA  on simulated firing rate data (left column) and on simulated previous                 time data (right column). } 
         \label{fig:DiffMaps_PCA_on_Prevtime_FR}
 \end{figure}
 
