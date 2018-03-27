@@ -80,7 +80,7 @@ From  $\theta(t)$,  we model the place field of the $j^{th}$ neuron using a Gaus
 where $f_{bg}$ is the background firing rate that is independent of the underlying stimulus, $f_{\max}$ denotes the maximum firing rate of each neuron, $\epsilon_j \in  [0.01, 1]$ is the width of the $j^{th}$ neuron's place field  and $\phi_{j}$ is the preferred position of the $j^{th}$  neuron or the center of the j$^{th}$ place field. We assume that the centers of the place fields are distributed uniformly in space.  In particular, we set 
 $$\phi_j = \frac{j2\pi}{N}, \ \    \text{for}   \ \    1 \leq j \leq N.$$
 Intuitively, $g^{j}(\theta)$, models  the likelihood that the rat's neuron fires given the animal's position $\theta(t)$, in space.
-The Gaussian function indicates that the rat's place cell is  likely to  maximally fire at the center of the cell's place field
+The Gaussian function indicates that the rat's place cell is  likely to fire maximally  at the center of the cell's place field
 which mimics a characteristic  of a real-world rat's place cells.
 Our model assumes that each neuron in the simulated rat's brain has a single place field. This is a realistic assumption as 
 most place cells have one place field (see section 6 on possible future directions). \\
@@ -105,64 +105,49 @@ We use two data sets because we do not have a suitable measure of error for anal
 and PCA. Hence, we use the clean firing rate data set as our reference to determine how well both algorithms perform
 on the noisy previous time data set.\\
 
-First, we sample from the firing rate function  $R^{j}(t)$ for each time point $t \in [0, T]$,
-to obtain $N-$ dimensional vectors  that form each row of our  clean synthetic firing rate data  matrix,
-$$(R^{1}(t),  R^{2}(t),    \ldots , R^{N}(t) )  \in \R^N. $$
-
-The second data set is generated as follows: we assume that the experiment consists of a single trial and that the spike train  $\{ t^j \}   =  \{t_{1}^{j}, ....., t_{n_{i}}^{j} \} $, of the $j^{th}$, neuron is generated according to a non-homogeneous poisson process with firing rate  $R^{j}(t),$ in the interval $[0, T].$ We then generate a spike  $t^j_i,$ with probability $\text{R}^{j}(t)\Delta t \ll 1$, otherwise no spike is generated.  Next, we define the previous time function (see section 4.3 )  based on the  generated set of synthetic spike trains.  We sample from the previous time function to obtain 
-$N-$dimensional vectors for each row of our previous time data matrix,
-
-$$
-( \text{P}^{1}(t), \text{P}^{2}(t), \ldots, \text{P}^{N}(t) ) \in  \R^N.
-$$
-
-From Figure \ref{fig:PrevTime}, we  see that the previous time function is undefined at the beginning
-of the experiment where there is no spike. In our ananlysis, we do blah blah blah, we discussion for future directions on how to address this.
+First, we sample from the firing rate function  $R^{j}(t),$ for each time point $t \in [0, T]$,
+to obtain vectors  $(R^{1}(t),  R^{2}(t),    \ldots , R^{N}(t) )  \in \R^N),$ that form each row of our  
+clean synthetic firing rate data  matrix.\\
 
 
+The second data set is generated as follows: we assume that the experiment consists of a single trial and that the spike train  $\{ t^j \}   =  \{t_{1}^{j}, ....., t_{n_{i}}^{j} \} $, of the $j^{th}$, neuron is generated according to a non-homogeneous poisson process with firing rate  $R^{j}(t),$ in the interval $[0, T].$ We then generate a spike  $t^j_i,$ with probability $\text{R}^{j}(t)\Delta t \ll 1$, otherwise no spike is generated.  Next, we define the previous time function (see section 4.3 )  based on the  generated set of synthetic spike trains.  We sample from the previous time function to obtain  vectors
+$( \text{P}^{1}(t), \text{P}^{2}(t), \ldots, \text{P}^{N}(t) ) \in  \R^N,$ for each row of our previous time data matrix.\\
 
+From Figure \ref{fig:PrevTime}, we  see that the previous time function is undefined at the beginning of the experiment where there is no recorded spike. In our analysis, we insert a spike before the start of the experiment by computing the mean previous time obtained after running  one simulation of  the previous time data. This ensures that the previous time function
+is defined for all time (see discussion in section 6 for future directions). \\
 
-Thus at each time point, $t  \in [0,T]$, the position of the animal, $\theta(t)$, is associated with a previous time function, $\text{P}^{j}(t)$, and a firing rate function, $R^{j}(t)$. We analyze both data sets using the diffusion maps algorithm  and  PCA.
-
-
+At  each time point, $t  \in [0,T]$, the position of the animal, $\theta(t)$, is associated with a previous time function, $\text{P}^{j}(t)$, and a firing rate function, $R^{j}(t)$. We analyze both data sets using the diffusion maps algorithm  and  PCA.
 
 
 \subsection{Distance  and similarity measure used in results section}
-Given two time points $t_{1}$ and $t_{2}$ , we form the corresponding previous time vectors 
+Given two time points $t_{1}$ and $t_{2}$ , we write the corresponding previous time vectors 
 
-$$ \vect{P}(t_1)= (p^{1}(t_{1}), p^{2}(t_{1}), \ldots, p^{N}(t_{1}))^{\top}   \  \ \text{and} \  \ 
- \vect{p}(t_{2}) = (p^{1}(t_{2}), p^{2}(t_{2}), \ldots, p^{N}(t_{2}))^{\top} \  \ \text{in} \  \  \R^{N}.$$
+$$ \vect{P}(t_1)= (\text{P}^{1}(t_{1}), \text{P}^{2}(t_{1}), \ldots, \text{P}^{N}(t_{1}))   \  \ \text{and} \  \ 
+ \vect{P}(t_{2}) = (\text{P}^{1}(t_{2}), \text{P}^{2}(t_{2}), \ldots, \text{P}^{N}(t_{2}))  \  \ \text{in} \  \  \R^{N}.$$
 
 We use the l$_{1}$ norm to compute the distance between the two vectors:
 
 \begin{equation}\label{distPrevtime}
-\text{d}(\vect{p}(t_{1}), \vect{p}(t_{2}) ) = 
-\displaystyle \sum_{i=1}^{N} \abs{ p^{i}(t_{1}) - p^{i}(t_{2})   }.
+\text{d}(\vect{P}(t_{1}), \vect{P}(t_{2}) ) = 
+\displaystyle \sum_{j=1}^{N} \abs{ \text{P}^{j}(t_{1}) - \text{P}^{j}(t_{2})   }.
 \end{equation}
 
 Similarly, we use the $l_{1}$-norm to compute the distance between two firing rate vectors:
 
 \begin{equation}\label{distFirerate}
-\text{d}(\vect{r}(t_{1}), \vect{r}(t_{2}) ) = 
-\displaystyle \sum_{i=1}^{N} \abs{ r^{i}(t_{1}) - r^{i}(t_{2})   }.
+\text{d}(\vect{R}(t_{1}), \vect{R}(t_{2}) ) = 
+\displaystyle \sum_{j=1}^{N} \abs{ R^{j}(t_{1}) - R^{j}(t_{2})   }.
 \end{equation}
 
 We use the  l$_1$ norm  instead of the l$_{2}$ norm because the latter emphasizes large differences between data points which diverges from our goal of learning similar brain states  based on pairwise distances between spike trains.\\
 
 
-We form pairwise similarities, $w_{ij}$, between each data point
-using the Gaussian kernel 
+We form pairwise similarities, $w_{ij}$, between each data point using the Gaussian kernel  which we eventually use as weights in the diffusion maps algorithm. The weights are given by,
 \[
 w_{ij} = e^{-\dfrac{\text{dist}^{2}(\vect{x}_{i}, \vect{x}_{j})}{2\sigma^2}} 
-\]
-where $\text{dist}(\vect{x}_{i}, \vect{x}_{j})$ is given by equations
-\eqref{distPrevtime} and \eqref{distFirerate}.
-We then apply diffusion maps to the resultant weight matrix  W = (w$_{ij}$) 
-as described in section 3.3.8, to obtain a low dimensional model for the 
-firing rate and previous time data.
+\]   where $\text{dist}(\vect{x}_{i}, \vect{x}_{j})$ is given by equations
+\eqref{distPrevtime} and \eqref{distFirerate}. 
 
-%The two parameters in diffusion maps are $\sigma$ and $\alpha$.
-%We set $\sigma =1$ and $\alpha = 0.5$ for all our synthetic results.
 
 
 
