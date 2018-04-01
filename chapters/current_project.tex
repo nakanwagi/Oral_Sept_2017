@@ -4,33 +4,28 @@
 
 \subsection{Our framework}
 
-We propose a novel method of pre-processing spike times by looking at the time since the previous spike, which we refer to as the previous time.  Currently, our pre-processing technique is  applied to synthetic data as a first step towards being
-able to pre-process  real-world data using the previous time.  To the best of our knowledge, using previous time  to pre-process spike train data from the CA1 region of the rat hippocampus has never been done before.\\
+---- Most importatnt part of the paper -----------------------------------
 
-Our preliminary results on synthetic experiments  show  that  previous time data  capture  the  four and a half laps taken by a rat  around a simulated circular track.  We use the diffusion maps algorithm \cite{coifman2006diffusion}  to obtain a low dimensional model of the simulated data and compare the algorithm's performance with that of PCA.\\
-
-Traditionally, spike trains are often smoothed using a suitable kernel (see section 3.4.2) in order to obtain an estimate
-of the  firing rate.  Smoothing a simulated firing rate with a kernel such as a Gaussian or decaying exponential  and then adding additive and Poisson noise to the simulated firing rate could be an ideal way to generate synthetic data which closely mimics the nature of the real-world  data we have. However  there are many parameters to tune when using kernels.
-Moreover,  we do not have  a suitable measure of error for  analyzing the performance  of the diffusion maps  algorithm and PCA on our synthetic data. To work around these two obstacles, we simulate clean firing rate data which perfectly encodes the position of the animal on a circular track and compare the output of the  two algorithms on both the clean firing rate data and the noisy previous time data. \\
-
-Our motivation for using both  firing rate data  and previous time data  is based on the fact that the position of the rat is coded by place cells using both the firing rate and the precise time at which the cells fire with respect to the hippocampal theta rhythm. The theta rhythm is a sinusoid of frequency 7-12 Hz which occurs whenever a rat changes position in  a specific direction \cite{OKeefe1971, Burgess1993}.\\
 
 
 In section  4.2 and 4.3,  we define the previous time function and illustrate it graphically.  In addition, we give a description of our simulation and analyzes used. In section 5, we show our results of diffusion maps and PCA on synthetic data sets.
 Finally in section 6, we give a brief discussion on our results and suggest possible future directions.
 
 
-\subsection{Nature of our raw real-world data}
-The  raw real-world data set consists  of multiple single-unit single-trial spike trains,\\
+\subsection{Nature of spike  data}
+The  spike  data  set consists  of multiple single-unit single-trial spike trains,
+
 \[ 
-\text{T}^{\text{spike}} = \displaystyle \{ \{ t^{j} \} ,  1 \leq j \leq 32 \}  
+\text{T}^{\text{spike}} = \displaystyle \{ \{ t^{j} \} ,  1 \leq j \leq N \}  
 \]
-recorded from 32 neurons, called  place cells, in the CA1 region of the rat hippocampus, where,
-$\displaystyle  \{t^{j}\} =  \{t_{1}^{j}, ....., t_{n_{i}}^{j} \} $, represents  a sequences of n$_{i}$ recorded times at which the spikes of the $j^{th}$ neuron occurred. \\
-However, we only show results based on synthetic data due to lack of a suitable measure of error to quantify 
-the performance of  diffusion maps and PCA on real world data.  We pre-process the simulated spike trains by computing  the previous time  defined in section 4.3.
+recorded from $N$  neurons  where,
+$\displaystyle  \{t^{j}\} =  \{t_{1}^{j}, ....., t_{n_{i}}^{j} \} $, represents  a sequences of n$_{i}$ recorded times at which the spikes of the $j^{th}$ neuron occurred. 
+
+%However, we only show results based on synthetic data due to lack of a suitable measure of error to quantify 
+%the performance of  diffusion maps and PCA on real world data.  We pre-process the simulated spike trains by computing  the previous time  defined in section 4.3.
  
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%% %%%  deleted this because our firing rate does not have spikes   %%%%%%%%%%%%%%%%%%%%%%%%%%
 %\subsubsection{Conversation to a firing rate}
 %For each neuron labeled $j$,  we smooth the corresponding spike train T$^{\text{spike}}_{j}(t)$ to obtain the firing rate function $R^{j}(t).$ The  firing rate function, for the $j^{th}$ neuron is given by
@@ -41,7 +36,7 @@ the performance of  diffusion maps and PCA on real world data.  We pre-process t
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{The previous time function}
-
+Previous time refers to the time since the last spike of a given neuron. The previous time function captures the history of the neuron's  activity even in the absence of spikes.
 Given any time $t$, define the previous time function of the $j^{th}$ neuron, denoted by $\text{P}^{j}(t)$ as follows. Let 
 \[
 t^{j}_{\text{prev}}(t) = \displaystyle \max  \{  t^{j}_{i} \ \ | \ \ t^{j}_{i} < t, 1 \leq i \leq n_{i} \} \ \ \text{for all spike trains} \quad  \{t^{j}\} \in T^{\text{spike}}, 
@@ -50,7 +45,7 @@ where $t^j_i$ denotes the $i^{th}$ spike of the $j^{th}$ neuron.  The previous t
 \begin{equation}\label{prevtimefun}
 \text{P}^{j}(t) = t^{j}_{\text{prev}}(t) - t.
 \end{equation}
-Previous time refers to the time since the last spike of a given neuron. The previous time function captures the history of the neuron's  activity even in the absence of spikes.
+
 
 Figure \ref{fig:PrevTime} below illustrates how the previous time function is obtained from the firing activity of a given neuron.
 
@@ -59,16 +54,16 @@ Figure \ref{fig:PrevTime} below illustrates how the previous time function is ob
         \centering
           \includegraphics[width=\textwidth]{./images/PrevTime_graph.pdf}
            \caption[]
-            {\small The previous time function $\text{P}^{j}(t) = t^{j}_{\text{prev}}(t) - t,$ based on a raster plot of a single neuron.   $P^{j}(t)$ is equal to zero when a neuron fires a spike  and then moves away from zero with a slope of negative one to a height equal to the difference between two adjacent spike times, below the horizontal axis. } 
+            {\small  The previous time function $\text{P}^{j}(t) = t^{j}_{\text{prev}}(t) - t,$ based on a raster plot of a single neuron.   The ticks on the raster plot represent the spike time of a neuron. $P^{j}(t)$ is equal to zero when a neuron fires a spike  and then moves away from zero with a slope of negative one to a height equal to the difference between two adjacent spike times, below the horizontal axis.  } 
              \label{fig:PrevTime}
   \end{figure}
 
 
 \subsection{Simulation}
-We consider a population of $N=32$ sensory neurons (place cells) encoding a 
-one-dimensional circular stimulus variable, $\theta(t)$, which represents 
-the position of a rat, at any time $t$ along a circular track, during a behavioral task.
-We let $\theta(t) = c t \ \ (\text{mod} \ \ 2\pi)$, where time $t$, is in seconds, $c = \dfrac{2\pi}{T_{\text{lap}}}$ is the speed of the animal, and
+We consider a population of $N=32$  neurons (idealized place cells) encoding a 
+one-dimensional circular  variable, $\theta(t)$, which represents 
+the position of a rat, at any time $t$ along a circular track, during a behavioral task  (see figure \ref{fig:RasterPlot}).
+In the simulation, we let the rat move at a constant speed $c$, setting  $\theta(t) = c t \ \ (\text{mod} \ \ 2\pi)$, where time $t$, is in seconds. The quantity  $c = \dfrac{2\pi}{T_{\text{lap}}},$ is the speed of the animal, and
 $\text{T}_{\text{lap}}$ is the time taken for the animal to make one lap around the circle.
 From  $\theta(t)$,  we model the place field of the $j^{th}$ neuron using a Gaussian 
 
@@ -77,7 +72,7 @@ From  $\theta(t)$,  we model the place field of the $j^{th}$ neuron using a Gaus
 \exp\bigg(-\dfrac{\text{dist}^{2}(\theta - \phi_{j})}{2\epsilon_{j}^{2}} \bigg)
 \end{equation}
 
-where $f_{bg}$ is the background firing rate that is independent of the underlying stimulus, $f_{\max}$ denotes the maximum firing rate of each neuron, $\epsilon_j \in  [0.01, 1]$ is the width of the $j^{th}$ neuron's place field  and $\phi_{j}$ is the preferred position of the $j^{th}$  neuron or the center of the j$^{th}$ place field. We assume that the centers of the place fields are distributed uniformly in space.  In particular, we set 
+where $f_{bg}$ is the background firing rate that is independent of the underlying stimulus, $f_{\max}$ denotes the maximum firing rate of each neuron, $\epsilon_j $  is the width of the $j^{th}$ neuron's place field ($\epsilon_j$ is chosen uniformly at random in  $[0.01, 1]$)  and $\phi_{j}$ is the preferred position of the $j^{th}$  neuron or the center of the j$^{th}$ place field. The centers of the place fields are equally spaced, that is, we set
 $$\phi_j = \frac{j2\pi}{N}, \ \    \text{for}   \ \    1 \leq j \leq N.$$
 Intuitively, $g^{j}(\theta)$, models  the likelihood that the rat's neuron fires given the animal's position $\theta(t)$, in space.
 The Gaussian function indicates that the rat's place cell is  likely to fire maximally  at the center of the cell's place field
@@ -94,24 +89,24 @@ two points on a unit circle, given by
 
 Our simulation assumes  that information about the animal's environment is  encoded by the firing rate function
 $$R^{j}(t) =  \text{g}^{j}(\theta(t)).$$
-Thus given a rat position $\theta(t)$, all the 32  neurons  in the simulated rat's brain fire according to the firing rate function  $R^{j}(t).$
+Thus given a rat position $\theta(t)$, all the $N$ neurons  in the simulated rat's brain fire according to the firing rate functions  $R^{j}(t),$ for $j = 1, \ldots, 32.$
 
 
 \subsection{Analysis}
 We set the start  and end time of the synthetic experiment  to be  $0$ and $T$ respectively. We then divide the interval
 $[0, T],$ into equal sub-intervals  of width $\Delta t$.
-We carry out  our analyzes  using two different data sets:  a clean firing rate data set and  a noisy previous time data set.
+We carry out  our analyses  using two different data sets:  a clean firing rate data set and a data set consisting of spikes generated as a Poisson process.
 We use two data sets because we do not have a suitable measure of error for analyzing the performance of diffusion maps
 and PCA. Hence, we use the clean firing rate data set as our reference to determine how well both algorithms perform
-on the noisy previous time data set.\\
+on the spike time data set.\\
 
 First, we sample from the firing rate function  $R^{j}(t),$ for each time point $t \in [0, T]$,
-to obtain vectors  $(R^{1}(t),  R^{2}(t),    \ldots , R^{N}(t) )  \in \R^N),$ that form each row of our  
-clean synthetic firing rate data  matrix.\\
+to obtain one data point  $(R^{1}(t),  R^{2}(t),    \ldots , R^{N}(t) )  \in \R^N.$ \\
 
-
-The second data set is generated as follows: we assume that the experiment consists of a single trial and that the spike train  $\{ t^j \}   =  \{t_{1}^{j}, ....., t_{n_{i}}^{j} \} $, of the $j^{th}$, neuron is generated according to a non-homogeneous poisson process with firing rate  $R^{j}(t),$ in the interval $[0, T].$ We then generate a spike  $t^j_i,$ with probability $\text{R}^{j}(t)\Delta t \ll 1$, otherwise no spike is generated.  Next, we define the previous time function (see section 4.3 )  based on the  generated set of synthetic spike trains.  We sample from the previous time function to obtain  vectors
-$( \text{P}^{1}(t), \text{P}^{2}(t), \ldots, \text{P}^{N}(t) ) \in  \R^N,$ for each row of our previous time data matrix.\\
+To obtain the second data set, we generate spikes  for a single trial. The spike times $\{t_{1}^{j}, ....., t_{n_{i}}^{j} \},$  of the $j^{th}$ neuron are generated as a non-homogeneous Poisson process at a rate $R^{j}(t),$ in the interval $[0, T].$
+Next, we define the previous time function (see section 4.3 )  based on the  generated set of  spike trains.  
+For each time point $t \in [0, T],$ we sample from the previous time function $\text{P}^{j}(t),$ to obtain  one data point
+$( \text{P}^{1}(t), \text{P}^{2}(t), \ldots, \text{P}^{N}(t) ) \in  \R^N.$ \\
 
 From Figure \ref{fig:PrevTime}, we  see that the previous time function is undefined at the beginning of the experiment where there is no recorded spike. In our analysis, we insert a spike before the start of the experiment by computing the mean previous time obtained after running  one simulation of  the previous time data. This ensures that the previous time function
 is defined for all time (see discussion in section 6 for future directions). \\
