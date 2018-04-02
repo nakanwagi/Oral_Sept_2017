@@ -2,7 +2,7 @@
 
 \section{Results}
 In this section, we report results on  synthetic data using diffusion maps with the $l_{1}$ distance. We compare our results with those obtained via PCA, a popular linear dimensionality technique. We apply PCA and diffusion maps to both the 
-clean firing rate data set and the spike time data set preprocessed  with the previous time measure to obtain previous time data.
+clean firing rate data set and the spike time data set preprocessed  with the previous time measure to obtain previous time data (see Figure \ref{fig:Simulated_datasets}).
 
 
 Figure \ref{fig:DiffMaps_PCA_on_Prevtime_FR} (left column) shows that both diffusion maps with $l_1$  distance and PCA capture the animal's motion around the circular track when applied on firing rate data. This is not surprising since we are using clean firing rate data that encodes the animal's position around the track. However, when using previous time data, diffusion maps with $l_{1}$ distance appears to outperform PCA (see the right column of Figure  \ref{fig:DiffMaps_PCA_on_Prevtime_FR}). We  see that analyzing previous time data using diffusion maps captures the simulated four and half laps taken by the animal around the circular track while PCA  fails to reveal that the rat took four and a half laps  around the track. 
@@ -11,7 +11,7 @@ Figure \ref{fig:DiffMaps_PCA_on_Prevtime_FR} (left column) shows that both diffu
         \centering
         \begin{subfigure}[b]{0.475\textwidth}
             \centering
-            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimFiringRate-with-Time.eps}
+            \includegraphics[width=\textwidth]{./images/SimFiringRate-with-time.eps}
            % \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimPrevtime.eps}
             \caption[]%
             {{\small Simulated firing rate data (FR)}}  
@@ -23,13 +23,24 @@ Figure \ref{fig:DiffMaps_PCA_on_Prevtime_FR} (left column) shows that both diffu
         \begin{subfigure}[b]{0.475\textwidth}  
             \centering 
            % \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimFiringRate-with-Time.eps}
-            \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimPrevtime.eps}
+            \includegraphics[width=\textwidth]{./images/SimPrevtime.eps}
             \caption[]%
             {{\small Simulated previous time data (Prevtime)}}  
             %{{\small Simulated firing rate data (FR)}}    
             \label{fig:Sim animal position in 3D}
         \end{subfigure}
-        \vskip\baselineskip
+        \caption[]%
+         {\small  (a) Example of the firing rate of two neurons showing the modulation of the firing rates as the rat completes four and a half laps around a simulated circular track.
+         (b) Example of the previous time of two neurons obtained after preprocessing  simulated spike times using  the 
+         previous time measure.} 
+         \label{fig:Simulated_datasets}
+\end{figure}
+        
+        
+        
+        
+        \begin{figure}[H]
+        \centering
         \begin{subfigure}[b]{0.475\textwidth}   
             \centering 
             \includegraphics[width=\textwidth]{./images/FinalOralPlots/SyntheticOralPaper/SimFRPCA.eps}
@@ -69,15 +80,21 @@ Figure \ref{fig:DiffMaps_PCA_on_Prevtime_FR} (left column) shows that both diffu
            % {{\small Diffusion Maps on FR}}    
             \label{fig:Diffusion maps on Prevtime in 3D }
         \end{subfigure}
-        \caption[Performance of Diffusion maps and PCA on data ]
-         {\small Performance of Diffusion maps (e and f) and PCA (c and d) on simulated firing rate data (a) and on simulated previous  time data (b). The $x$ and $y$ axes in both (a) and (b)  represent the first and second neuron respectively.
-         Any single point on a curve  (in c, d, e and f) represents the value of the first eigen vector (x-axis) and
-         the second eigen vector (y-axis) at any time $t$. Since the rat's position in space is a circular curve parametrized in time $t$, the top two eigen vectors of diffusion maps on previous time data capture this circular motion as shown in (f).} 
+        \caption[]%
+         {\small Performance of PCA (first row) and Diffusion maps (second row) on simulated firing rate data (figure \ref{fig:Simulated_datasets}, left column)  and  previous  time data (figure \ref{fig:Simulated_datasets}, right column).\\
+         Each circle in the left column corresponds to the four and a half laps made by the rat as the animal goes around 
+         a circular track.  All the laps are superimposed on top of each other because the results in the left column
+         are obtained after applying PCA (a) and Diffusion maps (c) on clean firing rate data.\\
+         (b) Example showing that PCA applied to previous time data fails to reveal the four and a half laps taken by the rat around a circular track.\\
+          (d)  Example showing that  Diffusion maps applied to previous time data recovers the four and a half laps taken by the rat around the circular  track. \\  
+         A single point on any curve in figure \ref{fig:DiffMaps_PCA_on_Prevtime_FR} represents the value of the first and 
+         second eigen vector at any time t. Since the rat's position in space is a circular curve parametrized in time t, the top
+         two eigen vectors of diffusion maps on previous time data capture the circular motion of the rat as shown in (d).} 
         \label{fig:DiffMaps_PCA_on_Prevtime_FR}
 \end{figure}
 
 
-
+\newpage
 
 
 

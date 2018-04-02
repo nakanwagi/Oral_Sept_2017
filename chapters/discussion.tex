@@ -4,9 +4,7 @@ In this section, first, we explain our observations based on experimental result
 
 
 \subsection{Interpretation of our results}
-Analyzing synthetic data using noisy previous time data captures the animals position around the simulated circular track 
-while using diffusion maps. We regard this observation as a potentially exciting area for future investigation since noisy 
-previous time data contains less information compared to using clean firing rate data. Even though we are using  synthetic data, these preliminary results show that pre-processing spike times using the previous time should be explored in future analyses of real-world spike train data from the CA1 region of the rat hippocampus. 
+Analyzing synthetic spike time data preprocessed by the previous time measure captures the animal's position around the simulated circular track while using diffusion maps. We regard this observation as a potentially exciting area for future investigation since previous time data contains less information compared to using clean firing rate data. Even though we are using  synthetic data, these preliminary results show that pre-processing spike times using the previous time  measure should be explored in future analyses of real-world spike train data from the CA1 region of the rat hippocampus. 
 
 \subsection{Future directions}
 First, at the beginning of the experiment, there are no recorded spike times.
@@ -14,13 +12,17 @@ However, we require that there is atleast one spike before a given brain state, 
 of the experiment. As it stands, we have addressed this problem by first running the experiment once to obtain the mean of the sampled previous time data, and afterwords, we insert a spike before the beginning of the experiment based on the computed previous time average, and then use that to simulate new  previous time data. We think that this is not the best approach for instance in the case where the mean of underlying distribution is not defined. In addition, computing the previous time vectors twice increases the computational complexity of our algorithm. We plan to find another way of addressing the boundary condition for the previous time vectors. For example, we plan to insert a spike before the beginning of the experiment based on samples drawn from a correctly estimated underlying model of the data.\\
 
 Second, we currently do not have a measure of error for analysing the  effectiveness of our approach. 
-We tried using the Shannon mutual information but found that  high  mutual information may be to due space noise, such as the animals head directions while running along the track which opens a variety of possible interpretations of the data.  We plan to use the Fisher information as a goodness of measure in future work. We think that the Fisher information is a likely a good measure of error, since it imposes a continuity assumption on the underlying model and is highest when then the variance of the estimated model parameter is very small. This could  yield a more reliable estimate of the animal's position along the simulated circular track. \\
+We tried using the Shannon mutual information but found that  high  mutual information may be to due space noise, such as the animals head directions while running along the track which opens a variety of possible interpretations of the data.  We plan to use the Fisher information as a goodness of measure in future work. We think that the Fisher information is a likely a good measure of error, since it imposes a continuity assumption on the underlying model and is highest when  the variance of the estimated model parameter is very small. This could  yield a more reliable estimate of the animal's position along the simulated circular track. \\
 
-We plan  to make harder simulations which mimic the real- world data we have.  For instance, we plan to  add additive and poisson noise to our simulated firing rate data.  In addition,  we plan to simulate  models in which each  neuron has 2 place fields. We hope that harder simulations and a good measure of error could guide us in the analysis of our real-world spike train data.\\
+We plan to preprocess the spike time real-world  data we have using the previous time measure  in order to look for
+structure in data itself so as to see how the structure corresponds to external variables.\\
 
 Finally, we plan to look at other types of distance measures for quantifying neural response variability such as variants of the kendal tau distance  or a weighted combination of some existing distances instead of the $l_1$ distance.\\
 
-An improved approach such as the one we envision and outline here  may lead to new theories of mathematical neuroscience for analysing spike train data from animal hippocampuses.
+An improved approach such as the one we envision and outline here  may provide some insight on how to analyze
+spike time data when the relationship between spikes and external variables is unknown.  By looking for structure in the 
+spike data itself preprocessed by the previous time measure,  a researcher may be able to see how the underlying structure
+corresponds to unknown external variables such as a stimulus eliciting an observed response without imposing ideas  on the likely external stimulus eliciting the response.
 
 
 
