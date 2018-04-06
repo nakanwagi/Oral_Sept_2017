@@ -3,14 +3,29 @@
 \section{Current Project}
 
 \subsection{Our framework}
+The goal of our current project  is to analyze real-world spike time data without assuming a particular relationship between spikes and external variables. For example, one target data set is  obtained by measuring single units (place cells)  from the CA1 region of the rat hippocampus during a behavioral experiment in which a rat is performing a spatial task along a circular track (see figure \ref{fig:RasterPlot}). As place cells fire predominantly when the rat is in  particular regions \cite{o1971hippocampus, Burgess1994}, neural activity is correlated with space. However, our goal is an analysis approach that does not assume such correlation but instead discovers structure in the neural data alone. Such an analysis would then be applicable to spike time data sets where such a strong relationship with external variables is not evident.\\
 
----- Most importatnt part of the paper -----------------------------------
+We hypothesize that the high dimensional spike time data from neural activity may lie along a low dimensional manifold 
+as the rat is moving along a one-dimensional track.  Therefore, we use dimensionality  reduction to learn the underlying
+structure of the data (see section 3.3). We then  check to see how the low dimensional structure learned from the 
+data itself corresponds to external variables such as the animal's position along the track.\\
 
+To do dimensionality reduction, we need a distance measure  (see  section 3.4) to model pairwise relations between spike trains since our data is spikes. The dimensionality reduction algorithms we use require a summary of pairwise distances between spike trains as an input in order to learn the low dimensional model.\\
 
+We propose a novel method of preprocessing spike times by looking at the time since the previous spike, which we refer to
+as the previous time measure (see section 4.3). The previous time function (see section 4.3) captures the history of neural activity even in long intervals between spikes.\\
 
-In section  4.2 and 4.3,  we define the previous time function and illustrate it graphically.  In addition, we give a description of our simulation and analyzes used. In section 5, we show our results of diffusion maps and PCA on synthetic data sets.
-Finally in section 6, we give a brief discussion on our results and suggest possible future directions.
+Since we do not have a suitable measure of error to analyze the performance of Diffusion maps and PCA on our
+real-world spike data, we design a synthetic experiment (simulation)  as a first step towards  developing and testing the effectiveness of our preprocessing technique on spike data (see section 4.4-4.5 ).
+To determine the performance of Diffusion maps and PCA on synthetic data, we carry out  our analyses  using two different synthetic data sets:  a clean firing rate data set and a data set consisting of spikes generated as a Poisson process.
+The generated spike data is then preprocessed using our previous time measure before carrying out dimensionality reduction. We use the clean firing rate data set as our reference to determine how well both algorithms perform
+on the  synthetic data.\\
 
+Our preliminary results on synthetic experiments show that spike time data preprocessed by the previous time measure
+capture the simulated four and a half laps taken by a rat around a circular track. We use the Diffusion maps algorithm 
+to obtain a low dimensional model of the synthetic data and compare the algorithm's performance with that of PCA.\\
+
+The sections that follow as organized as follows: In section  4.2 and 4.3,  we define the previous time function and illustrate it graphically.  In addition, we give a description of our simulation and analyzes used. In section 5, we show our results of diffusion maps and PCA on synthetic data sets. Finally in section 6, we give a brief discussion on our results and suggest possible future directions.
 
 \subsection{Nature of spike  data}
 The  spike  data  set consists  of multiple single-unit single-trial spike trains,
@@ -36,7 +51,7 @@ $\displaystyle  \{t^{j}\} =  \{t_{1}^{j}, ....., t_{n_{i}}^{j} \} $, represents 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{The previous time function}
-Previous time refers to the time since the last spike of a given neuron. The previous time function captures the history of the neuron's  activity even in the absence of spikes.
+Previous time refers to the time since the last spike of a given neuron. The previous time function captures the history of the neuron's  activity even in long intervals between spikes.
 Given any time $t$, define the previous time function of the $j^{th}$ neuron, denoted by $\text{P}^{j}(t)$ as follows. Let 
 \[
 t^{j}_{\text{prev}}(t) = \displaystyle \max  \{  t^{j}_{i} \ \ | \ \ t^{j}_{i} < t, 1 \leq i \leq n_{i} \} \ \ \text{for all spike trains} \quad  \{t^{j}\} \in T^{\text{spike}}, 
@@ -54,7 +69,7 @@ Figure \ref{fig:PrevTime} below illustrates how the previous time function is ob
         \centering
           \includegraphics[width=\textwidth]{./images/PrevTime_graph.pdf}
            \caption[]
-            {\small  The previous time function $\text{P}^{j}(t) = t^{j}_{\text{prev}}(t) - t,$ based on a raster plot of a single neuron.   The ticks on the raster plot represent the spike time of a neuron. $P^{j}(t)$ is equal to zero when a neuron fires a spike  and then moves away from zero with a slope of negative one to a height equal to the difference between two adjacent spike times, below the horizontal axis.  } 
+            {\small  The previous time function $\text{P}^{j}(t) = t^{j}_{\text{prev}}(t) - t,$ based on a raster plot of a single neuron.   The ticks on the raster plot represent the spike time of a neuron.  The previous time function captures the history of neural activity even in long intervals between spikes.  $P^{j}(t)$ is equal to zero when a neuron fires a spike  and then moves away from zero with a slope of negative one to a height equal to the difference between two adjacent spike times, below the horizontal axis.  } 
              \label{fig:PrevTime}
   \end{figure}
 
@@ -62,7 +77,7 @@ Figure \ref{fig:PrevTime} below illustrates how the previous time function is ob
 \subsection{Simulation}
 We consider a population of $N=32$  neurons (idealized place cells) encoding a 
 one-dimensional circular  variable, $\theta(t)$, which represents 
-the position of a rat, at any time $t$ along a circular track, during a behavioral task  (see figure \ref{fig:RasterPlot}).
+the position of a rat, at any time $t$ along a circular track, during a behavioral task  (cf.  figure \ref{fig:RasterPlot}).
 In the simulation, we let the rat move at a constant speed $c$, setting  $\theta(t) = c t \ \ (\text{mod} \ \ 2\pi)$, where time $t$, is in seconds. The quantity  $c = \dfrac{2\pi}{T_{\text{lap}}},$ is the speed of the animal, and
 $\text{T}_{\text{lap}}$ is the time taken for the animal to make one lap around the circle.
 From  $\theta(t)$,  we model the place field of the $j^{th}$ neuron using a Gaussian 
@@ -84,12 +99,12 @@ Given any two angles, $\theta_{1}, \theta_{2} \in [0, 2\pi]$, the quantity
 $\text{dist}(\theta_{1}, \theta_{2})$ denotes the shortest distance between 
 two points on a unit circle, given by
 \[
-\text{dist}(\theta_{1}, \theta_{2}) = \abs{\big( \big( (\theta_{1} - \theta_{2}) + \pi  \big) \ \ \text{mod} \ \ 2\pi \big) - \pi}.
+\text{dist}(\theta_{1}, \theta_{2}) =  \left | \big( \big( \theta_{1} - \theta_{2} + \pi  \big) \ \ \text{mod} \ \ 2\pi \big) - \pi \right|.
 \]
 
 Our simulation assumes  that information about the animal's environment is  encoded by the firing rate function
 $$R^{j}(t) =  \text{g}^{j}(\theta(t)).$$
-Thus given a rat position $\theta(t)$, all the $N$ neurons  in the simulated rat's brain fire according to the firing rate functions  $R^{j}(t),$ for $j = 1, \ldots, 32.$
+Thus given a rat position $\theta(t)$, all the $N$ neurons  in the simulated rat's brain fire according to the firing rate functions  $R^{j}(t),$ for $j = 1, \ldots, N.$
 
 
 \subsection{Analysis}
@@ -111,7 +126,7 @@ $( \text{P}^{1}(t), \text{P}^{2}(t), \ldots, \text{P}^{N}(t) ) \in  \R^N.$ \\
 From Figure \ref{fig:PrevTime}, we  see that the previous time function is undefined at the beginning of the experiment where there is no recorded spike. In our analysis, we insert a spike before the start of the experiment by computing the mean previous time obtained after running  one simulation of  the previous time data. This ensures that the previous time function
 is defined for all time (see discussion in section 6 for future directions). \\
 
-At  each time point, $t  \in [0,T]$, the position of the animal, $\theta(t)$, is associated with a previous time function, $\text{P}^{j}(t)$, and a firing rate function, $R^{j}(t)$. We analyze both data sets using the diffusion maps algorithm  and  PCA.
+At  each time point, $t  \in [0,T]$, the position of the animal, $\theta(t)$, is associated with a previous time function, $\text{P}^{j}(t)$, and a firing rate function, $R^{j}(t)$. We analyze both data sets using the diffusion maps algorithm  and  PCA. Note that the value of $\theta(t)$ does not enter these analyzes.
 
 
 \subsection{Distance  and similarity measure used in results section}
