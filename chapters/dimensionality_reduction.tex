@@ -5,10 +5,7 @@ In this section, we review some linear and non-linear dimensionality reduction t
 
 
 \subsubsection{Overview of spectral dimensionality reduction}
-Let $\textbf{X} = \displaystyle \{\vect{x}_{1}, \ldots , \vect{x}_{n} \}$
-be a set of $n$ data points, each of which is associated with $N$ features, so that each $\vect{x}_{i}$ is a point in a high dimensional space $\R^{N}$. For convenience, we often view the set of data points $\Bm{X}$ as a matrix, $\Bm{X} \in \mathbb{R}^{n \times N}$.
-Assume that the data points lie on or near an underlying $l$-dimensional manifold embedded in the high dimensional space where $l$ is much smaller than $N$. Dimensionality reduction considers the problem of  transforming the high dimensional data set $\textbf{X}$ into a new data set $\textbf{Y} = \displaystyle \{ \vect{y}_{1}, \ldots, \vect{y}_{n} \}$  of $n$ points, each of which is associated
-with a smaller set of $l$ features, which are possibly new or a combination of the original $N$ features, and such that each $\vect{y}_{i} \in \R^{l}$ is a low dimensional representation of $\vect{x}_{i} \in \R^{N}$. In addition the transformation must preserve, as much as possible, the underlying geometry of the data.\\
+Let $\textbf{X} = \displaystyle \{\vect{x}_{1}, \ldots , \vect{x}_{n} \}$ be a set of $n$ data points, each of which is associated with $N$ features, so that each $\vect{x}_{i}$ is a point in a high dimensional space $\R^{N}$. For convenience, we often view the set of data points $\Bm{X}$ as a matrix, $\Bm{X} \in \mathbb{R}^{n \times N}$. Assume that the data points lie on or near an underlying $l$-dimensional manifold embedded in the high dimensional space where $l$ is much smaller than $N$. Dimensionality reduction considers the problem of  transforming the high dimensional data set $\textbf{X}$ into a new data set $\textbf{Y} = \displaystyle \{ \vect{y}_{1}, \ldots, \vect{y}_{n} \}$  of $n$ points, each of which is associated with a smaller set of $l$ features, which are possibly new or a combination of the original $N$ features, and such that each $\vect{y}_{i} \in \R^{l}$ is a low dimensional representation of $\vect{x}_{i} \in \R^{N}$. In addition the transformation must preserve, as much as possible, the underlying geometry of the data.\\
 
 Spectral dimensionality reduction (SDR) refers to all dimensionality reduction methods which obtain a low dimensional model of $\Bm{X}$ by carrying out four main steps \cite{Lawrence2010}.
 \begin{itemize}
@@ -62,9 +59,7 @@ MDS \cite{CoxT2000, MardiaK.V1979Ma} considers the the problem of finding a low 
 
 \subsubsection{Spectral non-linear dimensionality reduction}
 Spectral non-linear dimensionality reduction (SNLDR) techniques are a 
-class of MDS methods which find a low dimensional model of the data by preserving relative distances between neighboring points on a data manifold. These are the non-linear dimensionality
-reduction algorithms that we will consider. Examples of SNLDR methods include ISOMAP \cite{TenenbaumJB2000Aggf}, locally linear embedding (LLE)  \cite{roweis2000nonlinear}, Laplacian eigenmaps (LE) \cite{belkin2003laplacian} and diffusion maps \cite{coifman2006diffusion}, in addition to many others. Unlike linear dimensionality reduction techniques, SNLDR methods do not make apriori assumptions about the underlying geometry of the data manifold.
-SNLDR methods model local neighborhood relations between data points by building a graph on the data  \cite{Luxburg2007}. We only review the diffusion maps algorithm.
+class of MDS methods which find a low dimensional model of the data by preserving relative distances between neighboring points on a data manifold. These are the non-linear dimensionality reduction algorithms that we will consider. Examples of SNLDR methods include ISOMAP \cite{TenenbaumJB2000Aggf}, locally linear embedding (LLE)  \cite{roweis2000nonlinear}, Laplacian eigenmaps (LE) \cite{belkin2003laplacian} and diffusion maps \cite{coifman2006diffusion}, in addition to many others. Unlike linear dimensionality reduction techniques, SNLDR methods do not make apriori assumptions about the underlying geometry of the data manifold. SNLDR methods model local neighborhood relations between data points by building a graph on the data  \cite{Luxburg2007}. We only review the diffusion maps algorithm.
 
 
 \subsubsection{Key graph theory concepts}
