@@ -3,21 +3,24 @@
  Our perception of the world is influenced by the way our brains processes information received from millions of neurons
  in our nervous system. Even if what we hear, see or feel may vary depending on our environment, information sent to brain
  as a result of neural activity consists of a sequence of identical electrical pulses often referred to as spikes.
- Thus spike trains are considered as the main mode of information transmission in the nervous system.  Sometimes, it may be obvious what the neurons encode for instance closing eye lids when a fly gets close to the eye. However in general,  the way neurons encode information is not known. In this paper, we attempt to answer a central question: how do we understand
- and analyze neural responses when the relationship between the way neurons encode information and external variables
- such as stimuli, location or behavior  is unclear? Our main innovation is  that we  first ignore these external variables and instead look for structure within data representing neural activity such as spike trains alone. Traditional approaches base analyses from the onset on the assumption of a particular relationship between the neural activity and some external variable.
+Thus spike trains are considered as the main mode of information transmission in the nervous system.  Sometimes what neurons encode may be obvious, for instance when a neuron directly responds to a stimulus. However in general,  the way neurons encode information is not known. In this paper, we attempt to answer a central question: how do we understand
+and analyze neural responses when the relationship between the way neurons encode information and external variables
+such as stimuli, location or behavior  is unclear? \\
+ 
+Our main innovation is  that we  first ignore these external variables and instead look for structure solely within data representing neural activity such as spike trains. Traditional approaches base analyses from the onset on the assumption of a particular relationship between the neural activity and some external variable.
 For example, when analyzing the response of visual neurons, one may start out by investigating the dependence of the activity on different visual stimuli. We avoid such apriori assumptions on the relationship between neural responses and any external variable.  Once we have discovered a particular structure in the neural activity, we can then compare the structure
 from data to external variables. \\
 
-Suppose that we have a set of  N-dimensional data points $\textbf{X} = \{\vect{x}_1, \ldots , \vect{x}_n \}$ that lie on or near an underlying $l$-dimensional manifold embedded in the high dimensional space $\R^N$ where $l$ is much smaller than $N$. Dimensionality reduction considers the problem of  transforming the high dimensional data set $\textbf{X}$ into a new data set $\textbf{Y} = \displaystyle \{ \vect{y}_{1}, \ldots, \vect{y}_{n} \}$  of $n$ points, each of which is associated
-with a smaller set of $l$ features, which are possibly new or a combination of the original $N$ features, and such that each $\vect{y}_{i} \in \R^{l}$ is a low dimensional representation of $\vect{x}_{i} \in \R^{N}$. In addition the transformation must preserve, as much as possible, the underlying geometry of the data. In our analysis, we use a non-linear dimensionality reduction technique called diffusion maps which finds a low dimensional model of the  data by preserving relative distances between neighboring points on a data manifold. \\
+Our primary tool for discovering structure within neural activity data is dimensionality reduction.
+Dimensionality reduction considers the problem of  transforming a high-dimensional data set into a new low-dimensional data set in  such a way that preserves as much as possible, the underlying geometry of the data. In our analysis, we use a non-linear dimensionality reduction technique called diffusion maps which finds a low dimensional model of the  data by preserving relative distances between neighboring points on a data manifold. The discovered low-dimensional manifold
+can then be related to external variables in order to explore possible relationships between the neural activity and the
+external variables.\\
 
-The  paper is organized as follows: In section 2 we give some biological background on the structure of neurons,
-how they are measured and the nature of spikes or electrical signals transferred from neurons to the brain.
- n section 3, we describe some previous work such as classical and modern analyses used to model neural responses
-and outline their strengths and weaknesses, if any. In section 4, we give a general overview of our current project,
-simulations and analyses used to model spike time data.  We also introduce a novel method of preprocessing spike time data so as to discover structure in the data. We use dimensionality reduction to analyze our preprocessed data.  In section 5, we report our results on synthetic data as a first step towards analysing real-world spike train data. Our preliminary results on synthetic data show that diffusion maps using spike time data preprocessed by our novel previous time measure
- captures the  one-dimensional manifold corresponding to a simulated rat's movement around a track. In section 6 we give a brief discussion of our results and outline our future directions.
+The  paper is organized as follows: In section 2, we give some biological background on the structure of neurons,
+how they are measured and the nature of spikes or electrical signals transferred from neurons to the brain. 
+In section 3, we describe some previous work such as classical and modern analyses used to model neural responses
+and outline their strengths and weaknesses, if any. In section 4, we give an overview of our current project, simulations and analyses used to model spike time data.  We also introduce a novel method of preprocessing spike time data so as to discover structure in the data. We use dimensionality reduction to analyze our preprocessed data.  In section 5, we report our results on synthetic data as a first step towards analysing real-world spike train data. Our preliminary results on synthetic data show that diffusion maps using spike time data preprocessed by our novel previous time measure,
+captures the  one-dimensional manifold corresponding to a simulated rat's movement around a track. In section 6 we give a brief discussion of our results and outline our future directions.
  
  
  
