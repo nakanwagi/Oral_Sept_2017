@@ -1,20 +1,22 @@
 
 \section{Introduction}
  Our perception of the world is influenced by the way our brains processes information received from millions of neurons
- in our nervous system. Even if what we hear, see or feel may vary depending on our environment, information sent to brain
- as a result of neural activity consists of a sequence of identical electrical pulses often referred to as spikes.
+ in our nervous system. Even if what we hear, see or feel may vary depending on our environment, information sent to the brain as a result of neural activity consists of a sequence of identical electrical pulses often referred to as spikes.
 Thus spike trains are considered as the main mode of information transmission in the nervous system.  Sometimes what neurons encode may be obvious, for instance when a neuron directly responds to a stimulus. However in general,  the way neurons encode information is not known. In this paper, we attempt to answer a central question: how do we understand
 and analyze neural responses when the relationship between the way neurons encode information and external variables
-such as stimuli, location or behavior  is unclear? \\
- 
+such as stimuli, location or behavior  is unclear? 
+
+
 Our main innovation is  that we  first ignore these external variables and instead look for structure solely within data representing neural activity such as spike trains. Traditional approaches base analyses from the onset on the assumption of a particular relationship between the neural activity and some external variable.
 For example, when analyzing the response of visual neurons, one may start out by investigating the dependence of the activity on different visual stimuli. We avoid such apriori assumptions on the relationship between neural responses and any external variable.  Once we have discovered a particular structure in the neural activity, we can then compare the structure
-from data to external variables. \\
+from data to external variables. 
+
 
 Our primary tool for discovering structure within neural activity data is dimensionality reduction.
 Dimensionality reduction considers the problem of  transforming a high-dimensional data set into a new low-dimensional data set in  such a way that preserves as much as possible, the underlying geometry of the data. In our analysis, we use a non-linear dimensionality reduction technique called diffusion maps which finds a low dimensional model of the  data by preserving relative distances between neighboring points on a data manifold. The discovered low-dimensional manifold
 can then be related to external variables in order to explore possible relationships between the neural activity and the
-external variables.\\
+external variables.
+
 
 The  paper is organized as follows: In section 2, we give some biological background on the structure of neurons,
 how they are measured and the nature of spikes or electrical signals transferred from neurons to the brain. 
@@ -70,7 +72,8 @@ A neuron is a specialized cell in the nervous system that receives, represents, 
 \centering
 \includegraphics[width=\textwidth]{./images/Neuron.png}
 %label the figure so latex can reference it
-\caption{Structure of a neuron. Taken from:https://commons.wikimedia.org/w/index.php?curid=1474927}
+\caption{Structure of a neuron.\\
+Taken from:https://commons.wikimedia.org/w/index.php?curid=1474927}
       \label{fig:Neuron}
 \end{figure}
 
@@ -89,22 +92,23 @@ This difference in separated charges is called the neuron's \textit{membrane pot
 \subsection{Generation of an action potential}
 Dendrites contain chemically-gated ion channels, which open when 
 a stimulus affects a sensory receptor, such as neurotransmitters binding to the dendrite receptors. As a result, current flows into the intracellular fluid, causing the membrane potential to be less negative or to be positive (depolarization of the neuron). 
-This increase in the membrane potential causes the voltage-gated Na$^{+}$ channels, at the entry point of the axon, to open and thus more Na$^{+}$ flows into the cell down its electrochemical  gradient. When a certain threshold is reached ($\approx$ -55mV), an electrical pulse lasting  a short duration ($\approx$ 1ms),  called an \textit{action potential}, is released and is propagated over long distances along the neuron's axon. When the membrane potential rises, the voltage-gated K$^{+}$ channels open, allowing more K$^{+}$ to flow out of the cell, which causes the membrane potential to fall below the resting potential (hyperpolarization of the neuron). The neuron later returns to its resting potential after a refractory period, during which the likelihood of spiking is greatly reduced. The axon terminal contains voltage-gated Ca$^{2+}$ channels which open causing an influx of Ca$^{2+}$. This leads to the release of 
-neurotransmitters (stored in the synaptic vesicles) into the synaptic cleft.
-The neurotransmitters then bind to the dendrite receptors of nearby neurons.
+This increase in the membrane potential causes the voltage-gated Na$^{+}$ channels, at the entry point of the axon, to open and thus more Na$^{+}$ flows into the cell down its electrochemical  gradient. When a certain threshold is reached ($\approx$ -55mV), an electrical pulse lasting  a short duration ($\approx$ 1ms),  called an \textit{action potential}, is released and is propagated over long distances along the neuron's axon. When the membrane potential rises, the voltage-gated K$^{+}$ channels open, allowing more K$^{+}$ to flow out of the cell, which causes the membrane potential to fall below the resting potential (hyperpolarization of the neuron). The neuron later returns to its resting potential after a refractory period, during which the likelihood of spiking is greatly reduced.
+
+
+The axon terminal contains voltage-gated Ca$^{2+}$ channels which open causing an influx of Ca$^{2+}$. This leads to the release of neurotransmitters (stored in the synaptic vesicles) into the synaptic cleft. The neurotransmitters then bind to the dendrite receptors of nearby neurons.
 A synapse is a specialized structure that facilitates communication between neurons. The neuron that sends off an action potential is called \textit{presynaptic} and the one receiving the chemical message is called a \textit{postsynaptic} neuron. Depending on the chemical properties of the binding neurotransmitters, action potentials fall into two broad categories. Excitatory post synaptic potentials (EPSP) result from excitation of a postsynaptic neuron, while inhibitory post synaptic potentials (IPSP) result from inhibition.
 
 \subsection{Measuring neurons}
 The electrical properties of biological cells are measured using electrodes, which allow electrical current to pass through them when they come into contact with electrolytes. Due to the small size of cells, microelectrodes are typically used to measure single unit spiking activity.
 A \textit{single unit} refers to a single action potential-generating neuron, whose spikes are clearly isolated by a recording microelectrode \cite{Humphrey1990}.
-Neurons are measured using two methods: \textit{intracellular recording}, a process where an electrode is inserted inside the cell body and \textit{extracellular recording} in which an electrode is inserted in the extracellular space near the cell body. (Figure \ref{fig:Electrodes}).
+Neurons are measured using two methods:\textit{extracellular recording} in which an electrode is inserted in the extracellular space near the cell body and  \textit{intracellular recording}, a process where an electrode is inserted inside the cell body (see Figure \ref{fig:Electrodes}).
 Intracellular electrodes record membrane potential by comparing the potential on the inserted electrode to that of a reference electrode placed in the extracellular fluid surrounding the cell body. Extracellular recordings can be 
 processed (via spike sorting algorithms) to obtain spike times.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=3in]{./images/MeasuringNeuron.png}
-\caption{Intracellular and  extracellular recordings, adapted from figure 2 of \cite{Humphrey1990}.}
+\caption{Extracellular (left) and intracellular (right)  recordings, adapted from figure 2 of \cite{Humphrey1990}.}
 %label the figure so latex can reference it
       \label{fig:Electrodes}
 \end{figure}

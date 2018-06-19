@@ -5,7 +5,8 @@ In this section, we review some linear and non-linear dimensionality reduction t
 
 
 \subsubsection{Overview of spectral dimensionality reduction}
-Let $\textbf{X} = \displaystyle \{\vect{x}_{1}, \ldots , \vect{x}_{n} \}$ be a set of $n$ data points, each of which is associated with $N$ features, so that each $\vect{x}_{i}$ is a point in a high dimensional space $\R^{N}$. For convenience, we often view the set of data points $\Bm{X}$ as a matrix, $\Bm{X} \in \mathbb{R}^{n \times N}$. Assume that the data points lie on or near an underlying $l$-dimensional manifold embedded in the high dimensional space where $l$ is much smaller than $N$. Dimensionality reduction considers the problem of  transforming the high dimensional data set $\textbf{X}$ into a new data set $\textbf{Y} = \displaystyle \{ \vect{y}_{1}, \ldots, \vect{y}_{n} \}$  of $n$ points, each of which is associated with a smaller set of $l$ features, which are possibly new or a combination of the original $N$ features, and such that each $\vect{y}_{i} \in \R^{l}$ is a low dimensional representation of $\vect{x}_{i} \in \R^{N}$. In addition the transformation must preserve, as much as possible, the underlying geometry of the data.\\
+Let $\textbf{X} = \displaystyle \{\vect{x}_{1}, \ldots , \vect{x}_{n} \}$ be a set of $n$ data points, each of which is associated with $N$ features, so that each $\vect{x}_{i}$ is a point in a high dimensional space $\R^{N}$. For convenience, we often view the set of data points $\Bm{X}$ as a matrix, $\Bm{X} \in \mathbb{R}^{n \times N}$. Assume that the data points lie on or near an underlying $l$-dimensional manifold embedded in the high dimensional space where $l$ is much smaller than $N$. Dimensionality reduction considers the problem of  transforming the high dimensional data set $\textbf{X}$ into a new data set $\textbf{Y} = \displaystyle \{ \vect{y}_{1}, \ldots, \vect{y}_{n} \}$  of $n$ points, each of which is associated with a smaller set of $l$ features, which are possibly new or a combination of the original $N$ features, and such that each $\vect{y}_{i} \in \R^{l}$ is a low dimensional representation of $\vect{x}_{i} \in \R^{N}$. In addition the transformation must preserve, as much as possible, the underlying geometry of the data.
+
 
 Spectral dimensionality reduction (SDR) refers to all dimensionality reduction methods which obtain a low dimensional model of $\Bm{X}$ by carrying out four main steps \cite{Lawrence2010}.
 \begin{itemize}
@@ -32,16 +33,17 @@ The low dimensional model that describes the data is found via spectral decompos
 \item[ii)] Summarize the correlation relationships between the zero-mean data points by computing the sample covariance matrix $\frac{1}{n}\textbf{XX}^{\top}.$
 \item[iii)] Find the spectral decomposition of $\textbf{XX}^{\top}$ or 
 use SVD to find $\textbf{X} = \bm{U\Sigma V^{\top}}$  (see appendix \ref{SVD}).
-\item[iv)] Let $\bm{V}_{l}$ denote the top $l$ columns of $\textbf{V}$ corresponding to the  top $l$ singular values of $\textbf{X}$.
+\item[iv)] Let $\bm{V}_{l}$ denote the first $l$ columns of $\textbf{V}$ corresponding to the  top $l$ singular values of $\textbf{X}$.
 \item[v)] The low dimensional model $\textbf{Y}$ is obtained by setting 
 $\textbf{Y} = \textbf{V}^{\top}\textbf{X}$.
 \end{itemize}
 
-\subsubsection{Non-linear dimensionality reduction}
-
+\subsubsection{Non-linear dimensionality reduction} 
 Methods like PCA assume that the underlying manifold on which the data lie is globally linear. This implies that the shortest distance between any two points while traveling along the data manifold is a straight line.
-However, any dimensionality reduction technique must preserve the underlying geometry of the data manifold. In particular, points that are close together in the high dimensional space should be mapped closer to each other in the low dimensional space where as points that are far apart in the high dimensional space must remain far apart in the embedded space. To accomplish this goal, we must ignore long distances in the embedded space, as long distances computed in the embedded space
-may be the result of shortcuts that ignore the non-linear geometry of the manifold.
+However, any dimensionality reduction technique must preserve the underlying geometry of the data manifold. In particular, points that are close together in the high dimensional space should be mapped closer to each other in the low dimensional space where as points that are far apart in the high dimensional space must remain far apart in the embedded space.
+
+
+To accomplish this goal, we must ignore long distances in the embedded space, as long distances computed in the embedded space may be the result of shortcuts that ignore the non-linear geometry of the manifold.
 Figure \ref{fig:Swiss roll} illustrates the limitations of linear techniques on highly curved manifolds like the swiss roll and helps to highlight the importance of non-linear dimensionality reduction techniques.
 
 \begin{figure}[h]
@@ -55,6 +57,8 @@ Figure \ref{fig:Swiss roll} illustrates the limitations of linear techniques on 
 
 \subsubsection{Multidimensional scaling (MDS)}
 This idea of preserving relative distances between points in both the input space and embedded space is based on the multidimensional scaling (MDS) approach. Assume that an $n\times n$ matrix, $\Bm{B}$=(b$_{ij}$), of pair-wise distances (not necessarily Euclidean) or similarities (see appendix \ref{proximity}), $\Bm{S} = (s_{ij})$, between data points, $\{\vect{x}_{1}, \ldots, \vect{x}_{n} \}$, is given and $n$ is large.
+
+
 MDS \cite{CoxT2000, MardiaK.V1979Ma} considers the the problem of finding a low dimensional model of the high dimensional data by searching for a configuration of $n$ points $\{\vect{y}_{1}, \ldots, \vect{y}_{n} \}$ in $\R^{\text{l}}, \text{l} \ll \text{n}$, where each $\vect{y}_{i}$ is a low dimensional representation of $\vect{x}_{i}$, and such that relative pair-wise distances between points are preserved. Specifically, the Euclidean distances between the configuration points, $\norm{\vect{y}_{i} - \vect{y}_{j}}_{2}$, must be as ``close" as possible to  the given distances, b$_{ij}$, that is, $\norm{\vect{y}_{i} - \vect{y}_{j}}_{2} \approx \text{b}_{ij}$, for all $1 \leq i, j \leq n$.
 
 \subsubsection{Spectral non-linear dimensionality reduction}
@@ -63,7 +67,8 @@ class of MDS methods which find a low dimensional model of the data by preservin
 
 
 \subsubsection{Key graph theory concepts}
-The non-linear dimensionality reduction algorithms we consider are based on graph theory. Hence, we first introduce three key graph theory concepts that we need: a weighted undirected graph, the degree matrix and the graph Laplacian.\\
+The non-linear dimensionality reduction algorithms we consider are based on graph theory. Hence, we first introduce three key graph theory concepts that we need: a weighted undirected graph, the degree matrix and the graph Laplacian.
+
 
 A graph is a tuple $G = (V,E)$ where $V = \{v_1, \ldots , v_n\}$ is a finite set of points called vertices or nodes and $E$ is a finite collection of edges connecting pairs of vertices. The graph $G$, is undirected if the edges between vertices are bidirectional.
 We can make a weighted graph by assigning a weight or number $w_{ij}$, to an edge $e_{ij} \in E$, between a pair of vertices $(v_i, v_j) \in V$. A connectivity matrix or similarity matrix $\Bm{W}$, of $G$, is the matrix whose $(i,j)$-th entries are edge weights $w_{ij}$.
@@ -74,9 +79,11 @@ The unnormalized graph Laplacian is the  matrix $\Bm{L = D} - \Bm{W}$.
 
 \subsubsection{Neighborhood graph}
 We can approximate small distances between points in the input space using the usual Euclidean distance between nearby points in the embedded space as in linear approaches. However, long distances in the input space are not necessarily equal to long distances in the feature space (see figure \ref{fig:Swiss roll}). One way to address this problem is to ignore long distances in the embedded space by building a graph $G = (V, E)$ on the data. We ignore long distances by placing an edge $e_{ij} \in E$ only between neighboring vertices $(v_i, v_j) \in V$. The result is called 
-a neighborhood graph.\\
+a neighborhood graph.
 
-A particular type of neighborhood graph is the $\epsilon-$neighborhood graph constructed as follows. Suppose we are given a data set, $\Bm{X} =  \{\vect{x}_{1}, \ldots, \vect{x}_{n} \}$ and assume that the pairwise distances, $b_{ij} = \text{dist}(\vect{x}_{i}, \vect{x}_{j})$, between points are known. Identifying each data point with a vertex $v_{i} \in V$, on a graph $G = (V, E)$, we can build a weighted  undirected graph on the data by placing an edge $e_{ij} \in E$, between vertices $(v_i, v_j) \in V$, if $x_i$ and $x_j$ are sufficiently close i.e., dist$(x_i, x_j) < \epsilon$. We weight the edge $e_{ij} \in E$, by a similarity measure $s_{ij}$, derived from the given distances (see appendix \ref{proximity}). The resulting $\epsilon-$nearest neighborhood graph represents the local distances among points.\\
+
+A particular type of neighborhood graph is the $\epsilon-$neighborhood graph constructed as follows. Suppose we are given a data set, $\Bm{X} =  \{\vect{x}_{1}, \ldots, \vect{x}_{n} \}$ and assume that the pairwise distances, $b_{ij} = \text{dist}(\vect{x}_{i}, \vect{x}_{j})$, between points are known. Identifying each data point with a vertex $v_{i} \in V$, on a graph $G = (V, E)$, we can build a weighted  undirected graph on the data by placing an edge $e_{ij} \in E$, between vertices $(v_i, v_j) \in V$, if $x_i$ and $x_j$ are sufficiently close i.e., dist$(x_i, x_j) < \epsilon$. We weight the edge $e_{ij} \in E$, by a similarity measure $s_{ij}$, derived from the given distances (see appendix \ref{proximity}). The resulting $\epsilon-$nearest neighborhood graph represents the local distances among points.
+
 
 For diffusion maps, the neighborhood graph is modified to a fully connected graph, but where the weights are approximately zero whenever the distance between data points is large.
 To do this, we use a similarity function that captures local neighborhood relations between points and at the same time decays to zero so fast that we do not have to truncate the weights. In particular, in diffusion maps, we use the similarity function 

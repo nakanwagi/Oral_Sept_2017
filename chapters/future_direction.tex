@@ -1,16 +1,20 @@
 %\mychapter{7}{Discussion}
 \section{Future direction}
-First, at the beginning of the experiment, there are no recorded spike times. However, there must be at least one spike before  the previous time function is defined. This raises a problem on how to address the boundary condition at the beginning of the experiment. As it stands, we have addressed this problem by first running the experiment once to obtain the mean of the sampled previous time data, and afterwords, we insert a spike before the beginning of the experiment based on the computed previous time average, and then use that to simulate new  previous time data. We think that this is not the best approach, as the mean may not be the best representation of the underlying distribution. We plan to find another way of addressing the boundary condition for the previous time vectors. For instance, we plan to insert a spike before the beginning of the experiment based on samples drawn from a correctly estimated underlying model of the data.\\
+First, at the beginning of the experiment, there are no recorded spike times. However, there must be at least one spike before  the previous time function is defined. This raises a problem on how to address the boundary condition at the beginning of the experiment. As it stands, we have addressed this problem by first running the experiment once to obtain the mean of the sampled previous time data, and afterwords, we insert a spike before the beginning of the experiment based on the computed previous time average, and then use that to simulate new  previous time data. We think that this is not the best approach, as the mean may not be the best representation of the underlying distribution. We plan to find another way of addressing the boundary condition for the previous time vectors. For instance, we plan to insert a spike before the beginning of the experiment based on samples drawn from a correctly estimated underlying model of the data.
+
 
 Second, we currently do not have a measure of error for analysing the  effectiveness of our approach. 
 We tried using Shannon mutual information on real-world data. However, we found that  high  mutual information may be caused by spatial noise, such as changes in the animal's head direction rather than indicating that the analysis captured the animal's movement around the track.  We plan to use the Fisher information as a goodness of measure in future work since it can take advantage of the fact that results lie in a continuous space. In addition, Fisher information is highest when  the variance of the estimated model parameter is very small. This could  yield a more reliable estimate of
-how well we captured a one-dimensional manifold that corresponds to the animal's position along the track. \\
+how well we captured a one-dimensional manifold that corresponds to the animal's position along the track. 
+
 
 We plan to preprocess  our real-world spike time  data  using the previous time measure  in order to look for
 structure in data itself so as to see how the structure corresponds to external variables. The  data set consists of spike times
-obtained by measuring from $N = 32$ single units (place cells)  from the CA1 region of a rat hippocampus during a behavioral experiment in which the rat is performing a spatial task along a circular track (see figure \ref{fig:RasterPlot}).\\
+obtained by measuring from $N = 32$ single units (place cells)  from the CA1 region of a rat hippocampus during a behavioral experiment in which the rat is performing a spatial task along a circular track (see figure \ref{fig:RasterPlot}).
 
-Finally, we plan to look at other types of distance measures for quantifying neural response variability such as variants of the kendal tau distance  or a weighted combination of some existing distances instead of the $l_1$ distance.\\
+
+Finally, we plan to look at other types of distance measures for quantifying neural response variability such as variants of the kendal tau distance  or a weighted combination of some existing distances instead of the $l_1$ distance.
+
 
 An improved approach such as the one we envision and outline here  may provide some insight on how to analyze
 spike time data when the relationship between spikes and external variables is unknown.  By looking for structure in the 

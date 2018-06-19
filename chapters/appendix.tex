@@ -25,7 +25,9 @@ The numbers $\sigma_{i}, 1\leq i\leq n$ are called the singular values of $\bm{A
 Given any $n\times m$ real matrix $A$ of rank $r$, there exist matrices  $\bm{U} \in \R^{n \times r}$ and $\bm{V} \in \R^{r \times r}$ satisfying $\bm{U^{\top}U = V^{\top}V = I}$ such that $\bm{\text{A} = \text{U} \Sigma_{1} \text{V}^{\top}}$ with $\bm{\Sigma}_{1}$ = \text{diag}$(\sigma_{1}, \ldots, \sigma_{r})$ and $\sigma_{1} \geq \sigma_{2} \geq \ldots \geq \sigma_{r} > 0$.
 This factorization of $\bm{A}$ is called the truncated SVD of $A$.
 The rank of $A$ is equal to the number of non-zero singular values of $A$.
-If $\bm{U}$ and $\bm{V}$ are made up of column vectors so that  $\bm{U} = [\vect{u}_1, \ldots, \vect{u}_{r}]$ and $\bm{V} = [\vect{v}_{1}, \ldots, \vect{v}_{r}]$ then $\{ \vect{u}_1, \ldots, \vect{u}_{r} \}$  and $\{\vect{v}_{1}, \ldots, \vect{v}_{r} \}$ are called the left and right singular vectors of $A$ respectively. \\
+If $\bm{U}$ and $\bm{V}$ are made up of column vectors so that  $\bm{U} = [\vect{u}_1, \ldots, \vect{u}_{r}]$ and $\bm{V} = [\vect{v}_{1}, \ldots, \vect{v}_{r}]$ then $\{ \vect{u}_1, \ldots, \vect{u}_{r} \}$  and $\{\vect{v}_{1}, \ldots, \vect{v}_{r} \}$ are called the left and right singular vectors of $A$ respectively. 
+
+
 The matrix $A$ admits the SVD expansion 
 \[
 A = \sum_{i=1}^{r} \sigma_{i} \vect{u}_{i} \vect{v}_{i}^{\top}.
@@ -66,8 +68,9 @@ for all $i$ and $j$, we have:
 \end{itemize}
 \end{Def}
 
-The similarity measure, $s_{ij}$, can be obtained from a distance, $d_{ij}$, using any of the three operations: $s_{ij}$ = c - d$_{ij}$ or  d$_{ij}$ = 1/$s_{ij}$ - c, or $d_{ij} = s_{ii} + s_{jj} - 2s_{ij}$, where $c$ is a constant.\\
+The similarity measure, $s_{ij}$, can be obtained from a distance, $d_{ij}$, using any of the three operations: $s_{ij}$ = c - d$_{ij}$ or  d$_{ij}$ = 1/$s_{ij}$ - c, or $d_{ij} = s_{ii} + s_{jj} - 2s_{ij}$, where $c$ is a constant.
 
+ 
 A matrix of distances between pairs of objects, $D = (d_{ij}$), is called a distance matrix or dissimilarity matrix and that of similarities between pairs of objects, $S = (s_{ij}$), is called a similarity matrix.
 
 
@@ -92,8 +95,7 @@ the graph Laplacian related to a random walk on a graph which is not symmetric
 \begin{equation}\label{RandomWalk}
 \Bm{L}_{rw} = \Bm{D}^{-1}\Bm{L} = \Bm{I} - \Bm{D}^{-1}\Bm{W}
 \end{equation}
-where $\Bm{D}$ is the degree matrix and $\Bm{W}$ is the similarity matrix.\\
-
+where $\Bm{D}$ is the degree matrix and $\Bm{W}$ is the similarity matrix.
 
 
 \section{Random walk on a graph}\label{random walk}
@@ -116,6 +118,7 @@ we know that the matrix
 is indeed a transition probability matrix. This follows from the fact that $d_{i} > 0$ (because G is connected) and $w_{ij} \geq 0$ since it is a similarity. Moreover, the definition of $\Bm{D}$ implies that the rows of $\Bm{P}$ sum to one. 
 $\Bm{P}$ is a probability transition matrix implies that it satisfies
 the equation $\Bm{P} \vect{1} = \vect{1}$ where $\vect{1}$ is the constant vector of all ones. Thus 1 is an eigenvalue of $\Bm{P}$ with corresponding constant eigenvector $\vect{1}$.
+
 
 Observe that $\Bm{P}$ is precisely the random walk graph Laplacian, $\Bm{L}_{rw}$, in equation \eqref{RandomWalk}.
 Given that the random walk starts at node $i$, so that $X(0) = i$, the probability

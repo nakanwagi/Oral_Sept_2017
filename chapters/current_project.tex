@@ -3,27 +3,33 @@
 \section{Current Project}
 
 \subsection{Our framework}
-The goal of our current project  is to analyze real-world spike time data without assuming a particular relationship between spikes and external variables. For example, one target data set is  obtained by measuring single units (place cells)  from the CA1 region of the rat hippocampus during a behavioral experiment in which a rat is performing a spatial task along a circular track (see figure \ref{fig:RasterPlot}). As place cells fire predominantly when the rat is in  particular regions \cite{o1971hippocampus, Burgess1994}, neural activity is correlated with space. However, our goal is an analysis approach that does not assume such correlation but instead discovers structure in the neural data alone. Such an analysis would then be applicable to spike time data sets where such a strong relationship with external variables is not evident.\\
+The goal of our current project  is to analyze real-world spike time data without assuming a particular relationship between spikes and external variables. For example, one target data set is  obtained by measuring single units (place cells)  from the CA1 region of the rat hippocampus during a behavioral experiment in which a rat is performing a spatial task along a circular track (see figure \ref{fig:RasterPlot}). As place cells fire predominantly when the rat is in  particular regions \cite{o1971hippocampus, Burgess1994}, neural activity is correlated with space. However, our goal is an analysis approach that does not assume such correlation but instead discovers structure in the neural data alone. Such an analysis would then be applicable to spike time data sets where such a strong relationship with external variables is not evident.
+
 
 We hypothesize that the high dimensional spike time data from neural activity may lie along a low dimensional manifold 
 as the rat is moving along a one-dimensional track.  Therefore, we use dimensionality  reduction to learn the underlying
 structure of the data (see section 3.3). We then  check to see how the low dimensional structure learned from the 
-data itself corresponds to external variables such as the animal's position along the track.\\
+data itself corresponds to external variables such as the animal's position along the track.
 
-To do dimensionality reduction, we need a distance measure  (see  section 3.4) to model pairwise relations between spike trains since our data is spikes. The dimensionality reduction algorithms we use require a summary of pairwise distances between spike trains as an input in order to learn the low dimensional model.\\
+
+To do dimensionality reduction, we need a distance measure  (see  section 3.4) to model pairwise relations between spike trains since our data is spikes. The dimensionality reduction algorithms we use require a summary of pairwise distances between spike trains as an input in order to learn the low dimensional model.
+
 
 We propose a novel method of preprocessing spike times by looking at the time since the previous spike, which we refer to
-as the previous time measure (see section 4.3). The previous time function (see section 4.3) captures the history of neural activity even in long intervals between spikes.\\
+as the previous time measure (see section 4.3). The previous time function (see section 4.3) captures the history of neural activity even in long intervals between spikes.
+
 
 Since we do not have a suitable measure of error to analyze the performance of Diffusion maps and PCA on our
 real-world spike data, we design a synthetic experiment (simulation)  as a first step towards  developing and testing the effectiveness of our preprocessing technique on spike data (see section 4.4-4.5 ).
 To determine the performance of Diffusion maps and PCA on synthetic data, we carry out  our analyses  using two different synthetic data sets:  a clean firing rate data set and a data set consisting of spikes generated as a Poisson process.
 The generated spike data is then preprocessed using our previous time measure before carrying out dimensionality reduction. We use the clean firing rate data set as our reference to determine how well both algorithms perform
-on the  synthetic data.\\
+on the  synthetic data.
+
 
 Our preliminary results on synthetic experiments show that spike time data preprocessed by the previous time measure
 capture the simulated four and a half laps taken by a rat around a circular track. We use the Diffusion maps algorithm 
-to obtain a low dimensional model of the synthetic data and compare the algorithm's performance with that of PCA.\\
+to obtain a low dimensional model of the synthetic data and compare the algorithm's performance with that of PCA.
+
 
 The sections that follow as organized as follows: In section  4.2 and 4.3,  we define the previous time function and illustrate it graphically.  In addition, we give a description of our simulation and analyzes used. In section 5, we show our results of diffusion maps and PCA on synthetic data sets. Finally in section 6, we give a brief discussion on our results and suggest possible future directions.
 
@@ -93,7 +99,8 @@ Intuitively, $g^{j}(\theta)$, models  the likelihood that the rat's neuron fires
 The Gaussian function indicates that the rat's place cell is  likely to fire maximally  at the center of the cell's place field
 which mimics a characteristic  of a real-world rat's place cells.
 Our model assumes that each neuron in the simulated rat's brain has a single place field. This is a realistic assumption as 
-most place cells have one place field (see section 6 on possible future directions). \\
+most place cells have one place field (see section 6 on possible future directions). 
+
 
 Given any two angles, $\theta_{1}, \theta_{2} \in [0, 2\pi]$, the quantity
 $\text{dist}(\theta_{1}, \theta_{2})$ denotes the shortest distance between 
@@ -113,18 +120,22 @@ $[0, T],$ into equal sub-intervals  of width $\Delta t$.
 We carry out  our analyses  using two different data sets:  a clean firing rate data set and a data set consisting of spikes generated as a Poisson process.
 We use two data sets because we do not have a suitable measure of error for analyzing the performance of diffusion maps
 and PCA. Hence, we use the clean firing rate data set as our reference to determine how well both algorithms perform
-on the spike time data set.\\
+on the spike time data set.
+
 
 First, we sample from the firing rate function  $R^{j}(t),$ for each time point $t \in [0, T]$,
-to obtain one data point  $(R^{1}(t),  R^{2}(t),    \ldots , R^{N}(t) )  \in \R^N.$ \\
+to obtain one data point  $(R^{1}(t),  R^{2}(t),    \ldots , R^{N}(t) )  \in \R^N.$ 
+
 
 To obtain the second data set, we generate spikes  for a single trial. The spike times $\{t_{1}^{j}, ....., t_{n_{i}}^{j} \},$  of the $j^{th}$ neuron are generated as a non-homogeneous Poisson process at a rate $R^{j}(t),$ in the interval $[0, T].$
 Next, we define the previous time function (see section 4.3 )  based on the  generated set of  spike trains.  
 For each time point $t \in [0, T],$ we sample from the previous time function $\text{P}^{j}(t),$ to obtain  one data point
-$( \text{P}^{1}(t), \text{P}^{2}(t), \ldots, \text{P}^{N}(t) ) \in  \R^N.$ \\
+$( \text{P}^{1}(t), \text{P}^{2}(t), \ldots, \text{P}^{N}(t) ) \in  \R^N.$ 
+
 
 From Figure \ref{fig:PrevTime}, we  see that the previous time function is undefined at the beginning of the experiment where there is no recorded spike. In our analysis, we insert a spike before the start of the experiment by computing the mean previous time obtained after running  one simulation of  the previous time data. This ensures that the previous time function
-is defined for all time (see discussion in section 6 for future directions). \\
+is defined for all time (see discussion in section 6 for future directions). 
+
 
 At  each time point, $t  \in [0,T]$, the position of the animal, $\theta(t)$, is associated with a previous time function, $\text{P}^{j}(t)$, and a firing rate function, $R^{j}(t)$. We analyze both data sets using the diffusion maps algorithm  and  PCA. Note that the value of $\theta(t)$ does not enter these analyzes.
 
@@ -149,7 +160,7 @@ Similarly, we use the $l_{1}$-norm to compute the distance between two firing ra
 \displaystyle \sum_{j=1}^{N} \abs{ R^{j}(t_{1}) - R^{j}(t_{2})   }.
 \end{equation}
 
-We use the  l$_1$ norm  instead of the l$_{2}$ norm because the latter emphasizes large differences between data points which diverges from our goal of learning similar brain states  based on pairwise distances between spike trains.\\
+We use the  l$_1$ norm  instead of the l$_{2}$ norm because the latter emphasizes large differences between data points which diverges from our goal of learning similar brain states  based on pairwise distances between spike trains.
 
 
 We form pairwise similarities, $w_{ij}$, between each data point using the Gaussian kernel  which we eventually use as weights in the diffusion maps algorithm. The weights are given by,
