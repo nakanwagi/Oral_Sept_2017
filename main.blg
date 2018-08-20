@@ -1,0 +1,164 @@
+This is BibTeX, Version 0.99d (TeX Live 2017)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: main.aux
+The style file: unsrt.bst
+Database file #1: ./References/library.bib.bib
+Repeated entry---line 294 of file ./References/library.bib.bib
+ : @article{Shenoy2013
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 382 of file ./References/library.bib.bib
+ : @article{coifman2006diffusion
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 405 of file ./References/library.bib.bib
+ : @article{houghton2010measuring
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 466 of file ./References/library.bib.bib
+ : @article{coifman2006diffusion
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 581 of file ./References/library.bib.bib
+ : @article{o1971hippocampus
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 603 of file ./References/library.bib.bib
+ : @article{o1971hippocampus
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 641 of file ./References/library.bib.bib
+ : @article{houghton2010measuring
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 676 of file ./References/library.bib.bib
+ : @article{coifman2006diffusion
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 721 of file ./References/library.bib.bib
+ : @article{Vos2015
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 881 of file ./References/library.bib.bib
+ : @article{Kaufman2014
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 940 of file ./References/library.bib.bib
+ : @article{Mazor2005
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 977 of file ./References/library.bib.bib
+ : @article{houghton2010measuring
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1105 of file ./References/library.bib.bib
+ : @article{coifman2006diffusion
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1116 of file ./References/library.bib.bib
+ : @article{Rossum2001
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1220 of file ./References/library.bib.bib
+ : @article{o1971hippocampus
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1258 of file ./References/library.bib.bib
+ : @article{Burgess1994
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1330 of file ./References/library.bib.bib
+ : @misc{Cunningham2014a
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1413 of file ./References/library.bib.bib
+ : @article{o1971hippocampus
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1462 of file ./References/library.bib.bib
+ : @article{OKeefe1971
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1477 of file ./References/library.bib.bib
+ : @article{Rossum2001
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1486 of file ./References/library.bib.bib
+ : @misc{Cunningham2014a
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1502 of file ./References/library.bib.bib
+ : @article{houghton2010measuring
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1582 of file ./References/library.bib.bib
+ : @article{o1971hippocampus
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1619 of file ./References/library.bib.bib
+ : @article{o1971hippocampus
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1688 of file ./References/library.bib.bib
+ : @article{o1971hippocampus
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1737 of file ./References/library.bib.bib
+ : @article{OKeefe1971
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1752 of file ./References/library.bib.bib
+ : @article{Redish2016
+ :                    ,
+I'm skipping whatever remains of this entry
+Warning--empty publisher in Dayan2001
+Warning--empty journal in Vos2015
+Warning--empty journal in Lawrence2010
+Warning--empty publisher in CoxT2000
+Warning--empty journal in Luxburg2007
+Warning--there's a number but no volume in Luxburg2007
+Warning--empty journal in Victor1998
+Warning--there's a number but no volume in Victor1998
+Warning--empty journal in Schreiber2003
+You've used 33 entries,
+            1791 wiz_defined-function locations,
+            689 strings with 8665 characters,
+and the built_in function-call counts, 7778 in all, are:
+= -- 744
+> -- 289
+< -- 2
++ -- 110
+- -- 77
+* -- 580
+:= -- 1213
+add.period$ -- 100
+call.type$ -- 33
+change.case$ -- 29
+chr.to.int$ -- 0
+cite$ -- 42
+duplicate$ -- 311
+empty$ -- 769
+format.name$ -- 77
+if$ -- 1692
+int.to.chr$ -- 0
+int.to.str$ -- 33
+missing$ -- 36
+newline$ -- 167
+num.names$ -- 33
+pop$ -- 76
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 124
+stack$ -- 0
+substring$ -- 707
+swap$ -- 42
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 9
+while$ -- 91
+width$ -- 35
+write$ -- 354
+(There were 27 error messages)

@@ -1,0 +1,47 @@
+\contentsline {section}{Acknowledgement}{i}
+\contentsline {section}{Dedication}{i}
+\contentsline {section}{Abstract}{i}
+\contentsline {section}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {2}Biological background}{2}
+\contentsline {subsection}{\numberline {2.1}Structure of a neuron}{2}
+\contentsline {subsection}{\numberline {2.2}Membrane potential}{2}
+\contentsline {subsection}{\numberline {2.3}Generation of an action potential}{3}
+\contentsline {subsection}{\numberline {2.4}Measuring neurons}{3}
+\contentsline {subsection}{\numberline {2.5}Place cells and place fields}{4}
+\contentsline {subsection}{\numberline {2.6}Spike trains}{4}
+\contentsline {subsection}{\numberline {2.7}Raster plot}{4}
+\contentsline {subsection}{\numberline {2.8}Poisson processes}{6}
+\contentsline {section}{\numberline {3}Previous work}{6}
+\contentsline {subsection}{\numberline {3.1}Single-unit multiple trial experimental design}{6}
+\contentsline {subsection}{\numberline {3.2}Multiple single-unit single trial experimental design}{7}
+\contentsline {subsection}{\numberline {3.3}Dimensionality reduction}{7}
+\contentsline {subsubsection}{\numberline {3.3.1}Overview of spectral dimensionality reduction}{8}
+\contentsline {subsubsection}{\numberline {3.3.2}Linear dimensionality reduction}{8}
+\contentsline {subsubsection}{\numberline {3.3.3}Non-linear dimensionality reduction}{9}
+\contentsline {subsubsection}{\numberline {3.3.4}Multidimensional scaling (MDS)}{9}
+\contentsline {subsubsection}{\numberline {3.3.5}Spectral non-linear dimensionality reduction}{10}
+\contentsline {subsubsection}{\numberline {3.3.6}Key graph theory concepts}{10}
+\contentsline {subsubsection}{\numberline {3.3.7}Neighborhood graph}{10}
+\contentsline {subsubsection}{\numberline {3.3.8}Basic idea of the diffusion maps algorithm}{11}
+\contentsline {subsection}{\numberline {3.4}Spike train metrics}{12}
+\contentsline {subsubsection}{\numberline {3.4.1}Cost-based spike metrics}{12}
+\contentsline {subsubsection}{\numberline {3.4.2}Van Rossum spike metrics}{13}
+\contentsline {section}{\numberline {4}Current Project}{14}
+\contentsline {subsection}{\numberline {4.1}Our framework}{14}
+\contentsline {subsection}{\numberline {4.2}Nature of spike data}{15}
+\contentsline {subsection}{\numberline {4.3}The previous time function}{15}
+\contentsline {subsection}{\numberline {4.4}Simulation}{16}
+\contentsline {subsection}{\numberline {4.5}Analysis}{17}
+\contentsline {subsection}{\numberline {4.6}Distance and similarity measure used in results section}{18}
+\contentsline {section}{\numberline {5}Results and interpretation}{18}
+\contentsline {subsection}{\numberline {5.1}Interpretation of our results}{19}
+\contentsline {section}{\numberline {6}Future direction}{19}
+\contentsline {section}{References}{22}
+\contentsline {section}{Appendices}{24}
+\contentsline {section}{\numberline {A}Linear algebra review}{24}
+\contentsline {subsection}{\numberline {A.1}Definitions}{24}
+\contentsline {subsection}{\numberline {A.2}Properties of SVD}{24}
+\contentsline {section}{\numberline {B}Proximity measures}{24}
+\contentsline {section}{\numberline {C}Graph Laplacians and their properties}{25}
+\contentsline {section}{\numberline {D}Random walk on a graph}{26}
+\contentsline {section}{\numberline {E}Diffusion maps algorithm}{26}

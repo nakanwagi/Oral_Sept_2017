@@ -11,7 +11,7 @@ We review spike train metrics because the dimensionality reduction algorithms we
 
 \subsection{Single-unit multiple trial experimental design}
 Traditionally, spike trains are obtained by recording from a single sensory neuron during multiple presentations of the same stimulus over a fixed period of time. The neural responses are decoded by counting the total number of spikes in a given time window following onset of the stimulus (firing rate) \cite{Abbott2001}.
-This approach is based on the rate-coding hypothesis which states that the rate of spike generation varies with stimulus intensity (Adrian ED 1928).
+This approach is based on the rate-coding hypothesis which states that the rate of spike generation varies with stimulus intensity.
 The goal of these classical experiments is to answer the question:
 Given a set of stimulus features, what is the neural response (spike train) elicited by the presented stimulus? The neuron is then characterized by plotting the firing rate as a function of given stimulus feature values. This plot is referred to as a tuning curve of the cell.
 In modern single-unit multiple trial recordings, the mean firing rate is estimated by averaging neural responses across repeated trials.
@@ -29,7 +29,7 @@ taking into account correlations among population activity patterns may be usefu
 variability. Lately, dimensionality reduction \cite{Cunningham2014a}, has been suggested as a tool for studying collective neural activity patterns. The technique can be applied to multiple single-unit single trial recordings so as to obtain a low dimensional model of the data which captures similar activity patterns among neuronal populations.
 
 
-In order to better analyze neural response variability, our approach is to use dimensionality reduction on synthetic data as a first step to analyzing a set of spike trains recorded from 32 neurons in the CA1 region of the rat hippocampus in a single trial.
+In order to better analyze neural response variability, our approach is to use dimensionality reduction on synthetic data as a first step to analyzing a set of spike trains recorded from multiple neurons in the CA1 region of the rat hippocampus in a single trial.
 Our focus is to study collective neural activity patterns using a low dimensional model which captures similar activity patterns among neural populations. The low dimensional model should also enable us to approximately recover the location of the animal (rat) based on the fact that place cell firing is correlated with position.
 Moreover, reconstructing information about an organism's environment based on neuronal responses enables the experimenter to interpret information in a way that an organism is likely to interpret it \cite{Bialek1992}. For instance, it may be possible to predict what the animal is ``thinking about" at a particular moment in time based on our low dimensional model.
 
